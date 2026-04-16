@@ -119,7 +119,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
   <div class="wc se on" id="welcomeSection">
     <div class="wc-ico">📐</div>
     <h2>小学数学练习</h2>
-    <p>每次生成一套练习卷<br>含 <strong>47题</strong> 口算题 + <strong>3题</strong> 应用题<br>满分 <strong>100分</strong>，加油拿高分！</p>
+    <p>每次生成一套练习卷<br>含 <strong>48题</strong> 口算题 + <strong>3题</strong> 应用题<br>满分 <strong>100分</strong>，加油拿高分！</p>
     <button class="btn bp" id="startBtn" style="font-size:19px;padding:15px 44px">📝 开始出题</button>
     <div id="historyPanel" class="hp" style="max-width:380px;margin:22px auto 0"></div>
   </div>
@@ -127,11 +127,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
   <div class="se" id="examSection">
     <div class="pb"><div class="pf" id="progressFill"></div></div>
     <div class="sh">
-      <div class="st">一、口算题 <span class="sb">每题1分，共47分</span></div>
+      <div class="st">一、口算题 <span class="sb">每题1分，共48分</span></div>
     </div>
     <div class="cg" id="calcGrid"></div>
     <div class="sh">
-      <div class="st">二、应用题 <span class="sb">共53分</span></div>
+      <div class="st">二、应用题 <span class="sb">共52分</span></div>
     </div>
     <div id="wordArea"></div>
   </div>
@@ -150,8 +150,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei
 </div>
 
 <div class="bb" id="bottomBar">
-  <button class="btn bs" id="submitBtn">✅ 提交答卷</button>
   <button class="btn bo" id="resetBtn">🔄 重新出题</button>
+  <button class="btn bs" id="submitBtn">✅ 提交答卷</button>
 </div>
 
 <div class="cfc" id="confettiContainer"></div>
@@ -274,14 +274,14 @@ function genWord(){
   var qs=shuffle(easy.map(function(f){return f;}));
   var qh=shuffle(hard.map(function(f){return f;}));
   var result=[qs[0](),qs[1](),qh[0]()];
-  result[0].score=15; result[1].score=15; result[2].score=23; result[2].hard=true;
+  result[0].score=15; result[1].score=15; result[2].score=22; result[2].hard=true;
   return result;
 }
 
 // ========== 生成试卷 ==========
 function generateExam(){
   try{
-    calcQ=genCalc(47);
+    calcQ=genCalc(48);
     wordQ=genWord();
     submitted=false;
     renderCalc();
@@ -352,7 +352,7 @@ function renderWord(){
 
 // ========== 进度 ==========
 function updateProgress(){
-  var total=50, done=0;
+  var total=51, done=0;
   for(var i=0;i<calcQ.length;i++){
     if($('cipt'+i).value.trim()!=='') done++;
   }
