@@ -1,589 +1,2509 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>小学数学练习</title>
-<link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoi5biG5b6u5pys5paH5rOH6KeG5a2mIiwic2hvcnRfbmFtZSI6IuaEuemtuiIsInN0YXJ0X3VybCI6Ii4iLCJkaXNwbGF5Ijoic3RhbmRhbG9uZSIsImJhY2tncm91bmRfY29sb3IiOiIjRjVGN0ZBIiwidGhlbWVfY29sb3IiOiIjNEE5MEQ5In0=">
-<style>
-:root{--p:#4A90D9;--pl:#E8F0FE;--ok:#2ECC71;--okb:#E8F8F0;--no:#E74C3C;--nob:#FDEDEC;--gd:#F39C12;--tx:#2C3E50;--tl:#7F8C8D;--bg:#F5F7FA;--cd:#FFF;--sh:0 2px 12px rgba(0,0,0,.08);--r:12px;--rs:8px}
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;-webkit-text-size-adjust:100%}
-.hd{background:linear-gradient(135deg,#4A90D9,#357ABD);color:#fff;padding:14px 20px;display:none;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(74,144,217,.3)}
-.hd-t{font-size:20px;font-weight:700}
-.hd-r{display:flex;align-items:center;gap:14px}
-.hd-tm{font-size:13px;opacity:.9}
-.hd-sc{background:rgba(255,255,255,.2);border-radius:20px;padding:5px 14px;font-size:14px;font-weight:500}
-.hd-sc b{font-size:20px;margin-left:3px}
-.ct{max-width:900px;margin:0 auto;padding:20px 16px 120px}
-.wc{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:70vh;text-align:center;animation:fi .6s ease}
-.wc-ico{font-size:72px;margin-bottom:20px;animation:bo 2s infinite}
-.wc h2{font-size:26px;margin-bottom:10px}
-.wc p{font-size:15px;color:var(--tl);margin-bottom:36px;line-height:1.8}
-.btn{border:none;border-radius:var(--r);padding:13px 36px;font-size:17px;font-weight:600;cursor:pointer;transition:.3s;display:inline-flex;align-items:center;gap:8px;touch-action:manipulation;-webkit-user-select:none;user-select:none}
-.btn:active{transform:scale(.96)}
-.bp{background:linear-gradient(135deg,#4A90D9,#357ABD);color:#fff;box-shadow:0 4px 15px rgba(74,144,217,.4)}
-.bs{background:linear-gradient(135deg,#2ECC71,#27AE60);color:#fff;box-shadow:0 4px 15px rgba(46,204,113,.4)}
-.bo{background:var(--cd);color:var(--p);border:2px solid var(--p)}
-.se{display:none;animation:fi .4s ease}
-.se.on{display:block}
-.sh{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding:10px 0;border-bottom:2px solid var(--pl)}
-.st{font-size:19px;font-weight:700;display:flex;align-items:center;gap:8px}
-.sb{background:var(--p);color:#fff;font-size:12px;padding:2px 9px;border-radius:12px;font-weight:500}
-.cg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:28px}
-@media(max-width:600px){.cg{grid-template-columns:1fr}}
-.ci{background:var(--cd);border-radius:var(--rs);padding:12px 14px;display:flex;align-items:center;justify-content:space-between;box-shadow:var(--sh);transition:.3s;gap:6px}
-.ci.ok{background:var(--okb);border-left:4px solid var(--ok)}
-.ci.no{background:var(--nob);border-left:4px solid var(--no)}
-.cno{font-size:14px;font-weight:600;color:var(--tl);min-width:22px;flex-shrink:0}
-.cq{font-size:18px;font-weight:600;white-space:nowrap;flex-shrink:0;font-variant-numeric:tabular-nums}
-.ciw{flex:1;display:flex;align-items:center;justify-content:flex-end;gap:4px}
-.ceq{font-size:18px;font-weight:600;color:var(--tl)}
-.ci input{width:68px;height:40px;border:2px solid #E0E0E0;border-radius:var(--rs);text-align:center;font-size:19px;font-weight:600;outline:none;transition:.3s;background:#FAFAFA;font-variant-numeric:tabular-nums;-webkit-appearance:none;appearance:none;-moz-appearance:textfield}
-.ci input::-webkit-inner-spin-button,.ci input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0;display:none}
-.ci input:focus{border-color:var(--p);background:#fff;box-shadow:0 0 0 3px rgba(74,144,217,.15)}
-.ci input.ok{border-color:var(--ok);background:var(--okb);color:var(--ok)}
-.ci input.no{border-color:var(--no);background:var(--nob);color:var(--no);text-decoration:line-through}
-.cic{font-size:18px;width:22px;text-align:center;flex-shrink:0}
-.wc-card{background:var(--cd);border-radius:var(--r);padding:18px;margin-bottom:14px;box-shadow:var(--sh);transition:.3s}
-.wc-card.ok{background:var(--okb);border-left:4px solid var(--ok)}
-.wc-card.no{background:var(--nob);border-left:4px solid var(--no)}
-.wn{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;background:var(--p);color:#fff;border-radius:50%;font-size:13px;font-weight:700;margin-bottom:8px}
-.wd{display:inline-block;font-size:11px;padding:2px 7px;border-radius:10px;margin-left:6px;font-weight:500;vertical-align:middle;background:#FFF3CD;color:#856404}
-.wqt{font-size:16px;line-height:1.9;margin-bottom:14px;padding-left:3px}
-.wia{display:flex;align-items:center;gap:8px;padding-left:3px}
-.wl{font-size:14px;color:var(--tl);font-weight:500;white-space:nowrap}
-.wia input{width:96px;height:42px;border:2px solid #E0E0E0;border-radius:var(--rs);text-align:center;font-size:19px;font-weight:600;outline:none;transition:.3s;background:#FAFAFA;-webkit-appearance:none;appearance:none;-moz-appearance:textfield}
-.wia input::-webkit-inner-spin-button,.wia input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0;display:none}
-.wia input:focus{border-color:var(--p);background:#fff;box-shadow:0 0 0 3px rgba(74,144,217,.15)}
-.wia input.ok{border-color:var(--ok);background:var(--okb);color:var(--ok)}
-.wia input.no{border-color:var(--no);background:var(--nob);color:var(--no);text-decoration:line-through}
-.wfb{font-size:13px;margin-top:6px;padding-left:3px;font-weight:500}
-.wfb.ok{color:var(--ok)}.wfb.no{color:var(--no)}
-.bb{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);padding:11px 16px;display:none;justify-content:center;gap:12px;box-shadow:0 -2px 20px rgba(0,0,0,.08);z-index:100;padding-bottom:max(11px,env(safe-area-inset-bottom))}
-.bb.on{display:flex}
-.bb .btn{padding:11px 28px;font-size:15px}
-.rp{display:none;background:var(--cd);border-radius:var(--r);padding:26px;margin:20px 0;box-shadow:var(--sh-lg,0 8px 30px rgba(0,0,0,.12));text-align:center;animation:su .4s ease}
-.rp.on{display:block}
-.rsc{font-size:52px;font-weight:800;background:linear-gradient(135deg,#4A90D9,#2ECC71);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:6px 0}
-.rl{font-size:14px;color:var(--tl);margin-bottom:2px}
-.rst{display:flex;justify-content:center;gap:30px;margin:18px 0;padding:14px 0;border-top:1px solid #EEE;border-bottom:1px solid #EEE}
-.rst-i{text-align:center}
-.rst-n{font-size:24px;font-weight:700}
-.rst-n.g{color:var(--ok)}.rst-n.r{color:var(--no)}.rst-n.b{color:var(--p)}
-.rst-l{font-size:12px;color:var(--tl);margin-top:2px}
-.rm{font-size:17px;font-weight:600;margin:14px 0;line-height:1.6}
-.rm.ex{color:var(--gd)}.rm.gd{color:var(--ok)}.rm.ta{color:var(--p)}
-.bg{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:20px}
-.cfc{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;overflow:hidden}
-.cf{position:absolute;top:-10px;width:12px;height:12px;opacity:0}
-@keyframes cff{0%{opacity:1;transform:translateY(0) rotate(0) scale(1)}100%{opacity:0;transform:translateY(100vh) rotate(720deg) scale(.3)}}
-@keyframes cfs{0%,100%{margin-left:0}25%{margin-left:30px}75%{margin-left:-30px}}
-.fw{position:fixed;pointer-events:none;z-index:9998}
-.fwp{position:absolute;width:6px;height:6px;border-radius:50%}
-@keyframes fwb{0%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--tx),var(--ty)) scale(0)}}
-.tpa{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);font-size:96px;z-index:10000;pointer-events:none;animation:tpp 1.5s ease forwards}
-@keyframes tpp{0%{transform:translate(-50%,-50%) scale(0) rotate(-20deg)}50%{transform:translate(-50%,-50%) scale(1.2) rotate(5deg)}70%{transform:translate(-50%,-50%) scale(.95) rotate(-3deg)}85%{transform:translate(-50%,-50%) scale(1.05) rotate(1deg)}100%{transform:translate(-50%,-50%) scale(1) rotate(0);opacity:0}}
-.pb{height:4px;background:#E0E0E0;border-radius:2px;margin-bottom:18px;overflow:hidden}
-.pf{height:100%;background:linear-gradient(90deg,var(--p),#357ABD);border-radius:2px;transition:width .3s;width:0%}
-.hp{display:none;background:var(--cd);border-radius:var(--r);padding:18px;margin-top:18px;box-shadow:var(--sh)}
-.hp.on{display:block;animation:fi .3s ease}
-.hi{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid #F0F0F0}
-.hi:last-child{border-bottom:none}
-.hd-dt{font-size:13px;color:var(--tl)}
-.hd-sb{padding:3px 12px;border-radius:14px;font-size:14px;font-weight:600}
-.hd-sb.h{background:var(--okb);color:var(--ok)}.hd-sb.m{background:var(--pl);color:var(--p)}.hd-sb.l{background:var(--nob);color:var(--no)}
-/* 确认对话框 */
-.modal-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.4);z-index:2000;align-items:center;justify-content:center}
-.modal-overlay.on{display:flex}
-.modal-box{background:#fff;border-radius:16px;padding:28px 24px 20px;max-width:320px;width:90%;text-align:center;box-shadow:0 12px 40px rgba(0,0,0,.2);animation:su .3s ease}
-.modal-box p{font-size:16px;line-height:1.6;margin-bottom:22px;color:var(--tx)}
-.modal-btns{display:flex;gap:10px;justify-content:center}
-.modal-btns .btn{padding:10px 24px;font-size:15px}
-@keyframes fi{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-@keyframes su{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-@keyframes bo{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-@media print{.hd,.bb,.bg,.rp,.cfc{display:none!important}.ci input,.wia input{border:none;border-bottom:1px solid #333}.ct{padding:0}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>乘除法星际大冒险</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'ZCOOL KuaiLe', 'Microsoft YaHei', 'PingFang SC', cursive, sans-serif;
+            background: #0a0a2a;
+            color: #e2e8f0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            touch-action: manipulation;
+        }
+
+        #starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .main-container {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .view {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .view.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: white;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .menu-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            padding: 24px 16px;
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(148, 163, 184, 0.2);
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .menu-card:hover,
+        .menu-card:active {
+            transform: translateY(-4px);
+            border-color: #3b82f6;
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+        }
+
+        .menu-card .icon {
+            font-size: 48px;
+            margin-bottom: 8px;
+        }
+
+        .menu-card h3 {
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .multiplication-table {
+            display: grid;
+            grid-template-columns: repeat(9, 1fr);
+            gap: 4px;
+            margin-top: 20px;
+        }
+
+        .table-cell {
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(59, 130, 246, 0.12);
+            border: 1px solid rgba(59, 130, 246, 0.25);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 14px;
+            padding: 1px;
+            line-height: 1;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* 对角线下半部（i >= j）：蓝色系 */
+        .table-cell.lower-half {
+            background: rgba(59, 130, 246, 0.18);
+            border-color: rgba(59, 130, 246, 0.35);
+        }
+
+        /* 对角线（i == j）：紫色系，突出平方数 */
+        .table-cell.diagonal {
+            background: rgba(168, 85, 247, 0.22);
+            border-color: rgba(168, 85, 247, 0.45);
+        }
+
+        /* 对角线上半部（i < j）：橙色系 */
+        .table-cell.upper-half {
+            background: rgba(249, 115, 22, 0.16);
+            border-color: rgba(249, 115, 22, 0.35);
+        }
+
+        .table-cell:hover,
+        .table-cell:active {
+            transform: scale(1.05);
+        }
+
+        /* 对角线：紫色 hover */
+        .table-cell.diagonal:hover,
+        .table-cell.diagonal:active {
+            background: rgba(168, 85, 247, 0.4);
+        }
+
+        /* 上半部（橙色区）：橙色 hover */
+        .table-cell.upper-half:hover,
+        .table-cell.upper-half:active {
+            background: rgba(249, 115, 22, 0.3);
+        }
+
+        /* 下半部（蓝色区）：蓝色 hover */
+        .table-cell.lower-half:hover,
+        .table-cell.lower-half:active {
+            background: rgba(59, 130, 246, 0.3);
+        }
+
+        .table-cell .formula {
+            font-weight: bold;
+            color: #60a5fa;
+            font-size: 18px;
+            line-height: 1.1;
+        }
+
+        .table-cell .result {
+            color: #fbbf24;
+            font-weight: bold;
+            font-size: 26px;
+            line-height: 1.1;
+        }
+
+        /* 横屏优化 (iPad横屏) */
+        @media (orientation: landscape) and (max-height: 768px) {
+            .main-container {
+                padding: 12px 20px;
+            }
+
+            .menu-grid {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 12px;
+            }
+
+            .menu-card {
+                padding: 16px 8px;
+            }
+
+            .menu-card .icon {
+                font-size: 36px;
+                margin-bottom: 4px;
+            }
+
+            .menu-card h3 {
+                font-size: 15px;
+            }
+
+            .card {
+                padding: 16px;
+                margin-bottom: 12px;
+            }
+
+            .question-display {
+                font-size: 28px;
+                padding: 16px;
+                margin: 12px 0;
+            }
+
+            .multiplication-table {
+                gap: 3px;
+                max-width: 500px;
+                margin: 12px auto;
+            }
+
+            .table-cell .formula {
+                font-size: 15px;
+                line-height: 1.1;
+            }
+
+            .table-cell .result {
+                font-size: 22px;
+                line-height: 1.1;
+            }
+
+            .stat-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 12px;
+            }
+
+            .level-display .level {
+                font-size: 36px;
+            }
+
+            .level-display .title {
+                font-size: 16px;
+            }
+
+            .word-problem .scene {
+                font-size: 36px;
+            }
+
+            .word-problem .problem-text {
+                font-size: 16px;
+            }
+
+            .visualization {
+                padding: 12px;
+                min-height: 60px;
+            }
+
+            .visual-item {
+                width: 24px;
+                height: 24px;
+                font-size: 12px;
+            }
+        }
+
+        .question-display {
+            font-size: 36px;
+            font-weight: bold;
+            text-align: center;
+            padding: 30px;
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 16px;
+            margin: 20px 0;
+            border: 2px solid rgba(148, 163, 184, 0.2);
+        }
+
+        .answer-input {
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+            display: block;
+            padding: 16px 24px;
+            font-size: 24px;
+            font-family: inherit;
+            text-align: center;
+            background: rgba(15, 23, 42, 0.8);
+            border: 2px solid rgba(148, 163, 184, 0.3);
+            border-radius: 12px;
+            color: #e2e8f0;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .answer-input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .answer-input::-webkit-inner-spin-button,
+        .answer-input::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .answer-input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        .feedback {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            padding: 16px;
+            margin: 16px 0;
+            border-radius: 12px;
+            animation: fadeIn 0.3s ease-out;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feedback.correct {
+            background: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+            border: 2px solid rgba(16, 185, 129, 0.5);
+        }
+
+        .feedback.incorrect {
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            border: 2px solid rgba(239, 68, 68, 0.5);
+        }
+
+        .feedback.hint {
+            background: rgba(245, 158, 11, 0.2);
+            color: #fbbf24;
+            border: 2px solid rgba(245, 158, 11, 0.5);
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        .stat-card .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #60a5fa;
+            margin: 8px 0;
+        }
+
+        .stat-card .stat-label {
+            font-size: 14px;
+            color: #94a3b8;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: 999px;
+            overflow: hidden;
+            margin: 16px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            border-radius: 999px;
+            transition: width 0.5s ease-out;
+        }
+
+        .level-display {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
+            border-radius: 16px;
+            margin: 20px 0;
+        }
+
+        .level-display .level {
+            font-size: 48px;
+            font-weight: bold;
+            color: #fbbf24;
+        }
+
+        .level-display .title {
+            font-size: 20px;
+            color: #e2e8f0;
+            margin-top: 8px;
+        }
+
+        .firework {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .firework-particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            animation: fireworkBurst 1s ease-out forwards;
+        }
+
+        @keyframes fireworkBurst {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        .visualization {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            justify-content: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 12px;
+            min-height: 100px;
+        }
+
+        .visual-item {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .word-problem {
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 20px 0;
+            border: 2px solid rgba(148, 163, 184, 0.2);
+        }
+
+        .word-problem .scene {
+            font-size: 48px;
+            text-align: center;
+            margin: 16px 0;
+        }
+
+        .word-problem .problem-text {
+            font-size: 20px;
+            line-height: 1.6;
+            text-align: center;
+            color: #e2e8f0;
+        }
+
+        .sound-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            color: #e2e8f0;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .sound-toggle:hover {
+            background: rgba(59, 130, 246, 0.3);
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 10px;
+            color: #e2e8f0;
+            font-family: inherit;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .back-btn:hover {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: #3b82f6;
+        }
+
+        @media (max-width: 640px) {
+            .main-container {
+                padding: 12px;
+            }
+
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .question-display {
+                font-size: 28px;
+                padding: 20px;
+            }
+
+            .multiplication-table {
+                gap: 2px;
+            }
+
+            .table-cell {
+                font-size: 12px;
+                padding: 1px;
+                line-height: 1;
+            }
+
+            .table-cell .formula {
+                font-size: 13px;
+                line-height: 1.1;
+            }
+
+            .table-cell .result {
+                font-size: 17px;
+                line-height: 1.1;
+            }
+        }
+
+        .btn:focus-visible,
+        .menu-card:focus-visible,
+        .table-cell:focus-visible,
+        .back-btn:focus-visible {
+            outline: 3px solid #60a5fa;
+            outline-offset: 2px;
+        }
+
+        .stat-bar-bg {
+            background-color: #334155;
+            border-radius: 999px;
+            height: 12px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .stat-bar-fill {
+            height: 100%;
+            border-radius: 999px;
+            transition: width 1s ease-out;
+        }
+
+        /* ========== 星际飞行元素（新增）========== */
+
+        /* 飞船显示 */
+        .spaceship-display {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.15));
+            border: 2px solid rgba(148, 163, 184, 0.3);
+            border-radius: 16px;
+            margin: 16px 0;
+        }
+
+        .spaceship-icon {
+            font-size: 48px;
+            animation: float 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(96, 165, 250, 0.5));
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(-5deg); }
+            50% { transform: translateY(-8px) rotate(5deg); }
+        }
+
+        .spaceship-info {
+            flex: 1;
+            margin-left: 16px;
+        }
+
+        .spaceship-name {
+            font-size: 16px;
+            color: #94a3b8;
+            margin-bottom: 4px;
+        }
+
+        .spaceship-fuel {
+            font-size: 14px;
+            color: #fbbf24;
+        }
+
+        .spaceship-fuel-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 6px;
+        }
+
+        .spaceship-fuel-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #f59e0b, #ef4444);
+            border-radius: 4px;
+            transition: width 0.5s ease-out;
+        }
+
+        /* 星球旅行进度 */
+        .journey-container {
+            position: relative;
+            padding: 20px 0;
+            margin: 16px 0;
+        }
+
+        .journey-track {
+            position: relative;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .journey-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg,
+                #3b82f6 0%,
+                #8b5cf6 25%,
+                #ec4899 50%,
+                #f59e0b 75%,
+                #10b981 100%);
+            z-index: 1;
+        }
+
+        .journey-planet {
+            position: relative;
+            z-index: 2;
+            font-size: 24px;
+            transition: all 0.3s ease;
+            filter: grayscale(80%);
+            opacity: 0.5;
+        }
+
+        .journey-planet.visited {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        .journey-planet.current {
+            filter: grayscale(0%);
+            opacity: 1;
+            animation: planetPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes planetPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+        }
+
+        .journey-label {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 11px;
+            color: #94a3b8;
+            margin-top: 4px;
+            white-space: nowrap;
+        }
+
+        .journey-planet.current .journey-label {
+            color: #fbbf24;
+            font-weight: bold;
+        }
+
+        /* 飞船飞过动画 */
+        .flying-spaceship {
+            position: fixed;
+            font-size: 60px;
+            z-index: 999;
+            pointer-events: none;
+            animation: flyAcross 1.5s ease-in-out forwards;
+        }
+
+        @keyframes flyAcross {
+            0% {
+                left: -100px;
+                top: 50%;
+                transform: translateY(-50%) rotate(15deg);
+            }
+            100% {
+                left: calc(100vw + 100px);
+                top: 30%;
+                transform: translateY(-50%) rotate(15deg);
+            }
+        }
+
+        /* 飞船尾焰 */
+        .rocket-trail {
+            position: fixed;
+            pointer-events: none;
+            z-index: 998;
+            width: 200px;
+            height: 30px;
+            background: linear-gradient(90deg,
+                transparent 0%,
+                rgba(245, 158, 11, 0.8) 30%,
+                rgba(239, 68, 68, 0.6) 60%,
+                rgba(139, 92, 246, 0.4) 100%);
+            border-radius: 0 50% 50% 0;
+            animation: trailFade 1.5s ease-out forwards;
+        }
+
+        @keyframes trailFade {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        /* 升级特效 */
+        .level-up-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: overlayFadeIn 0.3s ease-out;
+        }
+
+        @keyframes overlayFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .level-up-content {
+            text-align: center;
+            animation: levelUpBounce 0.8s ease-out;
+        }
+
+        @keyframes levelUpBounce {
+            0% { transform: scale(0) rotate(-180deg); }
+            50% { transform: scale(1.2) rotate(10deg); }
+            100% { transform: scale(1) rotate(0deg); }
+        }
+
+        .level-up-icon {
+            font-size: 120px;
+            margin-bottom: 20px;
+        }
+
+        .level-up-title {
+            font-size: 36px;
+            color: #fbbf24;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .level-up-subtitle {
+            font-size: 18px;
+            color: #94a3b8;
+        }
+
+        .level-up-close {
+            margin-top: 30px;
+            padding: 12px 32px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        /* 徽章墙 */
+        .badges-wall {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .badge {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 2px solid rgba(148, 163, 184, 0.2);
+            border-radius: 12px;
+            filter: grayscale(100%);
+            opacity: 0.3;
+            transition: all 0.3s ease;
+        }
+
+        .badge.earned {
+            filter: grayscale(0%);
+            opacity: 1;
+            border-color: #fbbf24;
+            box-shadow: 0 0 15px rgba(251, 191, 36, 0.4);
+            animation: badgeShine 2s ease-in-out infinite;
+        }
+
+        @keyframes badgeShine {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+    </style>
 </head>
 <body>
+    <canvas id="starfield"></canvas>
 
-<div class="hd" id="header">
-  <div class="hd-t">📐 小学数学练习</div>
-  <div class="hd-r">
-    <div class="hd-tm">⏱️ <span id="timerText">00:00</span></div>
-    <div class="hd-sc">得分：<b id="headerScore">0</b><small style="font-size:11px;opacity:.8">分</small></div>
-  </div>
-</div>
+    <button class="sound-toggle" id="sound-toggle" aria-label="切换声音">
+        <i class="fas fa-volume-up"></i>
+    </button>
 
-<div class="ct">
-  <div class="wc se on" id="welcomeSection">
-    <div class="wc-ico">📐</div>
-    <h2>小学数学练习</h2>
-    <p>每次生成一套练习卷<br>含 <strong>48题</strong> 口算题 + <strong>3题</strong> 应用题<br>满分 <strong>100分</strong>，加油拿高分！</p>
-    <button class="btn bp" id="startBtn" style="font-size:19px;padding:15px 44px">📝 开始出题</button>
-    <div id="historyPanel" class="hp" style="max-width:380px;margin:22px auto 0"></div>
-  </div>
+    <div class="main-container">
+        <div id="menu-view" class="view active">
+            <div style="text-align: center; margin-bottom: 30px;">
+                <h1 style="font-size: 36px; color: #fbbf24; margin-bottom: 8px;">
+                    <i class="fas fa-rocket"></i> 乘除法星际大冒险
+                </h1>
+                <p style="color: #94a3b8; font-size: 16px;">为二年级远航做准备</p>
+            </div>
 
-  <div class="se" id="examSection">
-    <div class="pb"><div class="pf" id="progressFill"></div></div>
-    <div class="sh">
-      <div class="st">一、口算题 <span class="sb">每题1分，共48分</span></div>
+            <div class="menu-grid">
+                <div class="menu-card" onclick="switchMode('table')" role="button" tabindex="0">
+                    <div class="icon">📊</div>
+                    <h3>九九乘法表</h3>
+                </div>
+                <div class="menu-card" onclick="switchMode('multiplication')" role="button" tabindex="0">
+                    <div class="icon">✖️</div>
+                    <h3>乘法练习</h3>
+                </div>
+                <div class="menu-card" onclick="switchMode('division')" role="button" tabindex="0">
+                    <div class="icon">➗</div>
+                    <h3>除法练习</h3>
+                </div>
+                <div class="menu-card" onclick="switchMode('word-problem')" role="button" tabindex="0">
+                    <div class="icon">📝</div>
+                    <h3>应用题</h3>
+                </div>
+                <div class="menu-card" onclick="switchMode('stats')" role="button" tabindex="0">
+                    <div class="icon">🏆</div>
+                    <h3>我的成绩</h3>
+                </div>
+            </div>
+        </div>
+
+        <div id="table-view" class="view">
+            <button class="back-btn" onclick="switchMode('menu')">
+                <i class="fas fa-arrow-left"></i> 返回
+            </button>
+            <div class="card">
+                <h2 style="text-align: center; font-size: 24px; margin-bottom: 16px; color: #60a5fa;">
+                    <i class="fas fa-table"></i> 九九乘法表
+                </h2>
+                <p style="text-align: center; color: #94a3b8; margin-bottom: 16px;">
+                    点击格子，听乘法口诀朗读
+                </p>
+                <div class="multiplication-table" id="multiplication-table"></div>
+            </div>
+        </div>
+
+        <div id="multiplication-view" class="view">
+            <button class="back-btn" onclick="switchMode('menu')">
+                <i class="fas fa-arrow-left"></i> 返回
+            </button>
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <div>
+                        <span style="color: #94a3b8;">得分：</span>
+                        <span id="score-display" style="font-size: 24px; font-weight: bold; color: #fbbf24;">0</span>
+                    </div>
+                    <div>
+                        <span style="color: #94a3b8;">连击：</span>
+                        <span id="streak-display" style="font-size: 24px; font-weight: bold; color: #34d399;">0</span>
+                        <span id="streak-fire" style="display: none; font-size: 20px;">🔥</span>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill" style="width: 0%;"></div>
+                </div>
+
+                <!-- 星际旅行进度（新增） -->
+                <div class="journey-container">
+                    <div class="journey-track">
+                        <div class="journey-line"></div>
+                        <div class="journey-planet" data-stage="0">🌍<div class="journey-label">地球</div></div>
+                        <div class="journey-planet" data-stage="1">🌙<div class="journey-label">月球</div></div>
+                        <div class="journey-planet" data-stage="2">🔴<div class="journey-label">火星</div></div>
+                        <div class="journey-planet" data-stage="3">🪐<div class="journey-label">木星</div></div>
+                        <div class="journey-planet" data-stage="4">⭐<div class="journey-label">宇宙</div></div>
+                    </div>
+                </div>
+
+                <!-- 飞船状态显示（新增） -->
+                <div class="spaceship-display">
+                    <div class="spaceship-icon" id="spaceship-icon">🚀</div>
+                    <div class="spaceship-info">
+                        <div class="spaceship-name" id="spaceship-name">基础火箭</div>
+                        <div class="spaceship-fuel" id="spaceship-fuel">燃料：0 / 10</div>
+                        <div class="spaceship-fuel-bar">
+                            <div class="spaceship-fuel-fill" id="fuel-fill" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-display" id="question-display">
+                    点击"开始"按钮
+                </div>
+
+                <div class="visualization" id="visualization"></div>
+
+                <input
+                    type="number"
+                    class="answer-input"
+                    id="answer-input"
+                    placeholder="输入答案"
+                    inputmode="numeric"
+                    style="display: none;"
+                >
+
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="btn btn-primary" id="action-btn" onclick="handleAction()">
+                        <i class="fas fa-play"></i> 开始
+                    </button>
+                </div>
+
+                <div class="feedback" id="feedback" style="display: none;"></div>
+            </div>
+        </div>
+
+        <div id="division-view" class="view">
+            <button class="back-btn" onclick="switchMode('menu')">
+                <i class="fas fa-arrow-left"></i> 返回
+            </button>
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <div>
+                        <span style="color: #94a3b8;">得分：</span>
+                        <span id="division-score" style="font-size: 24px; font-weight: bold; color: #fbbf24;">0</span>
+                    </div>
+                    <div>
+                        <span style="color: #94a3b8;">连击：</span>
+                        <span id="division-streak" style="font-size: 24px; font-weight: bold; color: #34d399;">0</span>
+                        <span id="division-streak-fire" style="display: none; font-size: 20px;">🔥</span>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="division-progress" style="width: 0%;"></div>
+                </div>
+
+                <!-- 星际旅行进度（新增） -->
+                <div class="journey-container">
+                    <div class="journey-track">
+                        <div class="journey-line"></div>
+                        <div class="journey-planet" data-stage="0">🌍<div class="journey-label">地球</div></div>
+                        <div class="journey-planet" data-stage="1">🌙<div class="journey-label">月球</div></div>
+                        <div class="journey-planet" data-stage="2">🔴<div class="journey-label">火星</div></div>
+                        <div class="journey-planet" data-stage="3">🪐<div class="journey-label">木星</div></div>
+                        <div class="journey-planet" data-stage="4">⭐<div class="journey-label">宇宙</div></div>
+                    </div>
+                </div>
+
+                <!-- 飞船状态显示（新增） -->
+                <div class="spaceship-display">
+                    <div class="spaceship-icon" id="division-spaceship-icon">🚀</div>
+                    <div class="spaceship-info">
+                        <div class="spaceship-name" id="division-spaceship-name">基础火箭</div>
+                        <div class="spaceship-fuel" id="division-spaceship-fuel">燃料：0 / 10</div>
+                        <div class="spaceship-fuel-bar">
+                            <div class="spaceship-fuel-fill" id="division-fuel-fill" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-display" id="division-question">
+                    点击"开始"按钮
+                </div>
+
+                <div class="visualization" id="division-visualization"></div>
+
+                <input
+                    type="number"
+                    class="answer-input"
+                    id="division-answer"
+                    placeholder="输入答案"
+                    inputmode="numeric"
+                    style="display: none;"
+                >
+
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="btn btn-success" id="division-action-btn" onclick="handleDivisionAction()">
+                        <i class="fas fa-play"></i> 开始
+                    </button>
+                </div>
+
+                <div class="feedback" id="division-feedback" style="display: none;"></div>
+            </div>
+        </div>
+
+        <div id="word-problem-view" class="view">
+            <button class="back-btn" onclick="switchMode('menu')">
+                <i class="fas fa-arrow-left"></i> 返回
+            </button>
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <div>
+                        <span style="color: #94a3b8;">得分：</span>
+                        <span id="wp-score" style="font-size: 24px; font-weight: bold; color: #fbbf24;">0</span>
+                    </div>
+                    <div>
+                        <span style="color: #94a3b8;">连击：</span>
+                        <span id="wp-streak" style="font-size: 24px; font-weight: bold; color: #34d399;">0</span>
+                        <span id="wp-streak-fire" style="display: none; font-size: 20px;">🔥</span>
+                    </div>
+                </div>
+
+                <div class="word-problem" id="word-problem-content">
+                    <div class="scene" id="wp-scene">📝</div>
+                    <div class="problem-text" id="wp-text">
+                        点击"开始"按钮，我会给你出一道应用题
+                    </div>
+                </div>
+
+                <!-- 星际旅行进度（新增） -->
+                <div class="journey-container">
+                    <div class="journey-track">
+                        <div class="journey-line"></div>
+                        <div class="journey-planet" data-stage="0">🌍<div class="journey-label">地球</div></div>
+                        <div class="journey-planet" data-stage="1">🌙<div class="journey-label">月球</div></div>
+                        <div class="journey-planet" data-stage="2">🔴<div class="journey-label">火星</div></div>
+                        <div class="journey-planet" data-stage="3">🪐<div class="journey-label">木星</div></div>
+                        <div class="journey-planet" data-stage="4">⭐<div class="journey-label">宇宙</div></div>
+                    </div>
+                </div>
+
+                <!-- 飞船状态显示（新增） -->
+                <div class="spaceship-display">
+                    <div class="spaceship-icon" id="wp-spaceship-icon">🚀</div>
+                    <div class="spaceship-info">
+                        <div class="spaceship-name" id="wp-spaceship-name">基础火箭</div>
+                        <div class="spaceship-fuel" id="wp-spaceship-fuel">燃料：0 / 10</div>
+                        <div class="spaceship-fuel-bar">
+                            <div class="spaceship-fuel-fill" id="wp-fuel-fill" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <input
+                    type="number"
+                    class="answer-input"
+                    id="wp-answer"
+                    placeholder="输入答案"
+                    inputmode="numeric"
+                    style="display: none;"
+                >
+
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="btn btn-warning" id="wp-action-btn" onclick="handleWordProblemAction()">
+                        <i class="fas fa-play"></i> 开始
+                    </button>
+                </div>
+
+                <div class="feedback" id="wp-feedback" style="display: none;"></div>
+            </div>
+        </div>
+
+        <div id="stats-view" class="view">
+            <button class="back-btn" onclick="switchMode('menu')">
+                <i class="fas fa-arrow-left"></i> 返回
+            </button>
+
+            <div class="level-display" id="level-display">
+                <div class="level" id="level-number">Lv.1</div>
+                <div class="title" id="level-title">新手宇航员</div>
+            </div>
+
+            <!-- 徽章墙（新增） -->
+            <div class="card">
+                <h2 style="font-size: 20px; margin-bottom: 16px; color: #60a5fa;">
+                    <i class="fas fa-medal"></i> 徽章收藏
+                </h2>
+                <div class="badges-wall" id="badges-wall">
+                    <div class="badge" data-badge="first">🌟<div style="font-size:10px;margin-top:4px">初次飞行</div></div>
+                    <div class="badge" data-badge="streak5">🔥<div style="font-size:10px;margin-top:4px">5连击</div></div>
+                    <div class="badge" data-badge="streak10">💥<div style="font-size:10px;margin-top:4px">10连击</div></div>
+                    <div class="badge" data-badge="perfect">💯<div style="font-size:10px;margin-top:4px">满分</div></div>
+                    <div class="badge" data-badge="multiplication-master">✖️<div style="font-size:10px;margin-top:4px">乘法大师</div></div>
+                    <div class="badge" data-badge="division-master">➗<div style="font-size:10px;margin-top:4px">除法大师</div></div>
+                    <div class="badge" data-badge="word-problem-master">📚<div style="font-size:10px;margin-top:4px">应用题王</div></div>
+                    <div class="badge" data-badge="galaxy">🌌<div style="font-size:10px;margin-top:4px">银河大师</div></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 style="font-size: 20px; margin-bottom: 16px; color: #60a5fa;">
+                    <i class="fas fa-chart-bar"></i> 练习统计
+                </h2>
+
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">总答题数</div>
+                        <div class="stat-value" id="stat-total">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">正确率</div>
+                        <div class="stat-value" id="stat-accuracy">0%</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">最高连击</div>
+                        <div class="stat-value" id="stat-best-streak">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">总得分</div>
+                        <div class="stat-value" id="stat-total-score">0</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 style="font-size: 20px; margin-bottom: 16px; color: #60a5fa;">
+                    <i class="fas fa-list"></i> 各模式统计
+                </h2>
+
+                <div style="margin-bottom: 16px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span>乘法练习</span>
+                        <span id="stat-multiplication">0/0 (0%)</span>
+                    </div>
+                    <div class="stat-bar-bg">
+                        <div class="stat-bar-fill" id="stat-multiplication-bar" style="width: 0%; background: linear-gradient(90deg, #3b82f6, #8b5cf6);"></div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 16px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span>除法练习</span>
+                        <span id="stat-division">0/0 (0%)</span>
+                    </div>
+                    <div class="stat-bar-bg">
+                        <div class="stat-bar-fill" id="stat-division-bar" style="width: 0%; background: linear-gradient(90deg, #10b981, #059669);"></div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 16px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span>应用题</span>
+                        <span id="stat-word-problem">0/0 (0%)</span>
+                    </div>
+                    <div class="stat-bar-bg">
+                        <div class="stat-bar-fill" id="stat-word-problem-bar" style="width: 0%; background: linear-gradient(90deg, #f59e0b, #d97706);"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 20px;">
+                <button class="btn btn-danger" onclick="resetStats()">
+                    <i class="fas fa-trash-alt"></i> 重置数据
+                </button>
+            </div>
+        </div>
+
+        <div style="text-align: center; padding: 30px 0; color: #475569; font-size: 14px;">
+            <p>乘除法星际大冒险 v2.0 | 适合一年级学生</p>
+        </div>
     </div>
-    <div class="cg" id="calcGrid"></div>
-    <div class="sh">
-      <div class="st">二、应用题 <span class="sb">共52分</span></div>
-    </div>
-    <div id="wordArea"></div>
-  </div>
 
-  <div class="rp" id="resultPanel">
-    <div class="rl">本次得分</div>
-    <div class="rsc" id="resultScore">0</div>
-    <div class="rst">
-      <div class="rst-i"><div class="rst-n g" id="resultCorrect">0</div><div class="rst-l">答对题数</div></div>
-      <div class="rst-i"><div class="rst-n r" id="resultWrong">0</div><div class="rst-l">答错题数</div></div>
-      <div class="rst-i"><div class="rst-n b" id="resultTime">0:00</div><div class="rst-l">用时</div></div>
-    </div>
-    <div class="rm" id="resultMessage"></div>
-    <div class="bg" id="resultButtons"></div>
-  </div>
-</div>
+    <script>
+        'use strict';
 
-<div class="bb" id="bottomBar">
-  <button class="btn bo" id="resetBtn">🔄 重新出题</button>
-  <button class="btn bs" id="submitBtn">✅ 提交答卷</button>
-</div>
+        var gameState = {
+            currentMode: 'menu',
+            score: 0,
+            streak: 0,
+            bestStreak: 0,
+            sessionQuestions: 0,
+            soundEnabled: true,
+            currentQuestion: null,
+            stats: {
+                totalAnswered: 0,
+                totalCorrect: 0,
+                multiplication: { answered: 0, correct: 0 },
+                division: { answered: 0, correct: 0 },
+                wordProblem: { answered: 0, correct: 0 }
+            },
+            level: 1,
+            levelTitles: ['新手宇航员', '见习飞行员', '星际导航员', '银河守护者', '宇宙指挥官'],
+            // 飞船系统（按模式分离）
+            spaceship: {
+                multiplication: { stage: 0, fuel: 0, maxFuel: 10, current: '🚀', name: '基础火箭' },
+                division: { stage: 0, fuel: 0, maxFuel: 10, current: '🚀', name: '基础火箭' },
+                wordProblem: { stage: 0, fuel: 0, maxFuel: 10, current: '🚀', name: '基础火箭' }
+            },
+            // 徽章系统（新增）
+            badges: {
+                first: false,
+                streak5: false,
+                streak10: false,
+                perfect: false,
+                'multiplication-master': false,
+                'division-master': false,
+                'word-problem-master': false,
+                galaxy: false
+            }
+        };
 
-<div class="cfc" id="confettiContainer"></div>
+        // 飞船等级配置（按模式分别设计）
+        var spaceshipLevels = {
+            multiplication: [
+                { icon: '🚀', name: '基础火箭' },
+                { icon: '🛸', name: '飞行飞碟' },
+                { icon: '🚀', name: '巡航飞船' },
+                { icon: '🛰️', name: '轨道卫星' },
+                { icon: '🛸', name: '星际战舰' }
+            ],
+            division: [
+                { icon: '🚀', name: '基础火箭' },
+                { icon: '🛰️', name: '探索卫星' },
+                { icon: '🛸', name: '除法飞碟' },
+                { icon: '🚀', name: '巡航飞船' },
+                { icon: '🛸', name: '银河战舰' }
+            ],
+            wordProblem: [
+                { icon: '🚀', name: '基础火箭' },
+                { icon: '🛸', name: '应用飞碟' },
+                { icon: '🛰️', name: '分析卫星' },
+                { icon: '🚀', name: '巡航飞船' },
+                { icon: '🛸', name: '智慧战舰' }
+            ]
+        };
 
-<!-- 确认对话框 -->
-<div class="modal-overlay" id="confirmModal">
-  <div class="modal-box">
-    <p id="confirmMsg"></p>
-    <div class="modal-btns">
-      <button class="btn bo" id="confirmNo">取消</button>
-      <button class="btn bp" id="confirmYes">确定提交</button>
-    </div>
-  </div>
-</div>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('[初始化] 乘除法星际大冒险启动');
 
-<script>
-(function(){
-'use strict';
+            initStarfield();
+            initMultiplicationTable();
+            loadStats();
+            updateStatsDisplay();
 
-// ========== 状态 ==========
-var calcQ = [], wordQ = [], submitted = false, timerID = null, startT = 0, elapsed = 0;
+            document.getElementById('sound-toggle').addEventListener('click', function() {
+                gameState.soundEnabled = !gameState.soundEnabled;
+                var icon = this.querySelector('i');
+                if (gameState.soundEnabled) {
+                    icon.className = 'fas fa-volume-up';
+                } else {
+                    icon.className = 'fas fa-volume-mute';
+                }
+            });
 
-// ========== DOM引用 ==========
-var $ = function(id){ return document.getElementById(id); };
-var startBtn = $('startBtn');
-var submitBtn = $('submitBtn');
-var resetBtn = $('resetBtn');
-var header = $('header');
-var bottomBar = $('bottomBar');
-var resultPanel = $('resultPanel');
-var welcomeSection = $('welcomeSection');
-var examSection = $('examSection');
-var calcGrid = $('calcGrid');
-var wordArea = $('wordArea');
-var progressFill = $('progressFill');
-var headerScore = $('headerScore');
-var timerText = $('timerText');
-var confirmModal = $('confirmModal');
-var confirmMsg = $('confirmMsg');
-var confirmYes = $('confirmYes');
-var confirmNo = $('confirmNo');
-var historyPanel = $('historyPanel');
+            document.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter') {
+                    if (gameState.currentMode === 'multiplication') {
+                        handleAction();
+                    } else if (gameState.currentMode === 'division') {
+                        handleDivisionAction();
+                    } else if (gameState.currentMode === 'word-problem') {
+                        handleWordProblemAction();
+                    }
+                }
+                if (event.key === 'Escape') {
+                    switchMode('menu');
+                }
+            });
 
-// ========== 事件绑定 ==========
-startBtn.addEventListener('click', function(e){
-  e.preventDefault();
-  generateExam();
-});
-submitBtn.addEventListener('click', function(e){
-  e.preventDefault();
-  submitExam();
-});
-resetBtn.addEventListener('click', function(e){
-  e.preventDefault();
-  resetExam();
-});
-confirmYes.addEventListener('click', function(e){
-  e.preventDefault();
-  confirmModal.classList.remove('on');
-  doSubmit();
-});
-confirmNo.addEventListener('click', function(e){
-  e.preventDefault();
-  confirmModal.classList.remove('on');
-});
+            console.log('[初始化] 完成');
+        });
 
-// ========== 工具 ==========
-function randInt(a,b){ return Math.floor(Math.random()*(b-a+1))+a; }
-function shuffle(arr){ for(var i=arr.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=arr[i];arr[i]=arr[j];arr[j]=t;} return arr; }
-function fmtTime(s){ var m=Math.floor(s/60); return (m<10?'0':'')+m+':'+(s%60<10?'0':'')+(s%60); }
+        function initStarfield() {
+            var canvas = document.getElementById('starfield');
+            var ctx = canvas.getContext('2d');
 
-// ========== 生成口算题 ==========
-function genCalc(n){
-  var qs=[];
-  for(var i=0;i<n;i++){
-    var a,b,op,ans,txt;
-    op=Math.random()<0.5?'+':'-';
-    if(op==='+'){
-      if(Math.random()<0.7){a=randInt(10,99);b=randInt(1,100-a);}
-      else{a=randInt(1,50);b=randInt(1,100-a);}
-      ans=a+b; txt=a+' + '+b+' = ';
-    } else {
-      if(Math.random()<0.7){a=randInt(10,100);b=randInt(1,a);}
-      else{a=randInt(1,50);b=randInt(1,a);}
-      ans=a-b; txt=a+' − '+b+' = ';
-    }
-    qs.push({a:a,b:b,op:op,answer:ans,text:txt});
-  }
-  return qs;
-}
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
 
-// ========== 应用题库 ==========
-function getWordPool(){
-  return [
-    function(){var a=randInt(5,30),b=randInt(3,20);return{text:'学校图书馆有故事书'+a+'本，今天又买来了'+b+'本。现在一共有多少本故事书？',answer:a+b,unit:'本',hard:false};},
-    function(){var a=randInt(20,50),b=randInt(5,a-1);return{text:'停车场原来有'+a+'辆汽车，开走了'+b+'辆。停车场现在还有多少辆汽车？',answer:a-b,unit:'辆',hard:false};},
-    function(){var a=randInt(3,9),b=randInt(3,9);return{text:'一年级有男生'+(a*5)+'人，女生'+(b*5)+'人。一年级一共有多少人？',answer:a*5+b*5,unit:'人',hard:false};},
-    function(){var a=randInt(15,40),b=randInt(5,a);return{text:'果园里有苹果树'+a+'棵，梨树比苹果树少'+b+'棵。梨树有多少棵？',answer:a-b,unit:'棵',hard:false};},
-    function(){var a=randInt(6,20),b=randInt(6,20);return{text:'小明看一本书，第一天看了'+a+'页，第二天看了'+b+'页。两天一共看了多少页？',answer:a+b,unit:'页',hard:false};},
-    function(){var a=randInt(30,60),b=randInt(10,25);return{text:'水果店有苹果'+a+'个，卖出'+b+'个后，还剩多少个苹果？',answer:a-b,unit:'个',hard:false};},
-    function(){var a=randInt(10,30),b=randInt(10,30),c=randInt(1,15);return{text:'花园里有红花'+a+'朵，黄花'+b+'朵，被摘走了'+c+'朵。花园里现在还有多少朵花？',answer:a+b-c,unit:'朵',hard:false};},
-    function(){var a=randInt(15,40),b=randInt(5,a-2);return{text:'小华有'+a+'颗糖，给了小丽'+b+'颗后，小华还剩多少颗糖？',answer:a-b,unit:'颗',hard:false};},
-    // 提高题
-    function(){var a=randInt(8,25),b=randInt(5,15),c=randInt(3,10);return{text:'文具店有铅笔'+a+'支，钢笔'+b+'支，卖出了'+c+'支铅笔后，店里一共还剩多少支笔？',answer:a-c+b,unit:'支',hard:true};},
-    function(){var a=randInt(12,30),b=randInt(5,12),c=randInt(3,10);return{text:'树上原来有'+a+'只鸟，飞走了'+b+'只，又飞来了'+c+'只。树上现在有多少只鸟？',answer:a-b+c,unit:'只',hard:true};},
-    function(){var a=randInt(5,15),b=randInt(5,15);return{text:'妈妈买了'+a+'个苹果和'+b+'个梨，爸爸又买了同样多的苹果。他们一共买了多少个水果？',answer:a*2+b,unit:'个',hard:true};},
-    function(){var a=randInt(20,50),b=randInt(8,20),c=randInt(5,15);return{text:'停车场有'+a+'辆车。先开走了'+b+'辆，又开走了'+c+'辆。停车场现在还有多少辆车？',answer:a-b-c,unit:'辆',hard:true};},
-    function(){var a=randInt(10,30),b=randInt(10,30),c=randInt(5,15);return{text:'小明有'+a+'张卡片，小红有'+b+'张卡片。小红送给小明'+c+'张后，小明现在有多少张卡片？',answer:a+c,unit:'张',hard:true};},
-    function(){var a=randInt(15,35),b=randInt(10,20);return{text:'篮子里有'+a+'个鸡蛋，王奶奶拿走了'+b+'个去做蛋糕，后来她又放回去了7个。篮子里现在有多少个鸡蛋？',answer:a-b+7,unit:'个',hard:true};}
-  ];
-}
+            var stars = [];
+            var starCount = 150;
 
-function genWord(){
-  var pool=getWordPool();
-  var easy=[], hard=[];
-  for(var i=0;i<pool.length;i++){
-    var r=pool[i]();
-    if(r.hard) hard.push(pool[i]); else easy.push(pool[i]);
-  }
-  var qs=shuffle(easy.map(function(f){return f;}));
-  var qh=shuffle(hard.map(function(f){return f;}));
-  var result=[qs[0](),qs[1](),qh[0]()];
-  result[0].score=15; result[1].score=15; result[2].score=22; result[2].hard=true;
-  return result;
-}
+            for (var i = 0; i < starCount; i++) {
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 2 + 0.5,
+                    opacity: Math.random() * 0.8 + 0.2,
+                    speed: Math.random() * 0.02 + 0.005
+                });
+            }
 
-// ========== 生成试卷 ==========
-function generateExam(){
-  try{
-    calcQ=genCalc(48);
-    wordQ=genWord();
-    submitted=false;
-    renderCalc();
-    renderWord();
-    showSection('examSection');
-    header.style.display='flex';
-    bottomBar.classList.add('on');
-    resultPanel.classList.remove('on');
-    updateProgress();
-    startTimer();
-    submitBtn.disabled=false;
-    submitBtn.textContent='✅ 提交答卷';
-    window.scrollTo({top:0,behavior:'smooth'});
-  } catch(err){
-    console.error('生成试卷出错:',err);
-  }
-}
+            function animateStars() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-function renderCalc(){
-  var html='';
-  for(var i=0;i<calcQ.length;i++){
-    var q=calcQ[i];
-    html+='<div class="ci" id="ci'+i+'">'
-      +'<span class="cno">'+(i+1)+'.</span>'
-      +'<span class="cq">'+q.text+'</span>'
-      +'<div class="ciw">'
-      +'<input type="number" id="cipt'+i+'" data-i="'+i+'" inputmode="numeric" pattern="[0-9]*" aria-label="第'+(i+1)+'题答案">'
+                for (var j = 0; j < stars.length; j++) {
+                    var star = stars[j];
+                    star.opacity += Math.sin(Date.now() * star.speed) * 0.02;
+                    star.opacity = Math.max(0.2, Math.min(1, star.opacity));
 
-      +'</div>'
-      +'<span class="cic" id="cic'+i+'"></span>'
-      +'</div>';
-  }
-  calcGrid.innerHTML=html;
-  // 绑定口算输入事件
-  for(var j=0;j<calcQ.length;j++){
-    (function(idx){
-      var inp=$('cipt'+idx);
-      inp.addEventListener('input',function(){ updateProgress(); });
-      inp.addEventListener('focus',function(){ if(!submitted) this.select(); });
-    })(j);
-  }
-}
+                    ctx.beginPath();
+                    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = 'rgba(255, 255, 255, ' + star.opacity + ')';
+                    ctx.fill();
+                }
 
-function renderWord(){
-  var html='';
-  for(var i=0;i<wordQ.length;i++){
-    var q=wordQ[i];
-    html+='<div class="wc-card" id="wc'+i+'">'
-      +'<div><span class="wn">'+(i+1)+'</span>'
-      +(q.hard?'<span class="wd">⭐ 提高题</span>':'')
-      +'<span class="sb" style="font-size:11px;margin-left:6px">'+q.score+'分</span></div>'
-      +'<p class="wqt">'+q.text+'</p>'
-      +'<div class="wia">'
-      +'<span class="wl">答：</span>'
-      +'<input type="number" id="wipt'+i+'" data-i="'+i+'" inputmode="numeric" pattern="[0-9]*" aria-label="应用题第'+(i+1)+'题答案">'
-      +'<span class="wl">'+q.unit+'</span>'
-      +'</div>'
-      +'<div class="wfb" id="wfb'+i+'"></div>'
-      +'</div>';
-  }
-  wordArea.innerHTML=html;
-  for(var j=0;j<wordQ.length;j++){
-    (function(idx){
-      $('wipt'+idx).addEventListener('input',function(){ updateProgress(); });
-    })(j);
-  }
-}
+                requestAnimationFrame(animateStars);
+            }
 
-// ========== 进度 ==========
-function updateProgress(){
-  var total=51, done=0;
-  for(var i=0;i<calcQ.length;i++){
-    if($('cipt'+i).value.trim()!=='') done++;
-  }
-  for(var i=0;i<wordQ.length;i++){
-    if($('wipt'+i).value.trim()!=='') done++;
-  }
-  progressFill.style.width=Math.round(done/total*100)+'%';
-}
+            animateStars();
+        }
 
-// ========== 提交 ==========
-var pendingSubmit=false;
-function submitExam(){
-  if(submitted) return;
-  // 检查未答题
-  var un=0;
-  for(var i=0;i<calcQ.length;i++){
-    if($('cipt'+i).value.trim()==='') un++;
-  }
-  for(var i=0;i<wordQ.length;i++){
-    if($('wipt'+i).value.trim()==='') un++;
-  }
-  if(un>0){
-    confirmMsg.textContent='还有 '+un+' 道题没有作答，确定要提交吗？';
-    confirmModal.classList.add('on');
-    pendingSubmit=true;
-  } else {
-    doSubmit();
-  }
-}
+        function initMultiplicationTable() {
+            var container = document.getElementById('multiplication-table');
+            container.innerHTML = '';
 
-function doSubmit(){
-  submitted=true;
-  stopTimer();
-  var total=0, correct=0, wrong=0;
-  // 评口算
-  for(var i=0;i<calcQ.length;i++){
-    var inp=$('cipt'+i), item=$('ci'+i), icon=$('cic'+i);
-    var v=inp.value.trim();
-    if(parseInt(v)===calcQ[i].answer){
-      inp.classList.add('ok'); item.classList.add('ok'); icon.textContent='✅';
-      total+=1; correct++;
-    } else {
-      inp.classList.add('no'); item.classList.add('no'); icon.textContent='❌';
-      wrong++;
-    }
-    inp.readOnly=true;
-  }
-  // 评应用题
-  for(var i=0;i<wordQ.length;i++){
-    var q=wordQ[i];
-    var inp=$('wipt'+i), card=$('wc'+i), fb=$('wfb'+i);
-    var v=inp.value.trim();
-    var ok=(parseInt(v)===q.answer);
-    if(ok){
-      inp.classList.add('ok'); card.classList.add('ok'); fb.classList.add('ok');
-      fb.textContent='✅ 回答正确！+'+q.score+'分';
-      total+=q.score; correct++;
-    } else {
-      inp.classList.add('no'); card.classList.add('no'); fb.classList.add('no');
-      fb.textContent='❌ 回答错误。正确答案是 '+q.answer+q.unit;
-      wrong++;
-    }
-    inp.readOnly=true;
-  }
-  animateScore(total);
-  submitBtn.disabled=true;
-  submitBtn.textContent='✅ 已提交';
-  showResult(total,correct,wrong);
-  saveHistory(total);
-  if(total>=96){ setTimeout(playCelebration,600); }
-}
+            for (var i = 1; i <= 9; i++) {
+                for (var j = 1; j <= 9; j++) {
+                    var cell = document.createElement('div');
+                    cell.className = 'table-cell';
+                    if (i === j) {
+                        cell.classList.add('diagonal');
+                    } else if (i > j) {
+                        cell.classList.add('lower-half');
+                    } else {
+                        cell.classList.add('upper-half');
+                    }
 
-// ========== 结果 ==========
-function showResult(score,correct,wrong){
-  resultPanel.classList.add('on');
-  $('resultScore').textContent=score;
-  $('resultCorrect').textContent=correct;
-  $('resultWrong').textContent=wrong;
-  $('resultTime').textContent=fmtTime(elapsed);
-  var msg=$('resultMessage');
-  if(score===100){msg.className='rm ex';msg.textContent='🎉 太棒了！满分！你是数学小天才！';}
-  else if(score>=96){msg.className='rm ex';msg.textContent='🏆 优秀！离满分只差一点点，继续加油！';}
-  else if(score>=80){msg.className='rm gd';msg.textContent='👍 不错！再接再厉，争取更高分！';}
-  else if(score>=60){msg.className='rm ta';msg.textContent='💪 还可以！多练习一定能更好！';}
-  else{msg.className='rm ta';msg.textContent='📖 别灰心，认真看看错题，下次一定行！';}
-  $('resultButtons').innerHTML='<button class="btn bp" id="againBtn">📝 再来一套</button><button class="btn bo" id="homeBtn">🏠 返回首页</button>';
-  $('againBtn').addEventListener('click',function(e){e.preventDefault();resetExam();});
-  $('homeBtn').addEventListener('click',function(e){e.preventDefault();backToHome();});
-  setTimeout(function(){resultPanel.scrollIntoView({behavior:'smooth',block:'center'});},200);
-}
+                    var formula = document.createElement('div');
+                    formula.className = 'formula';
+                    formula.textContent = i + '×' + j;
 
-function animateScore(target){
-  var cur=0, step=Math.max(1,Math.floor(target/30));
-  var iv=setInterval(function(){
-    cur+=step;
-    if(cur>=target){cur=target;clearInterval(iv);}
-    headerScore.textContent=cur;
-  },30);
-}
+                    var result = document.createElement('div');
+                    result.className = 'result';
+                    result.textContent = i * j;
 
-// ========== 庆祝 ==========
-function playCelebration(){
-  createConfetti();
-  setTimeout(function(){createFirework(window.innerWidth*.3,window.innerHeight*.3);},200);
-  setTimeout(function(){createFirework(window.innerWidth*.7,window.innerHeight*.4);},500);
-  setTimeout(function(){createFirework(window.innerWidth*.5,window.innerHeight*.25);},800);
-  setTimeout(showTrophy,300);
-}
+                    cell.appendChild(formula);
+                    cell.appendChild(result);
 
-function createConfetti(){
-  var c=document.getElementById('confettiContainer');
-  var colors=['#FF6B6B','#4ECDC4','#45B7D1','#96CEB4','#FFEAA7','#DDA0DD','#F39C12','#2ECC71','#E74C3C','#3498DB'];
-  for(var i=0;i<80;i++){
-    (function(idx){
-      setTimeout(function(){
-        var d=document.createElement('div');
-        d.className='cf';
-        var col=colors[Math.floor(Math.random()*colors.length)];
-        var left=Math.random()*100;
-        var sz=randInt(6,14);
-        var dur=randInt(25,45)/10;
-        var sway=randInt(15,30)/10;
-        d.style.left=left+'%';
-        d.style.width=sz+'px';
-        d.style.height=sz+'px';
-        d.style.backgroundColor=col;
-        if(Math.random()<.33) d.style.borderRadius='50%';
-        d.style.animation='cff '+dur+'s linear forwards, cfs '+sway+'s ease-in-out infinite';
-        c.appendChild(d);
-        setTimeout(function(){if(d.parentNode)d.parentNode.removeChild(d);},dur*1000+100);
-      },idx*40);
-    })(i);
-  }
-}
+                    (function(num1, num2) {
+                        cell.addEventListener('click', function() {
+                            speakMultiplication(num1, num2);
+                        });
+                    })(i, j);
 
-function createFirework(x,y){
-  var fw=document.createElement('div');
-  fw.className='fw';
-  fw.style.left=x+'px';
-  fw.style.top=y+'px';
-  document.body.appendChild(fw);
-  var colors=['#FF6B6B','#4ECDC4','#45B7D1','#FFEAA7','#DDA0DD','#F39C12','#2ECC71'];
-  for(var i=0;i<20;i++){
-    var p=document.createElement('div');
-    p.className='fwp';
-    var angle=(360/20)*i;
-    var dist=randInt(40,100);
-    var tx=Math.cos(angle*Math.PI/180)*dist;
-    var ty=Math.sin(angle*Math.PI/180)*dist;
-    p.style.backgroundColor=colors[Math.floor(Math.random()*colors.length)];
-    p.style.setProperty('--tx',tx+'px');
-    p.style.setProperty('--ty',ty+'px');
-    p.style.animation='fwb 0.8s ease-out forwards';
-    p.style.animationDelay=(Math.random()*.1)+'s';
-    fw.appendChild(p);
-  }
-  setTimeout(function(){if(fw.parentNode)fw.parentNode.removeChild(fw);},1200);
-}
+                    container.appendChild(cell);
+                }
+            }
+        }
 
-function showTrophy(){
-  var t=document.createElement('div');
-  t.className='tpa';
-  t.textContent='🏆';
-  document.body.appendChild(t);
-  setTimeout(function(){if(t.parentNode)t.parentNode.removeChild(t);},2500);
-}
+        function speakMultiplication(num1, num2) {
+            if (!gameState.soundEnabled) return;
 
-// ========== 计时器 ==========
-function startTimer(){
-  startT=Date.now(); elapsed=0; timerText.textContent='00:00';
-  timerID=setInterval(function(){
-    elapsed=Math.floor((Date.now()-startT)/1000);
-    timerText.textContent=fmtTime(elapsed);
-  },1000);
-}
-function stopTimer(){ if(timerID){clearInterval(timerID);timerID=null;} }
+            var result = num1 * num2;
+            var text = '';
 
-// ========== 历史 ==========
-function saveHistory(score){
-  try{
-    var h=JSON.parse(localStorage.getItem('mathExamHistory')||'[]');
-    h.unshift({date:new Date().toLocaleString('zh-CN'),score:score,time:fmtTime(elapsed)});
-    if(h.length>20) h.pop();
-    localStorage.setItem('mathExamHistory',JSON.stringify(h));
-  }catch(e){}
-}
+            if (num1 <= num2) {
+                text = num1 + '乘以' + num2 + '等于' + result;
+            } else {
+                text = num2 + '乘以' + num1 + '等于' + result;
+            }
 
-function loadHistory(){
-  try{
-    var h=JSON.parse(localStorage.getItem('mathExamHistory')||'[]');
-    if(!h.length) return;
-    var html='<div style="font-size:15px;font-weight:600;margin-bottom:10px;color:var(--tx)">📊 历史成绩</div>';
-    var show=h.slice(0,5);
-    for(var i=0;i<show.length;i++){
-      var s=show[i];
-      var cls=s.score>=96?'h':s.score>=80?'m':'l';
-      html+='<div class="hi"><span class="hd-dt">'+s.date+'</span><span class="hd-sb '+cls+'">'+s.score+'分 · '+s.time+'</span></div>';
-    }
-    historyPanel.innerHTML=html;
-    historyPanel.classList.add('on');
-  }catch(e){}
-}
+            var utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'zh-CN';
+            utterance.rate = 0.9;
+            speechSynthesis.speak(utterance);
+        }
 
-// ========== 导航 ==========
-function showSection(id){
-  var secs=document.querySelectorAll('.se');
-  for(var i=0;i<secs.length;i++) secs[i].classList.remove('on');
-  $(id).classList.add('on');
-}
+        function switchMode(mode) {
+            console.log('[视图切换] 从 ' + gameState.currentMode + ' 到 ' + mode);
 
-function resetExam(){
-  stopTimer();
-  resultPanel.classList.remove('on');
-  generateExam();
-}
+            var views = document.querySelectorAll('.view');
+            for (var i = 0; i < views.length; i++) {
+                views[i].classList.remove('active');
+            }
 
-function backToHome(){
-  stopTimer();
-  header.style.display='none';
-  bottomBar.classList.remove('on');
-  resultPanel.classList.remove('on');
-  showSection('welcomeSection');
-  headerScore.textContent='0';
-  loadHistory();
-}
+            var targetView = document.getElementById(mode + '-view');
+            if (targetView) {
+                targetView.classList.add('active');
+            } else if (mode === 'menu') {
+                document.getElementById('menu-view').classList.add('active');
+            }
 
-// ========== 初始化 ==========
-loadHistory();
+            gameState.currentMode = mode;
 
-})();
-</script>
+            if (mode === 'stats') {
+                updateStatsDisplay();
+            }
+
+            if (mode === 'multiplication' || mode === 'division' || mode === 'word-problem') {
+                gameState.sessionQuestions = 0;
+            }
+        }
+
+        function generateMultiplicationQuestion() {
+            var num1 = Math.floor(Math.random() * 9) + 1;
+            var num2 = Math.floor(Math.random() * 9) + 1;
+            var answer = num1 * num2;
+
+            gameState.currentQuestion = {
+                num1: num1,
+                num2: num2,
+                answer: answer,
+                type: 'multiplication'
+            };
+
+            document.getElementById('question-display').textContent = num1 + ' × ' + num2 + ' = ?';
+
+            generateVisualization(num1, num2);
+
+            document.getElementById('answer-input').style.display = 'block';
+            document.getElementById('answer-input').value = '';
+            document.getElementById('answer-input').focus();
+
+            document.getElementById('action-btn').innerHTML = '<i class="fas fa-check"></i> 确认';
+        }
+
+        function generateVisualization(num1, num2) {
+            var container = document.getElementById('visualization');
+            container.innerHTML = '';
+
+            for (var i = 0; i < num1; i++) {
+                for (var j = 0; j < num2; j++) {
+                    var item = document.createElement('div');
+                    item.className = 'visual-item';
+                    item.style.backgroundColor = getColor(i);
+                    item.textContent = '●';
+                    container.appendChild(item);
+                }
+                if (i < num1 - 1) {
+                    var br = document.createElement('div');
+                    br.style.width = '100%';
+                    br.style.height = '4px';
+                    container.appendChild(br);
+                }
+            }
+        }
+
+        function handleAction() {
+            var btn = document.getElementById('action-btn');
+
+            if (btn.textContent.indexOf('开始') !== -1 || btn.textContent.indexOf('下一题') !== -1) {
+                generateMultiplicationQuestion();
+            } else {
+                checkMultiplicationAnswer();
+            }
+        }
+
+        function checkMultiplicationAnswer() {
+            var input = document.getElementById('answer-input');
+            var userAnswer = parseInt(input.value);
+
+            if (isNaN(userAnswer)) {
+                showFeedback('feedback', '请输入一个数字！', 'hint');
+                return;
+            }
+
+            var correct = userAnswer === gameState.currentQuestion.answer;
+            var stats = gameState.stats.multiplication;
+
+            stats.answered++;
+            gameState.stats.totalAnswered++;
+
+            if (correct) {
+                stats.correct++;
+                gameState.stats.totalCorrect++;
+                gameState.score += 10;
+                gameState.streak++;
+                gameState.sessionQuestions++;
+
+                if (gameState.streak > gameState.bestStreak) {
+                    gameState.bestStreak = gameState.streak;
+                }
+
+                if (gameState.streak >= 5) {
+                    gameState.score += 5;
+                    showFeedback('feedback', '🔥 连击 ' + gameState.streak + '！额外 +5分！', 'correct');
+                } else {
+                    showFeedback('feedback', '✅ 答对啦！+10分', 'correct');
+                }
+
+                document.getElementById('score-display').textContent = gameState.score;
+                document.getElementById('streak-display').textContent = gameState.streak;
+                document.getElementById('streak-fire').style.display = gameState.streak >= 3 ? 'inline' : 'none';
+
+                // 飞船系统：增加燃料 + 飞过屏幕
+                addFuel('multiplication');
+                flySpaceship('multiplication');
+
+                if (gameState.streak % 5 === 0) {
+                    createFirework();
+                }
+
+                saveStats();
+            } else {
+                gameState.streak = 0;
+                showFeedback('feedback', '❌ 答错了！正确答案是 ' + gameState.currentQuestion.answer, 'incorrect');
+
+                document.getElementById('streak-display').textContent = 0;
+                document.getElementById('streak-fire').style.display = 'none';
+            }
+
+            updateProgressBar();
+
+            document.getElementById('action-btn').innerHTML = '<i class="fas fa-arrow-right"></i> 下一题';
+            document.getElementById('answer-input').style.display = 'none';
+
+            setTimeout(function() {
+                var currentBtn = document.getElementById('action-btn');
+                if (currentBtn.textContent.indexOf('下一题') !== -1) {
+                    generateMultiplicationQuestion();
+                    currentBtn.innerHTML = '<i class="fas fa-check"></i> 确认';
+                }
+            }, 2000);
+        }
+
+        function generateDivisionQuestion() {
+            var divisor = Math.floor(Math.random() * 9) + 1;
+            var quotient = Math.floor(Math.random() * 9) + 1;
+            var dividend = divisor * quotient;
+
+            gameState.currentQuestion = {
+                dividend: dividend,
+                divisor: divisor,
+                quotient: quotient,
+                answer: quotient,
+                type: 'division'
+            };
+
+            document.getElementById('division-question').textContent = dividend + ' ÷ ' + divisor + ' = ?';
+
+            generateDivisionVisualization(dividend, divisor);
+
+            document.getElementById('division-answer').style.display = 'block';
+            document.getElementById('division-answer').value = '';
+            document.getElementById('division-answer').focus();
+
+            document.getElementById('division-action-btn').innerHTML = '<i class="fas fa-check"></i> 确认';
+        }
+
+        function generateDivisionVisualization(dividend, divisor) {
+            var container = document.getElementById('division-visualization');
+            container.innerHTML = '';
+
+            var hint = document.createElement('div');
+            hint.style.width = '100%';
+            hint.style.textAlign = 'center';
+            hint.style.color = '#94a3b8';
+            hint.style.marginBottom = '8px';
+            hint.textContent = '把 ' + dividend + ' 平均分成 ' + divisor + ' 份';
+            container.appendChild(hint);
+
+            var itemsPerGroup = dividend / divisor;
+            for (var group = 0; group < divisor; group++) {
+                var groupContainer = document.createElement('div');
+                groupContainer.style.display = 'flex';
+                groupContainer.style.gap = '4px';
+                groupContainer.style.margin = '4px';
+
+                for (var i = 0; i < itemsPerGroup; i++) {
+                    var item = document.createElement('div');
+                    item.className = 'visual-item';
+                    item.style.backgroundColor = getColor(group);
+                    item.textContent = '●';
+                    groupContainer.appendChild(item);
+                }
+
+                container.appendChild(groupContainer);
+            }
+        }
+
+        function handleDivisionAction() {
+            var btn = document.getElementById('division-action-btn');
+
+            if (btn.textContent.indexOf('开始') !== -1 || btn.textContent.indexOf('下一题') !== -1) {
+                generateDivisionQuestion();
+            } else {
+                checkDivisionAnswer();
+            }
+        }
+
+        function checkDivisionAnswer() {
+            var input = document.getElementById('division-answer');
+            var userAnswer = parseInt(input.value);
+
+            if (isNaN(userAnswer)) {
+                showFeedback('division-feedback', '请输入一个数字！', 'hint');
+                return;
+            }
+
+            var correct = userAnswer === gameState.currentQuestion.answer;
+            var stats = gameState.stats.division;
+
+            stats.answered++;
+            gameState.stats.totalAnswered++;
+
+            if (correct) {
+                stats.correct++;
+                gameState.stats.totalCorrect++;
+                gameState.score += 10;
+                gameState.streak++;
+                gameState.sessionQuestions++;
+
+                if (gameState.streak > gameState.bestStreak) {
+                    gameState.bestStreak = gameState.streak;
+                }
+
+                if (gameState.streak >= 5) {
+                    gameState.score += 5;
+                    showFeedback('division-feedback', '🔥 连击 ' + gameState.streak + '！额外 +5分！', 'correct');
+                } else {
+                    showFeedback('division-feedback', '✅ 答对啦！+10分', 'correct');
+                }
+
+                document.getElementById('division-score').textContent = gameState.score;
+                document.getElementById('division-streak').textContent = gameState.streak;
+                document.getElementById('division-streak-fire').style.display = gameState.streak >= 3 ? 'inline' : 'none';
+
+                // 飞船系统
+                addFuel('division');
+                flySpaceship('division');
+
+                if (gameState.streak % 5 === 0) {
+                    createFirework();
+                }
+
+                saveStats();
+            } else {
+                gameState.streak = 0;
+                showFeedback('division-feedback', '❌ 答错了！正确答案是 ' + gameState.currentQuestion.answer, 'incorrect');
+
+                document.getElementById('division-streak').textContent = 0;
+                document.getElementById('division-streak-fire').style.display = 'none';
+            }
+
+            updateDivisionProgressBar();
+
+            document.getElementById('division-action-btn').innerHTML = '<i class="fas fa-arrow-right"></i> 下一题';
+            document.getElementById('division-answer').style.display = 'none';
+
+            setTimeout(function() {
+                var currentBtn = document.getElementById('division-action-btn');
+                if (currentBtn.textContent.indexOf('下一题') !== -1) {
+                    generateDivisionQuestion();
+                    currentBtn.innerHTML = '<i class="fas fa-check"></i> 确认';
+                }
+            }, 2000);
+        }
+
+        // 应用题模板库
+        // 每道题用模板方式定义：题目文案 + 数字范围 + 计算函数
+        // 每次出题时随机生成数字，答案和提示自动计算
+        var wordProblems = [
+            // ===== 一年级题目（8道）=====
+            {
+                scene: '🍎',
+                template: '小明有 {a} 个篮子，每个篮子里有 {b} 个苹果。一共有多少个苹果？',
+                vars: { a: [2, 5], b: [3, 6] },
+                calc: function(a, b) { return { answer: a * b, hint: a + ' × ' + b + ' = ' + (a * b) }; }
+            },
+            {
+                scene: '🍬',
+                template: '小红有 {a} 颗糖果，她想平均分给 {b} 个朋友。每个朋友能分到几颗？',
+                vars: { a: [12, 48], b: [3, 6] },
+                calc: function(a, b) {
+                    // 调整 a 让它能被 b 整除
+                    var q = Math.floor(a / b);
+                    var realA = q * b;
+                    if (realA < 12) { q = Math.ceil(12 / b); realA = q * b; }
+                    return { answer: q, hint: realA + ' ÷ ' + b + ' = ' + q, realA: realA };
+                },
+                preProcess: function(p) {
+                    // 让 a 一定是 b 的倍数
+                    var b = randInt(p.vars.b[0], p.vars.b[1]);
+                    var q = randInt(Math.ceil(p.vars.a[0] / b), Math.floor(p.vars.a[1] / b));
+                    return { b: b, q: q };
+                },
+                calc2: function(ctx) {
+                    return { answer: ctx.q, hint: (ctx.q * ctx.b) + ' ÷ ' + ctx.b + ' = ' + ctx.q };
+                }
+            },
+            {
+                scene: '🚌',
+                template: '一辆巴士上有 {a} 排座位，每排坐 {b} 个人。一共有多少人？',
+                vars: { a: [3, 7], b: [4, 8] },
+                calc: function(a, b) { return { answer: a * b, hint: a + ' × ' + b + ' = ' + (a * b) }; }
+            },
+            {
+                scene: '📚',
+                template: '老师买了 {a} 本书，要平均分给 {b} 个小组。每个小组分到几本？',
+                vars: { a: [18, 54], b: [3, 6] },
+                preProcess: function(p) {
+                    var b = randInt(p.vars.b[0], p.vars.b[1]);
+                    var q = randInt(Math.ceil(p.vars.a[0] / b), Math.floor(p.vars.a[1] / b));
+                    return { b: b, q: q };
+                },
+                calc2: function(ctx) {
+                    return { answer: ctx.q, hint: (ctx.q * ctx.b) + ' ÷ ' + ctx.b + ' = ' + ctx.q };
+                }
+            },
+            {
+                scene: '⚽',
+                template: '球场上有 {a} 个队伍，每个队伍有 {b} 个人。一共有多少人？',
+                vars: { a: [3, 6], b: [5, 9] },
+                calc: function(a, b) { return { answer: a * b, hint: a + ' × ' + b + ' = ' + (a * b) }; }
+            },
+            {
+                scene: '🍕',
+                template: '妈妈买了 {a} 块披萨，要分给 {b} 个小朋友。每个小朋友分到几块？',
+                vars: { a: [12, 48], b: [4, 8] },
+                preProcess: function(p) {
+                    var b = randInt(p.vars.b[0], p.vars.b[1]);
+                    var q = randInt(Math.ceil(p.vars.a[0] / b), Math.floor(p.vars.a[1] / b));
+                    return { b: b, q: q };
+                },
+                calc2: function(ctx) {
+                    return { answer: ctx.q, hint: (ctx.q * ctx.b) + ' ÷ ' + ctx.b + ' = ' + ctx.q };
+                }
+            },
+            {
+                scene: '🐰',
+                template: '兔妈妈有 {a} 个窝，每个窝里有 {b} 只小兔子。一共有多少只小兔子？',
+                vars: { a: [3, 7], b: [2, 5] },
+                calc: function(a, b) { return { answer: a * b, hint: a + ' × ' + b + ' = ' + (a * b) }; }
+            },
+            {
+                scene: '🎈',
+                template: '有 {a} 个气球，要绑成 {b} 束。每束有几个气球？',
+                vars: { a: [9, 81], b: [3, 9] },
+                preProcess: function(p) {
+                    var b = randInt(p.vars.b[0], p.vars.b[1]);
+                    var q = randInt(Math.ceil(p.vars.a[0] / b), Math.floor(p.vars.a[1] / b));
+                    return { b: b, q: q };
+                },
+                calc2: function(ctx) {
+                    return { answer: ctx.q, hint: (ctx.q * ctx.b) + ' ÷ ' + ctx.b + ' = ' + ctx.q };
+                }
+            },
+
+            // ===== 二年级上学期题目（12道）=====
+            {
+                scene: '🍬',
+                template: '一包糖有 {a} 颗，{b} 包一共有多少颗糖？',
+                vars: { a: [6, 9], b: [3, 9] },
+                calc: function(a, b) { return { answer: a * b, hint: a + ' × ' + b + ' = ' + (a * b) }; }
+            },
+            {
+                scene: '🍎',
+                template: '有 {a} 个苹果，平均分给 {b} 个小朋友。每个小朋友分到几个？',
+                vars: { a: [18, 63], b: [3, 7] },
+                preProcess: function(p) {
+                    var b = randInt(p.vars.b[0], p.vars.b[1]);
+                    var q = randInt(Math.ceil(p.vars.a[0] / b), Math.floor(p.vars.a[1] / b));
+                    return { b: b, q: q };
+                },
+                calc2: function(ctx) {
+                    return { answer: ctx.q, hint: (ctx.q * ctx.b) + ' ÷ ' + ctx.b + ' = ' + ctx.q };
+                }
+            },
+            {
+                scene: '📖',
+                template: '图书角有 {a} 本书，借出了 {b} 本，又还回来了 {c} 本。现在有多少本书？',
+                vars: { a: [50, 90], b: [10, 30], c: [5, 25] },
+                calc: function(a, b, c) {
+                    return { answer: a - b + c, hint: a + ' - ' + b + ' + ' + c + ' = ' + (a - b + c) };
+                }
+            },
+            {
+                scene: '✏️',
+                template: '小明每天做 {a} 道数学题，一个星期（{b}天）一共做多少道？',
+                vars: { a: [4, 9], b: [5, 7] },
+                calc: function(a, b) { return { answer: a * b, hint: a + ' × ' + b + ' = ' + (a * b) }; }
+            },
+            {
+                scene: '📏',
+                template: '铅笔长 {a} 厘米，橡皮长 {b} 厘米。铅笔比橡皮长多少厘米？',
+                vars: { a: [10, 20], b: [2, 8] },
+                calc: function(a, b) {
+                    if (b >= a) b = a - 2;
+                    return { answer: a - b, hint: a + ' - ' + b + ' = ' + (a - b) };
+                }
+            },
+            {
+                scene: '👦',
+                template: '有 {a} 个同学，每 {b} 个一组。可以分成几组？',
+                vars: { a: [24, 54], b: [3, 6] },
+                preProcess: function(p) {
+                    var b = randInt(p.vars.b[0], p.vars.b[1]);
+                    var q = randInt(Math.ceil(p.vars.a[0] / b), Math.floor(p.vars.a[1] / b));
+                    return { b: b, q: q };
+                },
+                calc2: function(ctx) {
+                    return { answer: ctx.q, hint: (ctx.q * ctx.b) + ' ÷ ' + ctx.b + ' = ' + ctx.q };
+                }
+            },
+            {
+                scene: '🖍️',
+                template: '一盒彩笔有 {a} 支，{b} 盒一共有多少支？',
+                vars: { a: [8, 12], b: [3, 6] },
+                calc: function(a, b) { return { answer: a * b, hint: a + ' × ' + b + ' = ' + (a * b) }; }
+            },
+            {
+                scene: '🥛',
+                template: '超市有 {a} 瓶牛奶，第一天卖了 {b} 瓶，第二天卖了 {c} 瓶。还剩多少瓶？',
+                vars: { a: [80, 99], b: [20, 40], c: [10, 30] },
+                preProcess: function(p) {
+                    var a = randInt(p.vars.a[0], p.vars.a[1]);
+                    var b = randInt(p.vars.b[0], p.vars.b[1]);
+                    var maxC = a - b - 5;
+                    if (maxC < p.vars.c[0]) maxC = p.vars.c[0];
+                    var c = randInt(p.vars.c[0], Math.min(p.vars.c[1], maxC));
+                    return { a: a, b: b, c: c };
+                },
+                calc2: function(ctx) {
+                    var ans = ctx.a - ctx.b - ctx.c;
+                    return { answer: ans, hint: ctx.a + ' - ' + ctx.b + ' - ' + ctx.c + ' = ' + ans };
+                }
+            },
+            {
+                scene: '🍭',
+                template: '每个小朋友分 {a} 颗糖，{b} 个小朋友一共需要多少颗糖？',
+                vars: { a: [3, 8], b: [5, 9] },
+                calc: function(a, b) { return { answer: a * b, hint: a + ' × ' + b + ' = ' + (a * b) }; }
+            },
+            {
+                scene: '🕐',
+                template: '一节课 {a} 分钟，{b} 节课一共多少分钟？',
+                vars: { a: [30, 45], b: [2, 4] },
+                calc: function(a, b) { return { answer: a * b, hint: a + ' × ' + b + ' = ' + (a * b) }; }
+            },
+            {
+                scene: '🧱',
+                template: '有 {a} 块积木，要平均分成 {b} 堆。每堆有几块？',
+                vars: { a: [27, 81], b: [3, 9] },
+                preProcess: function(p) {
+                    var b = randInt(p.vars.b[0], p.vars.b[1]);
+                    var q = randInt(Math.ceil(p.vars.a[0] / b), Math.floor(p.vars.a[1] / b));
+                    return { b: b, q: q };
+                },
+                calc2: function(ctx) {
+                    return { answer: ctx.q, hint: (ctx.q * ctx.b) + ' ÷ ' + ctx.b + ' = ' + ctx.q };
+                }
+            },
+            {
+                scene: '🐦',
+                template: '树上有 {a} 只鸟，飞走了 {b} 只。树上还剩几只鸟？',
+                vars: { a: [30, 60], b: [10, 25] },
+                calc: function(a, b) {
+                    if (b >= a) b = a - 5;
+                    return { answer: a - b, hint: a + ' - ' + b + ' = ' + (a - b) };
+                }
+            }
+        ];
+
+        // 工具函数：生成区间内的随机整数
+        function randInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        // 根据模板生成具体题目
+        function instantiateProblem(problem) {
+            // 处理除法题（用 preProcess + calc2）
+            if (problem.preProcess) {
+                var ctx = problem.preProcess(problem);
+                var result = problem.calc2(ctx);
+                // 构造变量映射用于模板替换
+                var replacements = {};
+                if (ctx.q !== undefined) {
+                    // 整除题：a = q * b
+                    if (ctx.a !== undefined) {
+                        replacements.a = ctx.a;
+                    } else {
+                        replacements.a = ctx.q * ctx.b;
+                    }
+                    replacements.b = ctx.b;
+                    if (ctx.c !== undefined) replacements.c = ctx.c;
+                } else {
+                    Object.keys(ctx).forEach(function(k) { replacements[k] = ctx[k]; });
+                }
+                var text = problem.template;
+                Object.keys(replacements).forEach(function(k) {
+                    text = text.replace(new RegExp('\\{' + k + '\\}', 'g'), replacements[k]);
+                });
+                return {
+                    text: text,
+                    answer: result.answer,
+                    hint: result.hint
+                };
+            }
+
+            // 标准题：直接生成 a, b, c
+            var a = randInt(problem.vars.a[0], problem.vars.a[1]);
+            var b = randInt(problem.vars.b[0], problem.vars.b[1]);
+            var c = problem.vars.c ? randInt(problem.vars.c[0], problem.vars.c[1]) : null;
+
+            var result;
+            if (c !== null) {
+                result = problem.calc(a, b, c);
+            } else {
+                result = problem.calc(a, b);
+            }
+
+            var text = problem.template
+                .replace('{a}', a)
+                .replace('{b}', b);
+            if (c !== null) text = text.replace('{c}', c);
+
+            return {
+                text: text,
+                answer: result.answer,
+                hint: result.hint
+            };
+        }
+
+        function generateWordProblem() {
+            var problem = wordProblems[Math.floor(Math.random() * wordProblems.length)];
+            var instance = instantiateProblem(problem);
+
+            gameState.currentQuestion = {
+                text: instance.text,
+                answer: instance.answer,
+                scene: problem.scene,
+                hint: instance.hint,
+                type: 'word-problem'
+            };
+
+            document.getElementById('wp-scene').textContent = problem.scene;
+            document.getElementById('wp-text').textContent = instance.text;
+
+            document.getElementById('wp-answer').style.display = 'block';
+            document.getElementById('wp-answer').value = '';
+            document.getElementById('wp-answer').focus();
+
+            document.getElementById('wp-action-btn').innerHTML = '<i class="fas fa-check"></i> 确认';
+        }
+
+        function handleWordProblemAction() {
+            var btn = document.getElementById('wp-action-btn');
+
+            if (btn.textContent.indexOf('开始') !== -1 || btn.textContent.indexOf('下一题') !== -1) {
+                generateWordProblem();
+            } else {
+                checkWordProblemAnswer();
+            }
+        }
+
+        function checkWordProblemAnswer() {
+            var input = document.getElementById('wp-answer');
+            var userAnswer = parseInt(input.value);
+
+            if (isNaN(userAnswer)) {
+                showFeedback('wp-feedback', '请输入一个数字！', 'hint');
+                return;
+            }
+
+            var correct = userAnswer === gameState.currentQuestion.answer;
+            var stats = gameState.stats.wordProblem;
+
+            stats.answered++;
+            gameState.stats.totalAnswered++;
+
+            if (correct) {
+                stats.correct++;
+                gameState.stats.totalCorrect++;
+                gameState.score += 15;
+                gameState.streak++;
+                gameState.sessionQuestions++;
+
+                if (gameState.streak > gameState.bestStreak) {
+                    gameState.bestStreak = gameState.streak;
+                }
+
+                if (gameState.streak >= 5) {
+                    gameState.score += 5;
+                    showFeedback('wp-feedback', '🔥 连击 ' + gameState.streak + '！额外 +5分！', 'correct');
+                } else {
+                    showFeedback('wp-feedback', '✅ 答对啦！+15分', 'correct');
+                }
+
+                document.getElementById('wp-score').textContent = gameState.score;
+                document.getElementById('wp-streak').textContent = gameState.streak;
+                document.getElementById('wp-streak-fire').style.display = gameState.streak >= 3 ? 'inline' : 'none';
+
+                // 飞船系统
+                addFuel('word-problem');
+                flySpaceship('word-problem');
+
+                if (gameState.streak % 5 === 0) {
+                    createFirework();
+                }
+
+                saveStats();
+            } else {
+                gameState.streak = 0;
+                showFeedback('wp-feedback', '❌ 答错了！正确答案是 ' + gameState.currentQuestion.answer + '（' + gameState.currentQuestion.hint + '）', 'incorrect');
+
+                document.getElementById('wp-streak').textContent = 0;
+                document.getElementById('wp-streak-fire').style.display = 'none';
+            }
+
+            document.getElementById('wp-action-btn').innerHTML = '<i class="fas fa-arrow-right"></i> 下一题';
+            document.getElementById('wp-answer').style.display = 'none';
+
+            setTimeout(function() {
+                var currentBtn = document.getElementById('wp-action-btn');
+                if (currentBtn.textContent.indexOf('下一题') !== -1) {
+                    generateWordProblem();
+                    currentBtn.innerHTML = '<i class="fas fa-check"></i> 确认';
+                }
+            }, 2500);
+        }
+
+        function showFeedback(elementId, message, type) {
+            var feedback = document.getElementById(elementId);
+            feedback.textContent = message;
+            feedback.className = 'feedback ' + type;
+            feedback.style.display = 'flex';
+        }
+
+        function updateProgressBar() {
+            var progress = (gameState.sessionQuestions % 10) * 10;
+            document.getElementById('progress-fill').style.width = progress + '%';
+        }
+
+        function updateDivisionProgressBar() {
+            var progress = (gameState.sessionQuestions % 10) * 10;
+            document.getElementById('division-progress').style.width = progress + '%';
+        }
+
+        function createFirework() {
+            var firework = document.createElement('div');
+            firework.className = 'firework';
+            firework.style.left = Math.random() * window.innerWidth + 'px';
+            firework.style.top = Math.random() * window.innerHeight * 0.5 + 'px';
+
+            var colors = ['#3b82f6', '#8b5cf6', '#ec4899', '#f59e0b', '#10b981'];
+
+            for (var i = 0; i < 20; i++) {
+                var particle = document.createElement('div');
+                particle.className = 'firework-particle';
+                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+                var angle = (Math.PI * 2 * i) / 20;
+                var distance = 50 + Math.random() * 50;
+                particle.style.setProperty('--tx', Math.cos(angle) * distance + 'px');
+                particle.style.setProperty('--ty', Math.sin(angle) * distance + 'px');
+
+                firework.appendChild(particle);
+            }
+
+            document.body.appendChild(firework);
+
+            setTimeout(function() {
+                firework.remove();
+            }, 1000);
+        }
+
+        function getColor(index) {
+            var colors = [
+                '#3b82f6', '#8b5cf6', '#ec4899', '#f59e0b',
+                '#10b981', '#ef4444', '#06b6d4', '#f97316', '#84cc16'
+            ];
+            return colors[index % colors.length];
+        }
+
+        function saveStats() {
+            try {
+                var data = {
+                    stats: gameState.stats,
+                    score: gameState.score,
+                    bestStreak: gameState.bestStreak,
+                    level: gameState.level,
+                    spaceship: gameState.spaceship,
+                    badges: gameState.badges
+                };
+                localStorage.setItem('math-camp-stats', JSON.stringify(data));
+                console.log('[存档] 统计数据已保存');
+            } catch (error) {
+                console.error('[存档] 保存失败：', error);
+            }
+        }
+
+        function loadStats() {
+            try {
+                var data = localStorage.getItem('math-camp-stats');
+                if (data) {
+                    var parsed = JSON.parse(data);
+                    gameState.stats = parsed.stats || gameState.stats;
+                    gameState.score = parsed.score || 0;
+                    gameState.bestStreak = parsed.bestStreak || 0;
+                    gameState.level = parsed.level || 1;
+                    if (parsed.spaceship) gameState.spaceship = parsed.spaceship;
+                    if (parsed.badges) gameState.badges = parsed.badges;
+                    console.log('[存档] 统计数据已加载');
+                }
+            } catch (error) {
+                console.error('[存档] 加载失败：', error);
+            }
+        }
+
+        function updateStatsDisplay() {
+            var stats = gameState.stats;
+
+            document.getElementById('stat-total').textContent = stats.totalAnswered;
+
+            var accuracy = stats.totalAnswered > 0
+                ? Math.round((stats.totalCorrect / stats.totalAnswered) * 100)
+                : 0;
+            document.getElementById('stat-accuracy').textContent = accuracy + '%';
+
+            document.getElementById('stat-best-streak').textContent = gameState.bestStreak;
+            document.getElementById('stat-total-score').textContent = gameState.score;
+
+            var mult = stats.multiplication;
+            var multAccuracy = mult.answered > 0 ? Math.round((mult.correct / mult.answered) * 100) : 0;
+            document.getElementById('stat-multiplication').textContent =
+                mult.correct + '/' + mult.answered + ' (' + multAccuracy + '%)';
+            document.getElementById('stat-multiplication-bar').style.width = multAccuracy + '%';
+
+            var div = stats.division;
+            var divAccuracy = div.answered > 0 ? Math.round((div.correct / div.answered) * 100) : 0;
+            document.getElementById('stat-division').textContent =
+                div.correct + '/' + div.answered + ' (' + divAccuracy + '%)';
+            document.getElementById('stat-division-bar').style.width = divAccuracy + '%';
+
+            var wp = stats.wordProblem;
+            var wpAccuracy = wp.answered > 0 ? Math.round((wp.correct / wp.answered) * 100) : 0;
+            document.getElementById('stat-word-problem').textContent =
+                wp.correct + '/' + wp.answered + ' (' + wpAccuracy + '%)';
+            document.getElementById('stat-word-problem-bar').style.width = wpAccuracy + '%';
+
+            // 更新徽章显示（新增）
+            updateBadgesDisplay();
+
+            updateLevel();
+        }
+
+        function updateLevel() {
+            var totalCorrect = gameState.stats.totalCorrect;
+            var level = 1;
+            var title = '新手宇航员';
+
+            if (totalCorrect >= 100) {
+                level = 5;
+                title = '宇宙指挥官';
+            } else if (totalCorrect >= 50) {
+                level = 4;
+                title = '银河守护者';
+            } else if (totalCorrect >= 30) {
+                level = 3;
+                title = '星际导航员';
+            } else if (totalCorrect >= 10) {
+                level = 2;
+                title = '见习飞行员';
+            }
+
+            gameState.level = level;
+            document.getElementById('level-number').textContent = 'Lv.' + level;
+            document.getElementById('level-title').textContent = title;
+        }
+
+        function resetStats() {
+            if (!confirm('确定要重置所有数据吗？这个操作不可恢复！')) {
+                return;
+            }
+
+            // 1. 清零 gameState
+            gameState.stats = {
+                totalAnswered: 0,
+                totalCorrect: 0,
+                multiplication: { answered: 0, correct: 0 },
+                division: { answered: 0, correct: 0 },
+                wordProblem: { answered: 0, correct: 0 }
+            };
+            gameState.score = 0;
+            gameState.bestStreak = 0;
+            gameState.streak = 0;
+            gameState.sessionQuestions = 0;
+            gameState.level = 1;
+            gameState.spaceship = {
+                multiplication: { stage: 0, fuel: 0, maxFuel: 10 },
+                division: { stage: 0, fuel: 0, maxFuel: 10 },
+                wordProblem: { stage: 0, fuel: 0, maxFuel: 10 }
+            };
+            gameState.badges = {
+                first: false, streak5: false, streak10: false, perfect: false,
+                'multiplication-master': false, 'division-master': false,
+                'word-problem-master': false, galaxy: false
+            };
+
+            // 2. 彻底清空 localStorage（键名完全匹配 saveStats 写的）
+            localStorage.removeItem('math-camp-stats');
+
+            // 3. 显式更新"我的成绩"页面所有 DOM 元素（不依赖 updateStatsDisplay）
+            var safeSet = function(id, val) {
+                var el = document.getElementById(id);
+                if (el) el.textContent = val;
+            };
+
+            safeSet('stat-total', 0);
+            safeSet('stat-accuracy', '0%');
+            safeSet('stat-best-streak', 0);
+            safeSet('stat-total-score', 0);
+            safeSet('stat-multiplication', '0/0 (0%)');
+            safeSet('stat-division', '0/0 (0%)');
+            safeSet('stat-word-problem', '0/0 (0%)');
+            safeSet('level-number', 'Lv.1');
+            safeSet('level-title', '新手宇航员');
+
+            // 进度条归零
+            var barIds = ['stat-multiplication-bar', 'stat-division-bar', 'stat-word-problem-bar'];
+            barIds.forEach(function(id) {
+                var el = document.getElementById(id);
+                if (el) el.style.width = '0%';
+            });
+
+            // 4. 清除所有徽章的 earned 样式
+            document.querySelectorAll('.badge.earned').forEach(function(badge) {
+                badge.classList.remove('earned');
+            });
+
+            // 5. 刷新三套飞船显示和星球旅程进度
+            ['multiplication', 'division', 'wordProblem'].forEach(function(mode) {
+                updateSpaceshipDisplay(mode);
+                updateJourneyDisplay(mode);
+            });
+
+            // 6. 更新等级显示（含等级进度条）
+            updateLevel();
+
+            // 7. 重新保存清零后的状态到 localStorage
+            saveStats();
+
+            // 8. 提示（用菜单页的 feedback，或当前活动视图的 feedback）
+            showFeedback('feedback', '数据已重置！', 'hint');
+        }
+
+        // ========== 飞船系统函数（按模式分离）==========
+        function addFuel(mode) {
+            // mode: 'multiplication' | 'division' | 'word-problem'
+            var ship = gameState.spaceship[mode];
+            ship.fuel++;
+
+            if (ship.fuel >= ship.maxFuel) {
+                if (ship.stage < 4) {
+                    ship.fuel = 0;
+                    ship.stage++;
+                    showLevelUp(mode, ship.stage);
+                } else {
+                    ship.fuel = ship.maxFuel;
+                }
+            }
+            updateSpaceshipDisplay(mode);
+            updateJourneyDisplay(mode);
+            checkBadges();
+        }
+
+        function updateSpaceshipDisplay(mode) {
+            var prefix = mode === 'multiplication' ? '' : (mode === 'division' ? 'division-' : 'wp-');
+            var iconEl = document.getElementById(prefix + 'spaceship-icon');
+            var nameEl = document.getElementById(prefix + 'spaceship-name');
+            var fuelEl = document.getElementById(prefix + 'spaceship-fuel');
+            var fillEl = document.getElementById(prefix + 'fuel-fill');
+
+            if (!iconEl) return;
+
+            var ship = gameState.spaceship[mode];
+            var config = spaceshipLevels[mode][ship.stage];
+            iconEl.textContent = config.icon;
+            nameEl.textContent = config.name;
+            fuelEl.textContent = '燃料：' + ship.fuel + ' / ' + ship.maxFuel;
+            var percent = (ship.fuel / ship.maxFuel) * 100;
+            fillEl.style.width = percent + '%';
+        }
+
+        function updateJourneyDisplay(mode) {
+            var view = document.getElementById(mode + '-view');
+            if (!view) return;
+            var planets = view.querySelectorAll('.journey-planet');
+            var stage = gameState.spaceship[mode].stage;
+            planets.forEach(function(planet) {
+                var planetStage = parseInt(planet.getAttribute('data-stage'));
+                planet.classList.remove('visited', 'current');
+                if (planetStage < stage) {
+                    planet.classList.add('visited');
+                } else if (planetStage === stage) {
+                    planet.classList.add('current');
+                }
+            });
+        }
+
+        function showLevelUp(mode, newStage) {
+            var config = spaceshipLevels[mode][newStage];
+            var modeName = mode === 'multiplication' ? '乘法' : (mode === 'division' ? '除法' : '应用题');
+            var overlay = document.createElement('div');
+            overlay.className = 'level-up-overlay';
+            overlay.onclick = function() { overlay.remove(); };
+            overlay.innerHTML = '<div class="level-up-content" onclick="event.stopPropagation()">' +
+                '<div class="level-up-icon">' + config.icon + '</div>' +
+                '<div class="level-up-title">🎉 升级啦！</div>' +
+                '<div class="level-up-subtitle">' + modeName + '飞船：' + config.name + '</div>' +
+                '<button class="level-up-close" onclick="this.parentNode.parentNode.remove()">继续飞行</button>' +
+                '</div>';
+            document.body.appendChild(overlay);
+        }
+
+        // 飞船飞过屏幕特效
+        function flySpaceship(mode) {
+            var ship = gameState.spaceship[mode];
+            var flyingShip = document.createElement('div');
+            flyingShip.className = 'flying-spaceship';
+            flyingShip.textContent = spaceshipLevels[mode][ship.stage].icon;
+            flyingShip.style.top = (Math.random() * 30 + 20) + '%';
+            document.body.appendChild(flyingShip);
+
+            var trail = document.createElement('div');
+            trail.className = 'rocket-trail';
+            trail.style.left = '0';
+            trail.style.top = flyingShip.style.top;
+            trail.style.transform = 'translateY(-50%)';
+            document.body.appendChild(trail);
+
+            setTimeout(function() {
+                flyingShip.remove();
+                trail.remove();
+            }, 1500);
+        }
+
+        // 检查并解锁徽章
+        function checkBadges() {
+            var stats = gameState.stats;
+            var badges = gameState.badges;
+
+            // 初次飞行：答对第一题
+            if (stats.totalCorrect >= 1 && !badges.first) {
+                badges.first = true;
+                showBadgeEarned('first', '初次飞行');
+            }
+            // 5连击
+            if (gameState.bestStreak >= 5 && !badges.streak5) {
+                badges.streak5 = true;
+                showBadgeEarned('streak5', '5连击');
+            }
+            // 10连击
+            if (gameState.bestStreak >= 10 && !badges.streak10) {
+                badges.streak10 = true;
+                showBadgeEarned('streak10', '10连击');
+            }
+            // 满分：单次会话正确率100%（至少答5题）
+            if (gameState.sessionQuestions >= 5 && stats.totalCorrect === stats.totalAnswered && !badges.perfect) {
+                badges.perfect = true;
+                showBadgeEarned('perfect', '满分');
+            }
+            // 乘法大师：答对20道乘法
+            if (stats.multiplication.correct >= 20 && !badges['multiplication-master']) {
+                badges['multiplication-master'] = true;
+                showBadgeEarned('multiplication-master', '乘法大师');
+            }
+            // 除法大师：答对20道除法
+            if (stats.division.correct >= 20 && !badges['division-master']) {
+                badges['division-master'] = true;
+                showBadgeEarned('division-master', '除法大师');
+            }
+            // 应用题王：答对15道应用题
+            if (stats.wordProblem.correct >= 15 && !badges['word-problem-master']) {
+                badges['word-problem-master'] = true;
+                showBadgeEarned('word-problem-master', '应用题王');
+            }
+            // 银河大师：至少一个模式到达最高等级
+            var maxStage = Math.max(
+                gameState.spaceship.multiplication.stage,
+                gameState.spaceship.division.stage,
+                gameState.spaceship.wordProblem.stage
+            );
+            if (maxStage >= 4 && !badges.galaxy) {
+                badges.galaxy = true;
+                showBadgeEarned('galaxy', '银河大师');
+            }
+        }
+
+        function showBadgeEarned(badgeId, badgeName) {
+            // 在统计页面显示已获得的徽章
+            var badge = document.querySelector('.badge[data-badge="' + badgeId + '"]');
+            if (badge) badge.classList.add('earned');
+
+            // 显示获得徽章的提示
+            if (gameState.soundEnabled) {
+                var msg = '🏆 获得徽章：' + badgeName + '！';
+                showFeedback('feedback', msg, 'correct');
+            }
+        }
+
+        function updateBadgesDisplay() {
+            var badges = gameState.badges;
+            Object.keys(badges).forEach(function(key) {
+                var badge = document.querySelector('.badge[data-badge="' + key + '"]');
+                if (badge) {
+                    if (badges[key]) {
+                        badge.classList.add('earned');
+                    } else {
+                        badge.classList.remove('earned');
+                    }
+                }
+            });
+        }
+
+        window.addEventListener('error', function(event) {
+            console.error('[全局错误] ', event.error);
+        });
+    </script>
 </body>
 </html>
