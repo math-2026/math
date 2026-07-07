@@ -224,14 +224,14 @@
         .table-cell .formula {
             font-weight: bold;
             color: #60a5fa;
-            font-size: 18px;
+            font-size: clamp(10px, 2vw, 18px);
             text-align: center;
         }
 
         .table-cell .result {
             color: #fbbf24;
             font-weight: bold;
-            font-size: 24px;
+            font-size: clamp(13px, 3vw, 24px);
             text-align: center;
         }
 
@@ -274,14 +274,6 @@
                 gap: 3px;
                 max-width: 500px;
                 margin: 12px auto;
-            }
-
-            .table-cell .formula {
-                font-size: 16px;
-            }
-
-            .table-cell .result {
-                font-size: 21px;
             }
 
             .stat-grid {
@@ -597,14 +589,6 @@
                 padding: 2px;
                 min-width: 0;
             }
-
-            .table-cell .formula {
-                font-size: 14px;
-            }
-
-            .table-cell .result {
-                font-size: 18px;
-            }
         }
 
         .btn:focus-visible,
@@ -661,6 +645,15 @@
             position: relative;
             overflow: hidden;
         }
+        .galaxy-bar .track-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #f59e0b);
+            border-radius: 2px;
+            transition: width 0.5s ease;
+        }
         .galaxy-bar .track::before,
         .galaxy-bar .track::after {
             content: '🪐';
@@ -714,6 +707,42 @@
             60% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 1; }
             100% { transform: translate(-50%, -50%) scale(0.8) rotate(0deg); opacity: 0; }
         }
+        /* 到达行星庆祝弹窗 */
+        .arrival-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5);
+            -webkit-backdrop-filter: blur(4px);
+            backdrop-filter: blur(4px);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: arrivalFadeIn 0.3s ease-out;
+        }
+        .arrival-content {
+            text-align: center;
+            animation: arrivalBounce 0.5s ease-out;
+        }
+        .arrival-planet {
+            font-size: 100px;
+            animation: arrivalSpin 2s ease-in-out;
+        }
+        .arrival-text {
+            font-size: 28px;
+            font-weight: bold;
+            color: #fbbf24;
+            text-shadow: 0 0 20px rgba(251,191,36,0.8);
+            margin-top: 12px;
+        }
+        .arrival-subtext {
+            font-size: 16px;
+            color: #93c5fd;
+            margin-top: 8px;
+        }
+        @keyframes arrivalFadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes arrivalBounce { 0% { transform: scale(0.3); opacity: 0; } 50% { transform: scale(1.1); } 100% { transform: scale(1); opacity: 1; } }
+        @keyframes arrivalSpin { from { transform: rotate(0deg) scale(0.5); } 50% { transform: rotate(180deg) scale(1.2); } to { transform: rotate(360deg) scale(1); } }
         .rocket-flyby {
             position: fixed;
             top: 50%;
@@ -736,7 +765,9 @@
     <!-- 顶部银河飞行进度条 -->
     <div class="galaxy-bar" id="galaxy-bar" style="display: none;">
         <span class="ship" id="galaxy-ship">🚀</span>
-        <span class="track"></span>
+        <span class="track">
+            <span class="track-fill" id="track-fill"></span>
+        </span>
         <span class="distance" id="galaxy-distance">0 光年</span>
     </div>
 
@@ -814,7 +845,7 @@
                 </div>
 
                 <div style="text-align: center;">
-                    <div class="target-planet" id="mult-target">🪐 目标行星：<span class="planet">火星</span> · 距离 0 光年</div>
+                    <div class="target-planet" id="mult-target">🪐 第1站：月球 (1/5) · 还剩 100 光年</div>
                 </div>
 
                 <div class="question-display" id="question-display">
@@ -864,7 +895,7 @@
                 </div>
 
                 <div style="text-align: center;">
-                    <div class="target-planet" id="div-target">🪐 目标行星：<span class="planet">木星</span> · 距离 0 光年</div>
+                    <div class="target-planet" id="div-target">🪐 第1站：金星 (1/5) · 还剩 100 光年</div>
                 </div>
 
                 <div class="question-display" id="division-question">
@@ -912,7 +943,7 @@
                 <div class="word-problem" id="word-problem-content">
                     <div class="scene" id="wp-scene">📝</div>
                     <div style="text-align: center; margin-bottom: 8px;">
-                        <div class="target-planet" id="wp-target">🪐 目标行星：<span class="planet">土星</span> · 距离 0 光年</div>
+                        <div class="target-planet" id="wp-target">🪐 第1站：月球 (1/5) · 还剩 100 光年</div>
                     </div>
                     <div class="problem-text" id="wp-text">
                         点击"开始"按钮，我会给你出一道应用题
@@ -1032,8 +1063,21 @@
                 </div>
             </div>
 
+            <div class="card">
+                <h2 style="font-size: 20px; margin-bottom: 16px; color: #60a5fa;">
+                    <i class="fas fa-level-up-alt"></i> 等级成长历程
+                </h2>
+                <div id="level-growth"></div>
+            </div>
+
+            <div class="card">
+                <h2 style="font-size: 20px; margin-bottom: 16px; color: #60a5fa;">
+                    <i class="fas fa-route"></i> 星际旅行日志
+                </h2>
+                <div id="journey-log"></div>
+            </div>
+
             <div style="text-align: center; margin-top: 20px;">
-                <button class="btn btn-danger" onclick="resetStats()">
                     <i class="fas fa-trash-alt"></i> 重置数据
                 </button>
             </div>
@@ -1081,12 +1125,30 @@
                 division: 1,
                 wordProblem: 1
             },
-            levelTitles: ['新手宇航员', '见习飞行员', '星际导航员', '银河守护者', '宇宙指挥官'],
-            // 星际飞行元素：每个模式的目标行星不同
-            modePlanets: {
-                multiplication: '火星',
-                division: '木星',
-                'word-problem': '土星'
+            // 三个模式各自的等级称谓
+            levelTitles: {
+                multiplication: ['星际萌新', '乘法新秀', '口算达人', '速算之星', '银河算神'],
+                division: ['除法学徒', '等分专家', '除法王者', '商数之星', '宇宙除神'],
+                wordProblem: ['解题萌新', '应用题小能手', '逻辑小高手', '思维小天才', '智慧宇宙王']
+            },
+            // 星际飞行元素：每个模式的行星链（5颗，从近到远）
+            // 统一行星链顺序：月球→火星→木星→土星→天王星
+            modePlanetChains: {
+                multiplication: ['月球', '火星', '木星', '土星', '天王星'],
+                division: ['月球', '火星', '木星', '土星', '天王星'],
+                wordProblem: ['月球', '火星', '木星', '土星', '天王星']
+            },
+            // 当前飞向第几颗行星（0=第一颗）
+            currentPlanetIndex: {
+                multiplication: 0,
+                division: 0,
+                wordProblem: 0
+            },
+            // 到达历史：每个模式总共到达过几次（决定等级）
+            journeyArrivals: {
+                multiplication: 0,
+                division: 0,
+                wordProblem: 0
             },
             // 累计答对里程碑，触发能量水晶动画
             crystalMilestones: [10, 30, 50, 100, 200, 365, 500],
@@ -1095,6 +1157,12 @@
                 multiplication: 0,
                 division: 0,
                 wordProblem: 0
+            },
+            // 各模式飞向当前行星的剩余距离（答对一题减 10 光年，归零后到达行星）
+            journeyRemaining: {
+                multiplication: 100,
+                division: 100,
+                wordProblem: 100
             }
         };
 
@@ -1105,6 +1173,17 @@
             initMultiplicationTable();
             loadStats();
             updateStatsDisplay();
+
+            // 预热语音引擎（Android Chrome 需要预先加载中文语音包）
+            if (window.speechSynthesis) {
+                speechSynthesis.cancel();
+                var warmUp = new SpeechSynthesisUtterance('');
+                warmUp.volume = 0;
+                warmUp.rate = 2;
+                speechSynthesis.speak(warmUp);
+                // 触发 voices 加载
+                speechSynthesis.getVoices();
+            }
 
             document.getElementById('sound-toggle').addEventListener('click', function() {
                 gameState.soundEnabled = !gameState.soundEnabled;
@@ -1212,6 +1291,7 @@
 
         function speakMultiplication(num1, num2) {
             if (!gameState.soundEnabled) return;
+            if (!window.speechSynthesis) return;
 
             var result = num1 * num2;
             var text = '';
@@ -1222,23 +1302,16 @@
                 text = num2 + '乘以' + num1 + '等于' + result;
             }
 
-            // 修复移动端 speechSynthesis 不发声的问题
             speechSynthesis.cancel();
-            // iOS Safari 有时 speechSynthesis 会进入暂停状态
-            if (speechSynthesis.paused) {
-                speechSynthesis.resume();
-            }
 
             var utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = 'zh-CN';
             utterance.rate = 0.9;
-            // 保持引用防止被垃圾回收（移动端常见问题）
+            // 保持全局引用防止被垃圾回收
             window._lastUtterance = utterance;
 
-            // 延迟一小段时间确保 cancel 完成后再 speak
-            setTimeout(function() {
-                speechSynthesis.speak(window._lastUtterance);
-            }, 50);
+            // 必须在用户手势同步回调中调用 speak()（Android Chrome 严格要求）
+            speechSynthesis.speak(window._lastUtterance);
         }
 
         function switchMode(mode) {
@@ -1279,7 +1352,7 @@
                     var el = document.getElementById(id);
                     if (el) el.style.paddingTop = '56px';
                 });
-                updateGalaxyDistance();
+                updateGalaxyDistance(normalizeMode(mode));
             } else {
                 // menu / table / stats 视图隐藏银河条 + 恢复卡片间距
                 var bar = document.getElementById('galaxy-bar');
@@ -1429,7 +1502,11 @@
                     if (gameState.streak.multiplication >= 5) flyRocket();
                 }
 
-                // 星际飞行元素：更新行星距离 + 检查能量水晶
+                // 星际飞行元素：缩短剩余距离 + 到达则庆祝 + 检查能量水晶
+                gameState.journeyRemaining.multiplication = Math.max(0, gameState.journeyRemaining.multiplication - 10);
+                if (gameState.journeyRemaining.multiplication <= 0) {
+                    onPlanetArrival('multiplication');
+                }
                 updateTargetPlanet('multiplication');
                 checkCrystalMilestone('multiplication');
 
@@ -1572,7 +1649,11 @@
                     if (gameState.streak.division >= 5) flyRocket();
                 }
 
-                // 星际飞行元素：更新行星距离 + 检查能量水晶
+                // 星际飞行元素：缩短剩余距离 + 到达则庆祝 + 检查能量水晶
+                gameState.journeyRemaining.division = Math.max(0, gameState.journeyRemaining.division - 10);
+                if (gameState.journeyRemaining.division <= 0) {
+                    onPlanetArrival('division');
+                }
                 updateTargetPlanet('division');
                 checkCrystalMilestone('division');
 
@@ -1947,7 +2028,11 @@
                     if (gameState.streak.wordProblem >= 5) flyRocket();
                 }
 
-                // 星际飞行元素：更新行星距离 + 检查能量水晶
+                // 星际飞行元素：缩短剩余距离 + 到达则庆祝 + 检查能量水晶
+                gameState.journeyRemaining.wordProblem = Math.max(0, gameState.journeyRemaining.wordProblem - 10);
+                if (gameState.journeyRemaining.wordProblem <= 0) {
+                    onPlanetArrival('wordProblem');
+                }
                 updateTargetPlanet('wordProblem');
                 checkCrystalMilestone('wordProblem');
 
@@ -2024,23 +2109,164 @@
 
         // ===== 星际飞行元素 =====
 
-        // 更新目标行星的距离（顶部提示 + 银河条）
+        // 模式名归一化：'word-problem' → 'wordProblem'
+        function normalizeMode(mode) {
+            return mode === 'word-problem' ? 'wordProblem' : mode;
+        }
+
+        // 返回当前行星链中第 index 颗行星的旅程总距离（方案A数值表）
+        function getJourneyMax(mode) {
+            mode = normalizeMode(mode);
+            var idx = gameState.currentPlanetIndex[mode] || 0;
+            var distances = [100, 250, 500, 800, 1000]; // Lv1→Lv5
+            return distances[Math.min(idx, 4)];
+        }
+
+        // 更新目标行星的距离（顶部提示 — 剩余距离递减 + 行星链进度）
         function updateTargetPlanet(mode) {
-            var correct = gameState.stats[mode].correct;
-            var planet = gameState.modePlanets[mode];
+            mode = normalizeMode(mode);
+            var remaining = gameState.journeyRemaining[mode];
+            var chain = gameState.modePlanetChains[mode];
+            var idx = gameState.currentPlanetIndex[mode] || 0;
+            var planet = chain[idx];
             var targetId = mode === 'wordProblem' ? 'wp-target' : (mode === 'division' ? 'div-target' : 'mult-target');
             var target = document.getElementById(targetId);
             if (target) {
-                target.innerHTML = '🪐 目标行星：<span class="planet">' + planet + '</span> · 距离 ' + correct + ' 光年';
+                if (remaining <= 0) {
+                    target.innerHTML = '🪐 已到达 <span class="planet">' + planet + '</span>！🎉';
+                } else {
+                    target.innerHTML = '🪐 第' + (idx + 1) + '站：<span class="planet">' + planet + '</span> (' + (idx + 1) + '/' + chain.length + ') · 还剩 <strong>' + remaining + '</strong> 光年';
+                }
             }
-            updateGalaxyDistance();
+            updateGalaxyDistance(mode);
         }
 
-        // 顶部银河条的距离显示
-        function updateGalaxyDistance() {
-            var total = gameState.stats.totalCorrect;
+        // 顶部银河条的距离显示 + 进度条填充
+        function updateGalaxyDistance(mode) {
+            mode = normalizeMode(mode);
+            var remaining = gameState.journeyRemaining[mode];
+            var maxDist = getJourneyMax(mode);
+            var traveled = Math.max(0, maxDist - remaining);
+            var pct = Math.min(100, Math.round((traveled / maxDist) * 100));
+
             var distElem = document.getElementById('galaxy-distance');
-            if (distElem) distElem.textContent = total + ' 光年';
+            if (distElem) {
+                if (remaining <= 0) {
+                    distElem.textContent = '已到达！';
+                } else {
+                    distElem.textContent = remaining + ' 光年';
+                }
+            }
+
+            var fill = document.getElementById('track-fill');
+            if (fill) {
+                fill.style.width = pct + '%';
+            }
+        }
+
+        // 到达行星：升级 + 庆祝 + 推进行星链
+        function onPlanetArrival(mode) {
+            mode = normalizeMode(mode);
+            var chain = gameState.modePlanetChains[mode];
+            var idx = gameState.currentPlanetIndex[mode] || 0;
+            var planet = chain[idx];
+
+            // 1. 增加到达次数
+            gameState.journeyArrivals[mode] = (gameState.journeyArrivals[mode] || 0) + 1;
+
+            // 2. 先升级等级（重要！必须在庆祝弹窗之前）
+            updateLevel(mode);
+
+            // 3. 全屏庆祝弹窗（此时等级已提升，显示新等级）
+            showArrivalCelebration(planet, mode);
+
+            // 4. 语音播报（此时等级已提升，播报新等级）
+            speakArrival(planet, mode);
+
+            // 5. 连发烟花
+            createFirework();
+            setTimeout(createFirework, 300);
+            setTimeout(createFirework, 600);
+
+            // 6. 推进行星链到下一颗
+            gameState.currentPlanetIndex[mode] = idx + 1;
+            if (gameState.currentPlanetIndex[mode] >= chain.length) {
+                // 完成一轮全部5颗，重置行星链
+                gameState.currentPlanetIndex[mode] = 0;
+            }
+
+            // 7. 旅程重置为下一颗行星的距离
+            gameState.journeyRemaining[mode] = getJourneyMax(mode);
+        }
+
+        // 到达行星的全屏庆祝弹窗
+        function showArrivalCelebration(planet, mode) {
+            var overlay = document.createElement('div');
+            overlay.className = 'arrival-overlay';
+            var nextIdx = (gameState.currentPlanetIndex[mode] || 0) + 1;
+            var chain = gameState.modePlanetChains[mode];
+            var isLast = nextIdx >= chain.length;
+            var subtext = isLast ? '完成全部行星探索！开启新一轮旅程' : '下一站：' + chain[nextIdx];
+            
+            // 获取当前等级和称谓
+            var currentLevel = gameState.level[mode];
+            var currentTitle = gameState.levelTitles[mode][currentLevel - 1];
+            
+            overlay.innerHTML = '<div class="arrival-content">' +
+                '<div class="arrival-planet">🪐</div>' +
+                '<div class="arrival-text">抵达 <strong>' + planet + '</strong>！</div>' +
+                '<div class="arrival-level" style="font-size: 24px; color: #fbbf24; margin: 10px 0; font-weight: bold;">🎉 等级提升 🎉</div>' +
+                '<div class="arrival-title" style="font-size: 20px; color: #e2e8f0; margin-bottom: 10px;">' + currentTitle + ' (Lv.' + currentLevel + ')</div>' +
+                '<div class="arrival-subtext">' + subtext + '</div>' +
+                '</div>';
+            document.body.appendChild(overlay);
+            setTimeout(function() { overlay.remove(); }, 3000);
+            
+            // 等级提升动画
+            showLevelUpAnimation(currentLevel, currentTitle);
+        }
+
+        // 等级提升动画
+        function showLevelUpAnimation(level, title) {
+            var animOverlay = document.createElement('div');
+            animOverlay.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:10001;display:flex;align-items:center;justify-content:center;pointer-events:none;';
+            animOverlay.innerHTML = '<div style="text-align:center;animation: levelUpPulse 1.5s ease-in-out;">' +
+                '<div style="font-size:48px;color:#fbbf24;font-weight:bold;text-shadow:0 0 20px rgba(251,191,36,0.8);">等级提升！</div>' +
+                '<div style="font-size:32px;color:#e2e8f0;margin-top:15px;">' + title + ' (Lv.' + level + ')</div>' +
+                '</div>';
+            document.body.appendChild(animOverlay);
+            
+            // 添加CSS动画
+            if (!document.getElementById('level-up-style')) {
+                var style = document.createElement('style');
+                style.id = 'level-up-style';
+                style.textContent = '@keyframes levelUpPulse {' +
+                    '0% { transform: scale(0.5); opacity: 0; }' +
+                    '50% { transform: scale(1.2); opacity: 1; }' +
+                    '100% { transform: scale(1); opacity: 1; }' +
+                    '}';
+                document.head.appendChild(style);
+            }
+            
+            setTimeout(function() { animOverlay.remove(); }, 2500);
+        }
+
+        // 语音播报到达行星
+        function speakArrival(planet, mode) {
+            if (!gameState.soundEnabled) return;
+            if (!window.speechSynthesis) return;
+            try {
+                speechSynthesis.cancel();
+                var currentLevel = gameState.level[mode];
+                var currentTitle = gameState.levelTitles[mode][currentLevel - 1];
+                var text = '太棒了！抵达' + planet + '！恭喜升级为' + currentTitle + '！';
+                var u = new SpeechSynthesisUtterance(text);
+                u.lang = 'zh-CN';
+                u.rate = 0.95;
+                u.pitch = 1.2;
+                window._lastUtterance = u;
+                speechSynthesis.speak(u);
+            } catch(e) {}
         }
 
         // 检查能量水晶里程碑
@@ -2104,7 +2330,10 @@
                     score: gameState.score,
                     bestStreak: gameState.bestStreak,
                     level: gameState.level,
-                    crystalsEarned: gameState.crystalsEarned
+                    crystalsEarned: gameState.crystalsEarned,
+                    journeyRemaining: gameState.journeyRemaining,
+                    currentPlanetIndex: gameState.currentPlanetIndex,
+                    journeyArrivals: gameState.journeyArrivals
                 };
                 localStorage.setItem('math-camp-stats', JSON.stringify(data));
                 console.log('[存档] 统计数据已保存');
@@ -2173,6 +2402,44 @@
                         wordProblem: 0
                     };
 
+                    // 加载星际旅行剩余距离（首次加载则初始化默认值）
+                    gameState.journeyRemaining = parsed.journeyRemaining || {
+                        multiplication: 100,
+                        division: 100,
+                        wordProblem: 100
+                    };
+
+                    // 加载行星链进度（首次加载则初始化为 0）
+                    gameState.currentPlanetIndex = parsed.currentPlanetIndex || {
+                        multiplication: 0,
+                        division: 0,
+                        wordProblem: 0
+                    };
+
+                    // 加载到达历史（首次加载则初始化为 0）
+                    gameState.journeyArrivals = parsed.journeyArrivals || {
+                        multiplication: 0,
+                        division: 0,
+                        wordProblem: 0
+                    };
+
+                    // 旧版数据迁移：journeyRemaining 旧默认值 50 → 新默认值 100
+                    ['multiplication', 'division', 'wordProblem'].forEach(function(m) {
+                        if (gameState.journeyRemaining[m] === 50) {
+                            gameState.journeyRemaining[m] = 100;
+                        }
+                    });
+
+                    // 数据一致性检查：确保等级与到达次数一致
+                    ['multiplication', 'division', 'wordProblem'].forEach(function(m) {
+                        var arrivals = gameState.journeyArrivals[m] || 0;
+                        var expectedLevel = Math.min(arrivals + 1, 5);
+                        if (gameState.level[m] !== expectedLevel) {
+                            console.log('[数据修复] ' + m + ' 等级不一致，修复为 Lv.' + expectedLevel);
+                            gameState.level[m] = expectedLevel;
+                        }
+                    });
+
                     console.log('[存档] 统计数据已加载');
                 }
             } catch (error) {
@@ -2226,12 +2493,116 @@
             updateTargetPlanet('multiplication');
             updateTargetPlanet('division');
             updateTargetPlanet('wordProblem');
+
+            // 更新星际旅行日志
+            updateJourneyLog();
+            
+            // 更新等级成长历程
+            updateLevelGrowth();
         }
 
+        // 更新统计页的星际旅行日志
+        function updateJourneyLog() {
+            var logElem = document.getElementById('journey-log');
+            if (!logElem) return;
+
+            var modes = [
+                { key: 'multiplication', name: '乘法', color: '#3b82f6' },
+                { key: 'division', name: '除法', color: '#10b981' },
+                { key: 'wordProblem', name: '应用题', color: '#f59e0b' }
+            ];
+
+            var html = '';
+            modes.forEach(function(m) {
+                var chain = gameState.modePlanetChains[m.key];
+                var idx = gameState.currentPlanetIndex[m.key] || 0;
+                var arrivals = gameState.journeyArrivals[m.key] || 0;
+                var remaining = gameState.journeyRemaining[m.key];
+                var maxDist = getJourneyMax(m.key);
+                var pct = maxDist > 0 ? Math.round((maxDist - remaining) / maxDist * 100) : 0;
+
+                html += '<div style="margin-bottom: 16px;">';
+                html += '<div style="display: flex; justify-content: space-between; margin-bottom: 6px;">';
+                html += '<span style="color:' + m.color + '; font-weight: bold;">' + m.name + '</span>';
+                html += '<span>已到达 ' + arrivals + ' 次 · 当前：' + chain[idx] + ' (' + (idx+1) + '/' + chain.length + ')</span>';
+                html += '</div>';
+                // 行星链进度点
+                html += '<div style="display: flex; gap: 4px; margin-bottom: 6px;">';
+                chain.forEach(function(p, i) {
+                    var dotColor = i < idx ? m.color : (i === idx ? '#fbbf24' : 'rgba(148,163,184,0.3)');
+                    var dotSize = i === idx ? '16px' : '12px';
+                    html += '<span style="font-size:' + dotSize + '; opacity:' + (i <= idx ? '1' : '0.4') + ';">🪐</span>';
+                });
+                html += '</div>';
+                // 进度条
+                html += '<div class="stat-bar-bg"><div class="stat-bar-fill" style="width:' + pct + '%; background:' + m.color + ';"></div></div>';
+                html += '</div>';
+            });
+
+            logElem.innerHTML = html;
+        }
+
+        // 更新统计页的等级成长历程
+        function updateLevelGrowth() {
+            var growthElem = document.getElementById('level-growth');
+            if (!growthElem) return;
+
+            var modes = [
+                { key: 'multiplication', name: '乘法', color: '#3b82f6', icon: '✖️' },
+                { key: 'division', name: '除法', color: '#10b981', icon: '➗' },
+                { key: 'wordProblem', name: '应用题', color: '#f59e0b', icon: '📝' }
+            ];
+
+            var html = '';
+            modes.forEach(function(m) {
+                var level = gameState.level[m.key];
+                var title = gameState.levelTitles[m.key][level - 1];
+                var arrivals = gameState.journeyArrivals[m.key] || 0;
+
+                html += '<div style="margin-bottom: 20px; padding: 12px; background: rgba(30,41,59,0.5); border-radius: 12px;">';
+                // 模式名称和当前等级
+                html += '<div style="display: flex; justify-content: space-between; margin-bottom: 10px; align-items: center;">';
+                html += '<span style="color: ' + m.color + '; font-weight: bold; font-size: 16px;">' + m.icon + ' ' + m.name + '</span>';
+                html += '<span style="color: #fbbf24; font-weight: bold;">Lv.' + level + ' ' + title + '</span>';
+                html += '</div>';
+                // 等级进度条
+                html += '<div style="display: flex; gap: 6px; margin-bottom: 8px;">';
+                for (var i = 1; i <= 5; i++) {
+                    if (i <= level) {
+                        // 已达成的等级
+                        var starColor = i === level ? m.color : 'rgba(251,191,36,0.6)';
+                        var starSize = i === level ? '24px' : '20px';
+                        var starText = i === level ? '🌟' : '⭐';
+                        html += '<span style="font-size: ' + starSize + '; color: ' + starColor + '; animation: ' + (i === level ? 'starPulse 1.5s infinite;' : 'none;') + '">' + starText + '</span>';
+                    } else {
+                        // 未达成的等级
+                        html += '<span style="font-size: 20px; color: rgba(148,163,184,0.3);">☆</span>';
+                    }
+                }
+                html += '</div>';
+                // 等级描述
+                html += '<div style="font-size: 12px; color: #94a3b8;">已到达 ' + arrivals + ' 次行星 · 还需 ' + (level < 5 ? (level + 1 - arrivals) + ' 次到达升级' : '已达最高等级') + '</div>';
+                html += '</div>';
+            });
+
+            // 添加CSS动画
+            if (!document.getElementById('level-growth-style')) {
+                var style = document.createElement('style');
+                style.id = 'level-growth-style';
+                style.textContent = '@keyframes starPulse {' +
+                    '0%, 100% { transform: scale(1); }' +
+                    '50% { transform: scale(1.2); }' +
+                    '}';
+                document.head.appendChild(style);
+            }
+
+            growthElem.innerHTML = html;
+        }
+        
         function updateAllModeLevels() {
             // 更新乘法等级
             var multLevel = gameState.level.multiplication;
-            var multTitle = gameState.levelTitles[multLevel - 1] || gameState.levelTitles[0];
+            var multTitle = gameState.levelTitles['multiplication'][multLevel - 1];
             var multLevelElem = document.getElementById('multiplication-level');
             if (multLevelElem) {
                 multLevelElem.textContent = 'Lv.' + multLevel;
@@ -2239,7 +2610,7 @@
 
             // 更新除法等级
             var divLevel = gameState.level.division;
-            var divTitle = gameState.levelTitles[divLevel - 1] || gameState.levelTitles[0];
+            var divTitle = gameState.levelTitles['division'][divLevel - 1];
             var divLevelElem = document.getElementById('division-level');
             if (divLevelElem) {
                 divLevelElem.textContent = 'Lv.' + divLevel;
@@ -2247,7 +2618,7 @@
 
             // 更新应用题等级
             var wpLevel = gameState.level.wordProblem;
-            var wpTitle = gameState.levelTitles[wpLevel - 1] || gameState.levelTitles[0];
+            var wpTitle = gameState.levelTitles['wordProblem'][wpLevel - 1];
             var wpLevelElem = document.getElementById('wordProblem-level');
             if (wpLevelElem) {
                 wpLevelElem.textContent = 'Lv.' + wpLevel;
@@ -2257,7 +2628,7 @@
             var currentMode = gameState.currentMode;
             if (currentMode !== 'menu' && currentMode !== 'stats') {
                 var currentLevel = gameState.level[currentMode];
-                var currentTitle = gameState.levelTitles[currentLevel - 1] || gameState.levelTitles[0];
+                var currentTitle = gameState.levelTitles[currentMode][currentLevel - 1];
                 var levelNumberElem = document.getElementById('level-number');
                 var levelTitleElem = document.getElementById('level-title');
                 if (levelNumberElem && levelTitleElem) {
@@ -2268,24 +2639,11 @@
         }
 
         function updateLevel(mode) {
-            // 根据模式获取该模式的正确答题数
-            var correctCount = gameState.stats[mode].correct;
-            var level = 1;
-            var title = gameState.levelTitles[0];
-
-            if (correctCount >= 100) {
-                level = 5;
-                title = gameState.levelTitles[4];
-            } else if (correctCount >= 50) {
-                level = 4;
-                title = gameState.levelTitles[3];
-            } else if (correctCount >= 30) {
-                level = 3;
-                title = gameState.levelTitles[2];
-            } else if (correctCount >= 10) {
-                level = 2;
-                title = gameState.levelTitles[1];
-            }
+            mode = normalizeMode(mode);
+            // 等级 = 到达次数 + 1，最高 Lv5
+            var arrivals = gameState.journeyArrivals[mode] || 0;
+            var level = Math.min(arrivals + 1, 5);
+            var title = gameState.levelTitles[mode][level - 1];
 
             // 更新该模式的等级
             gameState.level[mode] = level;
@@ -2345,6 +2703,17 @@
                 gameState.crystalsEarned.multiplication = 0;
                 gameState.crystalsEarned.division = 0;
                 gameState.crystalsEarned.wordProblem = 0;
+
+                // 重置星际旅行：剩余距离 + 行星链进度 + 到达历史
+                gameState.journeyRemaining.multiplication = 100;
+                gameState.journeyRemaining.division = 100;
+                gameState.journeyRemaining.wordProblem = 100;
+                gameState.currentPlanetIndex.multiplication = 0;
+                gameState.currentPlanetIndex.division = 0;
+                gameState.currentPlanetIndex.wordProblem = 0;
+                gameState.journeyArrivals.multiplication = 0;
+                gameState.journeyArrivals.division = 0;
+                gameState.journeyArrivals.wordProblem = 0;
 
                 // 彻底清空 localStorage（移除所有相关 key）
                 localStorage.removeItem('math-camp-stats');
