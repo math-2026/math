@@ -164,6 +164,8 @@
             grid-template-columns: repeat(9, 1fr);
             gap: 4px;
             margin-top: 20px;
+            width: 100%;
+            overflow: hidden;
         }
 
         .table-cell {
@@ -179,6 +181,8 @@
             padding: 2px;
             touch-action: manipulation;
             -webkit-tap-highlight-color: transparent;
+            min-width: 0;
+            overflow: hidden;
         }
 
         /* 上半部：蓝色系 */
@@ -584,11 +588,14 @@
 
             .multiplication-table {
                 gap: 2px;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
             }
 
             .table-cell {
                 font-size: 10px;
                 padding: 2px;
+                min-width: 0;
             }
 
             .table-cell .formula {
@@ -1215,10 +1222,23 @@
                 text = num2 + '乘以' + num1 + '等于' + result;
             }
 
+            // 修复移动端 speechSynthesis 不发声的问题
+            speechSynthesis.cancel();
+            // iOS Safari 有时 speechSynthesis 会进入暂停状态
+            if (speechSynthesis.paused) {
+                speechSynthesis.resume();
+            }
+
             var utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = 'zh-CN';
             utterance.rate = 0.9;
-            speechSynthesis.speak(utterance);
+            // 保持引用防止被垃圾回收（移动端常见问题）
+            window._lastUtterance = utterance;
+
+            // 延迟一小段时间确保 cancel 完成后再 speak
+            setTimeout(function() {
+                speechSynthesis.speak(window._lastUtterance);
+            }, 50);
         }
 
         function switchMode(mode) {
