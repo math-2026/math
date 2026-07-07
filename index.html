@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>乘除法星际训练营</title>
+    <title>乘除法星际探险</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
@@ -172,8 +172,6 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: rgba(59, 130, 246, 0.1);
-            border: 1px solid rgba(59, 130, 246, 0.3);
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -183,22 +181,54 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        .table-cell:hover,
-        .table-cell:active {
+        /* 上半部：蓝色系 */
+        .table-cell.upper {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .table-cell.upper:hover,
+        .table-cell.upper:active {
             background: rgba(59, 130, 246, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* 下半部：紫色系 */
+        .table-cell.lower {
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        .table-cell.lower:hover,
+        .table-cell.lower:active {
+            background: rgba(139, 92, 246, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* 对角线（1×1→9×9）：琥珀金色 */
+        .table-cell.diagonal {
+            background: rgba(245, 158, 11, 0.15);
+            border: 1px solid rgba(245, 158, 11, 0.4);
+        }
+
+        .table-cell.diagonal:hover,
+        .table-cell.diagonal:active {
+            background: rgba(245, 158, 11, 0.35);
             transform: scale(1.05);
         }
 
         .table-cell .formula {
             font-weight: bold;
             color: #60a5fa;
-            font-size: 15px;
+            font-size: 18px;
+            text-align: center;
         }
 
         .table-cell .result {
             color: #fbbf24;
             font-weight: bold;
-            font-size: 20px;
+            font-size: 24px;
+            text-align: center;
         }
 
         /* 横屏优化 (iPad横屏) */
@@ -243,11 +273,11 @@
             }
 
             .table-cell .formula {
-                font-size: 13px;
+                font-size: 16px;
             }
 
             .table-cell .result {
-                font-size: 17px;
+                font-size: 21px;
             }
 
             .stat-grid {
@@ -562,11 +592,11 @@
             }
 
             .table-cell .formula {
-                font-size: 11px;
+                font-size: 14px;
             }
 
             .table-cell .result {
-                font-size: 14px;
+                font-size: 18px;
             }
         }
 
@@ -711,9 +741,9 @@
         <div id="menu-view" class="view active">
             <div style="text-align: center; margin-bottom: 30px;">
                 <h1 style="font-size: 36px; color: #fbbf24; margin-bottom: 8px;">
-                    <i class="fas fa-rocket"></i> 乘除法星际训练营
+                    <i class="fas fa-rocket"></i> 乘除法星际探险
                 </h1>
-                <p style="color: #94a3b8; font-size: 16px;">一年级数学口算练习</p>
+                <p style="color: #94a3b8; font-size: 16px;">二年级数学预习先行者</p>
             </div>
 
             <div class="menu-grid">
@@ -1003,7 +1033,7 @@
         </div>
 
         <div style="text-align: center; padding: 30px 0; color: #475569; font-size: 14px;">
-            <p>乘除法星际训练营 v2.0 | 适合一年级学生</p>
+            <p>乘除法星际探险 v2.0 正式版 | 适合二年级学生</p>
         </div>
     </div>
 
@@ -1062,7 +1092,7 @@
         };
 
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('[初始化] 乘除法星际训练营启动');
+            console.log('[初始化] 乘除法星际探险 v2.0 正式版 启动');
 
             initStarfield();
             initMultiplicationTable();
@@ -1148,7 +1178,8 @@
             for (var i = 1; i <= 9; i++) {
                 for (var j = 1; j <= 9; j++) {
                     var cell = document.createElement('div');
-                    cell.className = 'table-cell';
+                    // 1×1→9×9 对角线分界：上半蓝、下半紫、对角线琥珀金
+                    cell.className = 'table-cell ' + (i === j ? 'diagonal' : i < j ? 'upper' : 'lower');
 
                     var formula = document.createElement('div');
                     formula.className = 'formula';
