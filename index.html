@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>乘除法星际大冒险</title>
+    <title>乘除法星际训练营</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
@@ -58,6 +58,7 @@
 
         .card {
             background: rgba(30, 41, 59, 0.8);
+            -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(148, 163, 184, 0.2);
             border-radius: 16px;
@@ -131,6 +132,7 @@
             gap: 12px;
             padding: 24px 16px;
             background: rgba(30, 41, 59, 0.8);
+            -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
             border: 2px solid rgba(148, 163, 184, 0.2);
             border-radius: 16px;
@@ -170,71 +172,33 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: rgba(59, 130, 246, 0.12);
-            border: 1px solid rgba(59, 130, 246, 0.25);
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.2s ease;
-            font-size: 14px;
-            padding: 1px;
-            line-height: 1;
+            font-size: 12px;
+            padding: 2px;
             touch-action: manipulation;
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* 对角线下半部（i >= j）：蓝色系 */
-        .table-cell.lower-half {
-            background: rgba(59, 130, 246, 0.18);
-            border-color: rgba(59, 130, 246, 0.35);
-        }
-
-        /* 对角线（i == j）：紫色系，突出平方数 */
-        .table-cell.diagonal {
-            background: rgba(168, 85, 247, 0.22);
-            border-color: rgba(168, 85, 247, 0.45);
-        }
-
-        /* 对角线上半部（i < j）：橙色系 */
-        .table-cell.upper-half {
-            background: rgba(249, 115, 22, 0.16);
-            border-color: rgba(249, 115, 22, 0.35);
-        }
-
         .table-cell:hover,
         .table-cell:active {
-            transform: scale(1.05);
-        }
-
-        /* 对角线：紫色 hover */
-        .table-cell.diagonal:hover,
-        .table-cell.diagonal:active {
-            background: rgba(168, 85, 247, 0.4);
-        }
-
-        /* 上半部（橙色区）：橙色 hover */
-        .table-cell.upper-half:hover,
-        .table-cell.upper-half:active {
-            background: rgba(249, 115, 22, 0.3);
-        }
-
-        /* 下半部（蓝色区）：蓝色 hover */
-        .table-cell.lower-half:hover,
-        .table-cell.lower-half:active {
             background: rgba(59, 130, 246, 0.3);
+            transform: scale(1.05);
         }
 
         .table-cell .formula {
             font-weight: bold;
             color: #60a5fa;
-            font-size: 18px;
-            line-height: 1.1;
+            font-size: 15px;
         }
 
         .table-cell .result {
             color: #fbbf24;
             font-weight: bold;
-            font-size: 26px;
-            line-height: 1.1;
+            font-size: 20px;
         }
 
         /* 横屏优化 (iPad横屏) */
@@ -279,13 +243,11 @@
             }
 
             .table-cell .formula {
-                font-size: 15px;
-                line-height: 1.1;
+                font-size: 13px;
             }
 
             .table-cell .result {
-                font-size: 22px;
-                line-height: 1.1;
+                font-size: 17px;
             }
 
             .stat-grid {
@@ -539,6 +501,7 @@
             height: 48px;
             border-radius: 50%;
             background: rgba(30, 41, 59, 0.8);
+            -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(148, 163, 184, 0.2);
             color: #e2e8f0;
@@ -594,19 +557,16 @@
             }
 
             .table-cell {
-                font-size: 12px;
-                padding: 1px;
-                line-height: 1;
+                font-size: 10px;
+                padding: 2px;
             }
 
             .table-cell .formula {
-                font-size: 13px;
-                line-height: 1.1;
+                font-size: 11px;
             }
 
             .table-cell .result {
-                font-size: 17px;
-                line-height: 1.1;
+                font-size: 14px;
             }
         }
 
@@ -632,277 +592,116 @@
             transition: width 1s ease-out;
         }
 
-        /* ========== 星际飞行元素（新增）========== */
-
-        /* 飞船显示 */
-        .spaceship-display {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 16px 20px;
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.15));
-            border: 2px solid rgba(148, 163, 184, 0.3);
-            border-radius: 16px;
-            margin: 16px 0;
-        }
-
-        .spaceship-icon {
-            font-size: 48px;
-            animation: float 2s ease-in-out infinite;
-            filter: drop-shadow(0 0 10px rgba(96, 165, 250, 0.5));
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(-5deg); }
-            50% { transform: translateY(-8px) rotate(5deg); }
-        }
-
-        .spaceship-info {
-            flex: 1;
-            margin-left: 16px;
-        }
-
-        .spaceship-name {
-            font-size: 16px;
-            color: #94a3b8;
-            margin-bottom: 4px;
-        }
-
-        .spaceship-fuel {
-            font-size: 14px;
-            color: #fbbf24;
-        }
-
-        .spaceship-fuel-bar {
-            width: 100%;
-            height: 8px;
-            background: rgba(15, 23, 42, 0.6);
-            border-radius: 4px;
-            overflow: hidden;
-            margin-top: 6px;
-        }
-
-        .spaceship-fuel-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #f59e0b, #ef4444);
-            border-radius: 4px;
-            transition: width 0.5s ease-out;
-        }
-
-        /* 星球旅行进度 */
-        .journey-container {
-            position: relative;
-            padding: 20px 0;
-            margin: 16px 0;
-        }
-
-        .journey-track {
-            position: relative;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .journey-line {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg,
-                #3b82f6 0%,
-                #8b5cf6 25%,
-                #ec4899 50%,
-                #f59e0b 75%,
-                #10b981 100%);
-            z-index: 1;
-        }
-
-        .journey-planet {
-            position: relative;
-            z-index: 2;
-            font-size: 24px;
-            transition: all 0.3s ease;
-            filter: grayscale(80%);
-            opacity: 0.5;
-        }
-
-        .journey-planet.visited {
-            filter: grayscale(0%);
-            opacity: 1;
-            transform: scale(1.2);
-        }
-
-        .journey-planet.current {
-            filter: grayscale(0%);
-            opacity: 1;
-            animation: planetPulse 1.5s ease-in-out infinite;
-        }
-
-        @keyframes planetPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.3); }
-        }
-
-        .journey-label {
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 11px;
-            color: #94a3b8;
-            margin-top: 4px;
-            white-space: nowrap;
-        }
-
-        .journey-planet.current .journey-label {
-            color: #fbbf24;
-            font-weight: bold;
-        }
-
-        /* 飞船飞过动画 */
-        .flying-spaceship {
-            position: fixed;
-            font-size: 60px;
-            z-index: 999;
-            pointer-events: none;
-            animation: flyAcross 1.5s ease-in-out forwards;
-        }
-
-        @keyframes flyAcross {
-            0% {
-                left: -100px;
-                top: 50%;
-                transform: translateY(-50%) rotate(15deg);
-            }
-            100% {
-                left: calc(100vw + 100px);
-                top: 30%;
-                transform: translateY(-50%) rotate(15deg);
-            }
-        }
-
-        /* 飞船尾焰 */
-        .rocket-trail {
-            position: fixed;
-            pointer-events: none;
-            z-index: 998;
-            width: 200px;
-            height: 30px;
-            background: linear-gradient(90deg,
-                transparent 0%,
-                rgba(245, 158, 11, 0.8) 30%,
-                rgba(239, 68, 68, 0.6) 60%,
-                rgba(139, 92, 246, 0.4) 100%);
-            border-radius: 0 50% 50% 0;
-            animation: trailFade 1.5s ease-out forwards;
-        }
-
-        @keyframes trailFade {
-            0% { opacity: 1; }
-            100% { opacity: 0; }
-        }
-
-        /* 升级特效 */
-        .level-up-overlay {
+        /* === 星际飞行元素 === */
+        .galaxy-bar {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
+            right: 0;
+            height: 32px;
+            background: linear-gradient(90deg, rgba(15,23,42,0.95), rgba(30,41,59,0.95));
             display: flex;
             align-items: center;
-            justify-content: center;
-            animation: overlayFadeIn 0.3s ease-out;
+            padding: 0 12px;
+            gap: 8px;
+            z-index: 50;
+            border-bottom: 1px solid rgba(148,163,184,0.2);
+            font-size: 12px;
+            color: #cbd5e1;
         }
-
-        @keyframes overlayFadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .galaxy-bar .ship {
+            font-size: 18px;
+            transition: transform 0.6s cubic-bezier(0.5, -0.5, 0.5, 1.5);
         }
-
-        .level-up-content {
-            text-align: center;
-            animation: levelUpBounce 0.8s ease-out;
+        .galaxy-bar .ship.fly {
+            transform: translateX(40px) rotate(-15deg);
         }
-
-        @keyframes levelUpBounce {
-            0% { transform: scale(0) rotate(-180deg); }
-            50% { transform: scale(1.2) rotate(10deg); }
-            100% { transform: scale(1) rotate(0deg); }
+        .galaxy-bar .track {
+            flex: 1;
+            height: 4px;
+            background: rgba(148,163,184,0.2);
+            border-radius: 2px;
+            position: relative;
+            overflow: hidden;
         }
-
-        .level-up-icon {
-            font-size: 120px;
-            margin-bottom: 20px;
+        .galaxy-bar .track::before,
+        .galaxy-bar .track::after {
+            content: '🪐';
+            position: absolute;
+            top: -10px;
+            font-size: 14px;
         }
-
-        .level-up-title {
-            font-size: 36px;
+        .galaxy-bar .track::before { left: 0; }
+        .galaxy-bar .track::after { right: 0; }
+        .galaxy-bar .distance {
             color: #fbbf24;
             font-weight: bold;
-            margin-bottom: 10px;
+            min-width: 50px;
+            text-align: right;
         }
-
-        .level-up-subtitle {
-            font-size: 18px;
+        .target-planet {
+            text-align: center;
+            font-size: 14px;
             color: #94a3b8;
+            margin-bottom: 8px;
+            padding: 6px 12px;
+            background: rgba(15, 23, 42, 0.4);
+            border-radius: 999px;
+            display: inline-block;
         }
-
-        .level-up-close {
-            margin-top: 30px;
-            padding: 12px 32px;
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 18px;
+        .target-planet .planet {
+            color: #fbbf24;
             font-weight: bold;
-            cursor: pointer;
-            font-family: inherit;
         }
-
-        /* 徽章墙 */
-        .badges-wall {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-            gap: 12px;
-            margin: 20px 0;
+        .energy-crystal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            font-size: 80px;
+            z-index: 100;
+            pointer-events: none;
+            animation: crystalPop 1.6s ease-out forwards;
         }
-
-        .badge {
-            aspect-ratio: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 36px;
-            background: rgba(15, 23, 42, 0.6);
-            border: 2px solid rgba(148, 163, 184, 0.2);
-            border-radius: 12px;
-            filter: grayscale(100%);
-            opacity: 0.3;
-            transition: all 0.3s ease;
+        .energy-crystal .crystal-label {
+            display: block;
+            font-size: 18px;
+            color: #fbbf24;
+            text-shadow: 0 0 10px rgba(251, 191, 36, 0.8);
+            margin-top: 8px;
+            animation: none;
         }
-
-        .badge.earned {
-            filter: grayscale(0%);
-            opacity: 1;
-            border-color: #fbbf24;
-            box-shadow: 0 0 15px rgba(251, 191, 36, 0.4);
-            animation: badgeShine 2s ease-in-out infinite;
+        @keyframes crystalPop {
+            0% { transform: translate(-50%, -50%) scale(0) rotate(-180deg); opacity: 0; }
+            30% { transform: translate(-50%, -50%) scale(1.3) rotate(0deg); opacity: 1; }
+            60% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(0.8) rotate(0deg); opacity: 0; }
         }
-
-        @keyframes badgeShine {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        .rocket-flyby {
+            position: fixed;
+            top: 50%;
+            left: -100px;
+            font-size: 48px;
+            z-index: 99;
+            pointer-events: none;
+            animation: flyby 1.2s ease-in-out forwards;
+        }
+        @keyframes flyby {
+            0% { left: -100px; transform: translateY(-50%) rotate(-15deg); }
+            50% { left: 50%; transform: translateY(-50%) rotate(0deg); }
+            100% { left: 110%; transform: translateY(-50%) rotate(15deg); }
         }
     </style>
 </head>
 <body>
     <canvas id="starfield"></canvas>
+
+    <!-- 顶部银河飞行进度条 -->
+    <div class="galaxy-bar" id="galaxy-bar" style="display: none;">
+        <span class="ship" id="galaxy-ship">🚀</span>
+        <span class="track"></span>
+        <span class="distance" id="galaxy-distance">0 光年</span>
+    </div>
 
     <button class="sound-toggle" id="sound-toggle" aria-label="切换声音">
         <i class="fas fa-volume-up"></i>
@@ -912,9 +711,9 @@
         <div id="menu-view" class="view active">
             <div style="text-align: center; margin-bottom: 30px;">
                 <h1 style="font-size: 36px; color: #fbbf24; margin-bottom: 8px;">
-                    <i class="fas fa-rocket"></i> 乘除法星际大冒险
+                    <i class="fas fa-rocket"></i> 乘除法星际训练营
                 </h1>
-                <p style="color: #94a3b8; font-size: 16px;">为二年级远航做准备</p>
+                <p style="color: #94a3b8; font-size: 16px;">一年级数学口算练习</p>
             </div>
 
             <div class="menu-grid">
@@ -977,28 +776,8 @@
                     <div class="progress-fill" id="progress-fill" style="width: 0%;"></div>
                 </div>
 
-                <!-- 星际旅行进度（新增） -->
-                <div class="journey-container">
-                    <div class="journey-track">
-                        <div class="journey-line"></div>
-                        <div class="journey-planet" data-stage="0">🌍<div class="journey-label">地球</div></div>
-                        <div class="journey-planet" data-stage="1">🌙<div class="journey-label">月球</div></div>
-                        <div class="journey-planet" data-stage="2">🔴<div class="journey-label">火星</div></div>
-                        <div class="journey-planet" data-stage="3">🪐<div class="journey-label">木星</div></div>
-                        <div class="journey-planet" data-stage="4">⭐<div class="journey-label">宇宙</div></div>
-                    </div>
-                </div>
-
-                <!-- 飞船状态显示（新增） -->
-                <div class="spaceship-display">
-                    <div class="spaceship-icon" id="spaceship-icon">🚀</div>
-                    <div class="spaceship-info">
-                        <div class="spaceship-name" id="spaceship-name">基础火箭</div>
-                        <div class="spaceship-fuel" id="spaceship-fuel">燃料：0 / 10</div>
-                        <div class="spaceship-fuel-bar">
-                            <div class="spaceship-fuel-fill" id="fuel-fill" style="width: 0%;"></div>
-                        </div>
-                    </div>
+                <div style="text-align: center;">
+                    <div class="target-planet" id="mult-target">🪐 目标行星：<span class="planet">火星</span> · 距离 0 光年</div>
                 </div>
 
                 <div class="question-display" id="question-display">
@@ -1047,28 +826,8 @@
                     <div class="progress-fill" id="division-progress" style="width: 0%;"></div>
                 </div>
 
-                <!-- 星际旅行进度（新增） -->
-                <div class="journey-container">
-                    <div class="journey-track">
-                        <div class="journey-line"></div>
-                        <div class="journey-planet" data-stage="0">🌍<div class="journey-label">地球</div></div>
-                        <div class="journey-planet" data-stage="1">🌙<div class="journey-label">月球</div></div>
-                        <div class="journey-planet" data-stage="2">🔴<div class="journey-label">火星</div></div>
-                        <div class="journey-planet" data-stage="3">🪐<div class="journey-label">木星</div></div>
-                        <div class="journey-planet" data-stage="4">⭐<div class="journey-label">宇宙</div></div>
-                    </div>
-                </div>
-
-                <!-- 飞船状态显示（新增） -->
-                <div class="spaceship-display">
-                    <div class="spaceship-icon" id="division-spaceship-icon">🚀</div>
-                    <div class="spaceship-info">
-                        <div class="spaceship-name" id="division-spaceship-name">基础火箭</div>
-                        <div class="spaceship-fuel" id="division-spaceship-fuel">燃料：0 / 10</div>
-                        <div class="spaceship-fuel-bar">
-                            <div class="spaceship-fuel-fill" id="division-fuel-fill" style="width: 0%;"></div>
-                        </div>
-                    </div>
+                <div style="text-align: center;">
+                    <div class="target-planet" id="div-target">🪐 目标行星：<span class="planet">木星</span> · 距离 0 光年</div>
                 </div>
 
                 <div class="question-display" id="division-question">
@@ -1115,32 +874,11 @@
 
                 <div class="word-problem" id="word-problem-content">
                     <div class="scene" id="wp-scene">📝</div>
+                    <div style="text-align: center; margin-bottom: 8px;">
+                        <div class="target-planet" id="wp-target">🪐 目标行星：<span class="planet">土星</span> · 距离 0 光年</div>
+                    </div>
                     <div class="problem-text" id="wp-text">
                         点击"开始"按钮，我会给你出一道应用题
-                    </div>
-                </div>
-
-                <!-- 星际旅行进度（新增） -->
-                <div class="journey-container">
-                    <div class="journey-track">
-                        <div class="journey-line"></div>
-                        <div class="journey-planet" data-stage="0">🌍<div class="journey-label">地球</div></div>
-                        <div class="journey-planet" data-stage="1">🌙<div class="journey-label">月球</div></div>
-                        <div class="journey-planet" data-stage="2">🔴<div class="journey-label">火星</div></div>
-                        <div class="journey-planet" data-stage="3">🪐<div class="journey-label">木星</div></div>
-                        <div class="journey-planet" data-stage="4">⭐<div class="journey-label">宇宙</div></div>
-                    </div>
-                </div>
-
-                <!-- 飞船状态显示（新增） -->
-                <div class="spaceship-display">
-                    <div class="spaceship-icon" id="wp-spaceship-icon">🚀</div>
-                    <div class="spaceship-info">
-                        <div class="spaceship-name" id="wp-spaceship-name">基础火箭</div>
-                        <div class="spaceship-fuel" id="wp-spaceship-fuel">燃料：0 / 10</div>
-                        <div class="spaceship-fuel-bar">
-                            <div class="spaceship-fuel-fill" id="wp-fuel-fill" style="width: 0%;"></div>
-                        </div>
                     </div>
                 </div>
 
@@ -1168,25 +906,31 @@
                 <i class="fas fa-arrow-left"></i> 返回
             </button>
 
+            <div class="feedback hint" id="stats-feedback" style="display: none;"></div>
+
             <div class="level-display" id="level-display">
                 <div class="level" id="level-number">Lv.1</div>
                 <div class="title" id="level-title">新手宇航员</div>
             </div>
 
-            <!-- 徽章墙（新增） -->
-            <div class="card">
+            <!-- 三个模式的等级显示 -->
+            <div class="card" style="margin-top: 20px;">
                 <h2 style="font-size: 20px; margin-bottom: 16px; color: #60a5fa;">
-                    <i class="fas fa-medal"></i> 徽章收藏
+                    <i class="fas fa-layer-group"></i> 各模式等级
                 </h2>
-                <div class="badges-wall" id="badges-wall">
-                    <div class="badge" data-badge="first">🌟<div style="font-size:10px;margin-top:4px">初次飞行</div></div>
-                    <div class="badge" data-badge="streak5">🔥<div style="font-size:10px;margin-top:4px">5连击</div></div>
-                    <div class="badge" data-badge="streak10">💥<div style="font-size:10px;margin-top:4px">10连击</div></div>
-                    <div class="badge" data-badge="perfect">💯<div style="font-size:10px;margin-top:4px">满分</div></div>
-                    <div class="badge" data-badge="multiplication-master">✖️<div style="font-size:10px;margin-top:4px">乘法大师</div></div>
-                    <div class="badge" data-badge="division-master">➗<div style="font-size:10px;margin-top:4px">除法大师</div></div>
-                    <div class="badge" data-badge="word-problem-master">📚<div style="font-size:10px;margin-top:4px">应用题王</div></div>
-                    <div class="badge" data-badge="galaxy">🌌<div style="font-size:10px;margin-top:4px">银河大师</div></div>
+                <div class="stat-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">乘法等级</div>
+                        <div class="stat-value" id="multiplication-level">Lv.1</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">除法等级</div>
+                        <div class="stat-value" id="division-level">Lv.1</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">应用题等级</div>
+                        <div class="stat-value" id="wordProblem-level">Lv.1</div>
+                    </div>
                 </div>
             </div>
 
@@ -1259,7 +1003,7 @@
         </div>
 
         <div style="text-align: center; padding: 30px 0; color: #475569; font-size: 14px;">
-            <p>乘除法星际大冒险 v2.0 | 适合一年级学生</p>
+            <p>乘除法星际训练营 v2.0 | 适合一年级学生</p>
         </div>
     </div>
 
@@ -1268,9 +1012,22 @@
 
         var gameState = {
             currentMode: 'menu',
-            score: 0,
-            streak: 0,
-            bestStreak: 0,
+            // 计分/连击/最高连击按模式独立
+            score: {
+                multiplication: 0,
+                division: 0,
+                wordProblem: 0
+            },
+            streak: {
+                multiplication: 0,
+                division: 0,
+                wordProblem: 0
+            },
+            bestStreak: {
+                multiplication: 0,
+                division: 0,
+                wordProblem: 0
+            },
             sessionQuestions: 0,
             soundEnabled: true,
             currentQuestion: null,
@@ -1281,54 +1038,31 @@
                 division: { answered: 0, correct: 0 },
                 wordProblem: { answered: 0, correct: 0 }
             },
-            level: 1,
-            levelTitles: ['新手宇航员', '见习飞行员', '星际导航员', '银河守护者', '宇宙指挥官'],
-            // 飞船系统（按模式分离）
-            spaceship: {
-                multiplication: { stage: 0, fuel: 0, maxFuel: 10, current: '🚀', name: '基础火箭' },
-                division: { stage: 0, fuel: 0, maxFuel: 10, current: '🚀', name: '基础火箭' },
-                wordProblem: { stage: 0, fuel: 0, maxFuel: 10, current: '🚀', name: '基础火箭' }
+            // 三个模式独立的等级系统
+            level: {
+                multiplication: 1,
+                division: 1,
+                wordProblem: 1
             },
-            // 徽章系统（新增）
-            badges: {
-                first: false,
-                streak5: false,
-                streak10: false,
-                perfect: false,
-                'multiplication-master': false,
-                'division-master': false,
-                'word-problem-master': false,
-                galaxy: false
+            levelTitles: ['新手宇航员', '见习飞行员', '星际导航员', '银河守护者', '宇宙指挥官'],
+            // 星际飞行元素：每个模式的目标行星不同
+            modePlanets: {
+                multiplication: '火星',
+                division: '木星',
+                'word-problem': '土星'
+            },
+            // 累计答对里程碑，触发能量水晶动画
+            crystalMilestones: [10, 30, 50, 100, 200, 365, 500],
+            // 各模式已经获得的水晶数（避免重复触发）
+            crystalsEarned: {
+                multiplication: 0,
+                division: 0,
+                wordProblem: 0
             }
         };
 
-        // 飞船等级配置（按模式分别设计）
-        var spaceshipLevels = {
-            multiplication: [
-                { icon: '🚀', name: '基础火箭' },
-                { icon: '🛸', name: '飞行飞碟' },
-                { icon: '🚀', name: '巡航飞船' },
-                { icon: '🛰️', name: '轨道卫星' },
-                { icon: '🛸', name: '星际战舰' }
-            ],
-            division: [
-                { icon: '🚀', name: '基础火箭' },
-                { icon: '🛰️', name: '探索卫星' },
-                { icon: '🛸', name: '除法飞碟' },
-                { icon: '🚀', name: '巡航飞船' },
-                { icon: '🛸', name: '银河战舰' }
-            ],
-            wordProblem: [
-                { icon: '🚀', name: '基础火箭' },
-                { icon: '🛸', name: '应用飞碟' },
-                { icon: '🛰️', name: '分析卫星' },
-                { icon: '🚀', name: '巡航飞船' },
-                { icon: '🛸', name: '智慧战舰' }
-            ]
-        };
-
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('[初始化] 乘除法星际大冒险启动');
+            console.log('[初始化] 乘除法星际训练营启动');
 
             initStarfield();
             initMultiplicationTable();
@@ -1415,13 +1149,6 @@
                 for (var j = 1; j <= 9; j++) {
                     var cell = document.createElement('div');
                     cell.className = 'table-cell';
-                    if (i === j) {
-                        cell.classList.add('diagonal');
-                    } else if (i > j) {
-                        cell.classList.add('lower-half');
-                    } else {
-                        cell.classList.add('upper-half');
-                    }
 
                     var formula = document.createElement('div');
                     formula.className = 'formula';
@@ -1486,7 +1213,68 @@
 
             if (mode === 'multiplication' || mode === 'division' || mode === 'word-problem') {
                 gameState.sessionQuestions = 0;
+                // 切换模式时清空共享状态，避免上一模式的题/连击数影响新模式
+                gameState.currentQuestion = null;
+                gameState.streak[mode] = 0;
+                // 清空所有模式的输入框与按钮文字，恢复到初始"开始"状态
+                resetModeUI('multiplication');
+                resetModeUI('division');
+                resetModeUI('word-problem');
+                // 显示银河飞行条 + 调整卡片顶部间距避免遮挡 + 重置当前模式的距离显示
+                var bar = document.getElementById('galaxy-bar');
+                if (bar) bar.style.display = 'flex';
+                // 给三个练习卡片加 padding-top，避免被 fixed 顶栏遮挡
+                ['multiplication-mode','division-mode','word-problem-mode'].forEach(function(id) {
+                    var el = document.getElementById(id);
+                    if (el) el.style.paddingTop = '56px';
+                });
+                updateGalaxyDistance();
+            } else {
+                // menu / table / stats 视图隐藏银河条 + 恢复卡片间距
+                var bar = document.getElementById('galaxy-bar');
+                if (bar) bar.style.display = 'none';
+                ['multiplication-mode','division-mode','word-problem-mode'].forEach(function(id) {
+                    var el = document.getElementById(id);
+                    if (el) el.style.paddingTop = '';
+                });
             }
+        }
+
+        function resetModeUI(modeKey) {
+            var config = {
+                'multiplication': {
+                    input: 'answer-input',
+                    btn: 'action-btn',
+                    feedback: 'feedback',
+                    score: 'score-display',
+                    streak: 'streak-display',
+                    streakFire: 'streak-fire'
+                },
+                'division': {
+                    input: 'division-answer',
+                    btn: 'division-action-btn',
+                    feedback: 'division-feedback',
+                    score: 'division-score',
+                    streak: 'division-streak',
+                    streakFire: 'division-streak-fire'
+                },
+                'word-problem': {
+                    input: 'wp-answer',
+                    btn: 'wp-action-btn',
+                    feedback: 'wp-feedback',
+                    score: 'wp-score',
+                    streak: 'wp-streak',
+                    streakFire: 'wp-streak-fire'
+                }
+            };
+            var c = config[modeKey];
+            if (!c) return;
+            var input = document.getElementById(c.input);
+            if (input) { input.value = ''; input.style.display = 'none'; }
+            var btn = document.getElementById(c.btn);
+            if (btn) { btn.innerHTML = '<i class="fas fa-play"></i> 开始'; }
+            var fb = document.getElementById(c.feedback);
+            if (fb) { fb.style.display = 'none'; fb.textContent = ''; }
         }
 
         function generateMultiplicationQuestion() {
@@ -1552,6 +1340,11 @@
                 return;
             }
 
+            if (!gameState.currentQuestion || gameState.currentQuestion.type !== 'multiplication') {
+                showFeedback('feedback', '请点击"开始"按钮获取新题目', 'hint');
+                return;
+            }
+
             var correct = userAnswer === gameState.currentQuestion.answer;
             var stats = gameState.stats.multiplication;
 
@@ -1561,36 +1354,39 @@
             if (correct) {
                 stats.correct++;
                 gameState.stats.totalCorrect++;
-                gameState.score += 10;
-                gameState.streak++;
+                gameState.score.multiplication += 10;
+                gameState.streak.multiplication++;
                 gameState.sessionQuestions++;
 
-                if (gameState.streak > gameState.bestStreak) {
-                    gameState.bestStreak = gameState.streak;
+                if (gameState.streak.multiplication > gameState.bestStreak.multiplication) {
+                    gameState.bestStreak.multiplication = gameState.streak.multiplication;
                 }
 
-                if (gameState.streak >= 5) {
-                    gameState.score += 5;
-                    showFeedback('feedback', '🔥 连击 ' + gameState.streak + '！额外 +5分！', 'correct');
+                if (gameState.streak.multiplication >= 5) {
+                    gameState.score.multiplication += 5;
+                    showFeedback('feedback', '🔥 连击 ' + gameState.streak.multiplication + '！额外 +5分！', 'correct');
                 } else {
                     showFeedback('feedback', '✅ 答对啦！+10分', 'correct');
                 }
 
-                document.getElementById('score-display').textContent = gameState.score;
-                document.getElementById('streak-display').textContent = gameState.streak;
-                document.getElementById('streak-fire').style.display = gameState.streak >= 3 ? 'inline' : 'none';
+                document.getElementById('score-display').textContent = gameState.score.multiplication;
+                document.getElementById('streak-display').textContent = gameState.streak.multiplication;
+                document.getElementById('streak-fire').style.display = gameState.streak.multiplication >= 3 ? 'inline' : 'none';
 
-                // 飞船系统：增加燃料 + 飞过屏幕
-                addFuel('multiplication');
-                flySpaceship('multiplication');
-
-                if (gameState.streak % 5 === 0) {
+                if (gameState.streak.multiplication % 5 === 0) {
                     createFirework();
+                    if (gameState.streak.multiplication >= 5) flyRocket();
                 }
 
+                // 星际飞行元素：更新行星距离 + 检查能量水晶
+                updateTargetPlanet('multiplication');
+                checkCrystalMilestone('multiplication');
+
+                // 更新乘法模式的等级
+                updateLevel('multiplication');
                 saveStats();
             } else {
-                gameState.streak = 0;
+                gameState.streak.multiplication = 0;
                 showFeedback('feedback', '❌ 答错了！正确答案是 ' + gameState.currentQuestion.answer, 'incorrect');
 
                 document.getElementById('streak-display').textContent = 0;
@@ -1603,6 +1399,8 @@
             document.getElementById('answer-input').style.display = 'none';
 
             setTimeout(function() {
+                // 如果用户已切换到别的模式，不再自动生成旧模式的新题
+                if (gameState.currentMode !== 'multiplication') return;
                 var currentBtn = document.getElementById('action-btn');
                 if (currentBtn.textContent.indexOf('下一题') !== -1) {
                     generateMultiplicationQuestion();
@@ -1685,6 +1483,11 @@
                 return;
             }
 
+            if (!gameState.currentQuestion || gameState.currentQuestion.type !== 'division') {
+                showFeedback('division-feedback', '请点击"开始"按钮获取新题目', 'hint');
+                return;
+            }
+
             var correct = userAnswer === gameState.currentQuestion.answer;
             var stats = gameState.stats.division;
 
@@ -1694,36 +1497,39 @@
             if (correct) {
                 stats.correct++;
                 gameState.stats.totalCorrect++;
-                gameState.score += 10;
-                gameState.streak++;
+                gameState.score.division += 10;
+                gameState.streak.division++;
                 gameState.sessionQuestions++;
 
-                if (gameState.streak > gameState.bestStreak) {
-                    gameState.bestStreak = gameState.streak;
+                if (gameState.streak.division > gameState.bestStreak.division) {
+                    gameState.bestStreak.division = gameState.streak.division;
                 }
 
-                if (gameState.streak >= 5) {
-                    gameState.score += 5;
-                    showFeedback('division-feedback', '🔥 连击 ' + gameState.streak + '！额外 +5分！', 'correct');
+                if (gameState.streak.division >= 5) {
+                    gameState.score.division += 5;
+                    showFeedback('division-feedback', '🔥 连击 ' + gameState.streak.division + '！额外 +5分！', 'correct');
                 } else {
                     showFeedback('division-feedback', '✅ 答对啦！+10分', 'correct');
                 }
 
-                document.getElementById('division-score').textContent = gameState.score;
-                document.getElementById('division-streak').textContent = gameState.streak;
-                document.getElementById('division-streak-fire').style.display = gameState.streak >= 3 ? 'inline' : 'none';
+                document.getElementById('division-score').textContent = gameState.score.division;
+                document.getElementById('division-streak').textContent = gameState.streak.division;
+                document.getElementById('division-streak-fire').style.display = gameState.streak.division >= 3 ? 'inline' : 'none';
 
-                // 飞船系统
-                addFuel('division');
-                flySpaceship('division');
-
-                if (gameState.streak % 5 === 0) {
+                if (gameState.streak.division % 5 === 0) {
                     createFirework();
+                    if (gameState.streak.division >= 5) flyRocket();
                 }
 
+                // 星际飞行元素：更新行星距离 + 检查能量水晶
+                updateTargetPlanet('division');
+                checkCrystalMilestone('division');
+
+                // 更新除法模式的等级
+                updateLevel('division');
                 saveStats();
             } else {
-                gameState.streak = 0;
+                gameState.streak.division = 0;
                 showFeedback('division-feedback', '❌ 答错了！正确答案是 ' + gameState.currentQuestion.answer, 'incorrect');
 
                 document.getElementById('division-streak').textContent = 0;
@@ -1736,6 +1542,8 @@
             document.getElementById('division-answer').style.display = 'none';
 
             setTimeout(function() {
+                // 如果用户已切换到别的模式，不再自动生成旧模式的新题
+                if (gameState.currentMode !== 'division') return;
                 var currentBtn = document.getElementById('division-action-btn');
                 if (currentBtn.textContent.indexOf('下一题') !== -1) {
                     generateDivisionQuestion();
@@ -2050,6 +1858,11 @@
                 return;
             }
 
+            if (!gameState.currentQuestion || gameState.currentQuestion.type !== 'word-problem') {
+                showFeedback('wp-feedback', '请点击"开始"按钮获取新题目', 'hint');
+                return;
+            }
+
             var correct = userAnswer === gameState.currentQuestion.answer;
             var stats = gameState.stats.wordProblem;
 
@@ -2059,36 +1872,39 @@
             if (correct) {
                 stats.correct++;
                 gameState.stats.totalCorrect++;
-                gameState.score += 15;
-                gameState.streak++;
+                gameState.score.wordProblem += 15;
+                gameState.streak.wordProblem++;
                 gameState.sessionQuestions++;
 
-                if (gameState.streak > gameState.bestStreak) {
-                    gameState.bestStreak = gameState.streak;
+                if (gameState.streak.wordProblem > gameState.bestStreak.wordProblem) {
+                    gameState.bestStreak.wordProblem = gameState.streak.wordProblem;
                 }
 
-                if (gameState.streak >= 5) {
-                    gameState.score += 5;
-                    showFeedback('wp-feedback', '🔥 连击 ' + gameState.streak + '！额外 +5分！', 'correct');
+                if (gameState.streak.wordProblem >= 5) {
+                    gameState.score.wordProblem += 5;
+                    showFeedback('wp-feedback', '🔥 连击 ' + gameState.streak.wordProblem + '！额外 +5分！', 'correct');
                 } else {
                     showFeedback('wp-feedback', '✅ 答对啦！+15分', 'correct');
                 }
 
-                document.getElementById('wp-score').textContent = gameState.score;
-                document.getElementById('wp-streak').textContent = gameState.streak;
-                document.getElementById('wp-streak-fire').style.display = gameState.streak >= 3 ? 'inline' : 'none';
+                document.getElementById('wp-score').textContent = gameState.score.wordProblem;
+                document.getElementById('wp-streak').textContent = gameState.streak.wordProblem;
+                document.getElementById('wp-streak-fire').style.display = gameState.streak.wordProblem >= 3 ? 'inline' : 'none';
 
-                // 飞船系统
-                addFuel('word-problem');
-                flySpaceship('word-problem');
-
-                if (gameState.streak % 5 === 0) {
+                if (gameState.streak.wordProblem % 5 === 0) {
                     createFirework();
+                    if (gameState.streak.wordProblem >= 5) flyRocket();
                 }
 
+                // 星际飞行元素：更新行星距离 + 检查能量水晶
+                updateTargetPlanet('wordProblem');
+                checkCrystalMilestone('wordProblem');
+
+                // 更新应用题模式的等级
+                updateLevel('wordProblem');
                 saveStats();
             } else {
-                gameState.streak = 0;
+                gameState.streak.wordProblem = 0;
                 showFeedback('wp-feedback', '❌ 答错了！正确答案是 ' + gameState.currentQuestion.answer + '（' + gameState.currentQuestion.hint + '）', 'incorrect');
 
                 document.getElementById('wp-streak').textContent = 0;
@@ -2099,6 +1915,8 @@
             document.getElementById('wp-answer').style.display = 'none';
 
             setTimeout(function() {
+                // 如果用户已切换到别的模式，不再自动生成旧模式的新题
+                if (gameState.currentMode !== 'word-problem') return;
                 var currentBtn = document.getElementById('wp-action-btn');
                 if (currentBtn.textContent.indexOf('下一题') !== -1) {
                     generateWordProblem();
@@ -2109,6 +1927,7 @@
 
         function showFeedback(elementId, message, type) {
             var feedback = document.getElementById(elementId);
+            if (!feedback) return;
             feedback.textContent = message;
             feedback.className = 'feedback ' + type;
             feedback.style.display = 'flex';
@@ -2152,6 +1971,73 @@
             }, 1000);
         }
 
+        // ===== 星际飞行元素 =====
+
+        // 更新目标行星的距离（顶部提示 + 银河条）
+        function updateTargetPlanet(mode) {
+            var correct = gameState.stats[mode].correct;
+            var planet = gameState.modePlanets[mode];
+            var targetId = mode === 'wordProblem' ? 'wp-target' : (mode === 'division' ? 'div-target' : 'mult-target');
+            var target = document.getElementById(targetId);
+            if (target) {
+                target.innerHTML = '🪐 目标行星：<span class="planet">' + planet + '</span> · 距离 ' + correct + ' 光年';
+            }
+            updateGalaxyDistance();
+        }
+
+        // 顶部银河条的距离显示
+        function updateGalaxyDistance() {
+            var total = gameState.stats.totalCorrect;
+            var distElem = document.getElementById('galaxy-distance');
+            if (distElem) distElem.textContent = total + ' 光年';
+        }
+
+        // 检查能量水晶里程碑
+        function checkCrystalMilestone(mode) {
+            var correct = gameState.stats[mode].correct;
+            var earned = gameState.crystalsEarned[mode] || 0;
+            // 看 correct 跨过了哪些里程碑
+            for (var i = earned; i < gameState.crystalMilestones.length; i++) {
+                var milestone = gameState.crystalMilestones[i];
+                if (correct >= milestone) {
+                    // 触发水晶动画
+                    var labels = ['第 1 颗能量水晶！', '第 2 颗能量水晶！', '第 3 颗能量水晶！', '第 4 颗能量水晶！', '第 5 颗能量水晶！', '第 6 颗能量水晶！', '第 7 颗能量水晶！'];
+                    showCrystal(labels[i] || '获得能量水晶！', milestone);
+                    gameState.crystalsEarned[mode] = i + 1;
+                } else {
+                    break;
+                }
+            }
+        }
+
+        // 显示能量水晶弹窗
+        function showCrystal(label, milestone) {
+            var crystal = document.createElement('div');
+            crystal.className = 'energy-crystal';
+            crystal.innerHTML = '💎<span class="crystal-label">' + label + '<br><small>累计答对 ' + milestone + ' 题</small></span>';
+            document.body.appendChild(crystal);
+            setTimeout(function() { crystal.remove(); }, 1700);
+        }
+
+        // 火箭飞过屏幕
+        function flyRocket() {
+            var ship = document.getElementById('galaxy-ship');
+            if (ship) {
+                ship.classList.remove('fly');
+                // 触发重排后重新添加动画
+                void ship.offsetWidth;
+                ship.classList.add('fly');
+                setTimeout(function() { ship.classList.remove('fly'); }, 800);
+            }
+            var rocket = document.createElement('div');
+            rocket.className = 'rocket-flyby';
+            rocket.textContent = '🚀';
+            // 随机垂直偏移
+            rocket.style.top = (30 + Math.random() * 30) + '%';
+            document.body.appendChild(rocket);
+            setTimeout(function() { rocket.remove(); }, 1300);
+        }
+
         function getColor(index) {
             var colors = [
                 '#3b82f6', '#8b5cf6', '#ec4899', '#f59e0b',
@@ -2167,8 +2053,7 @@
                     score: gameState.score,
                     bestStreak: gameState.bestStreak,
                     level: gameState.level,
-                    spaceship: gameState.spaceship,
-                    badges: gameState.badges
+                    crystalsEarned: gameState.crystalsEarned
                 };
                 localStorage.setItem('math-camp-stats', JSON.stringify(data));
                 console.log('[存档] 统计数据已保存');
@@ -2183,11 +2068,60 @@
                 if (data) {
                     var parsed = JSON.parse(data);
                     gameState.stats = parsed.stats || gameState.stats;
-                    gameState.score = parsed.score || 0;
-                    gameState.bestStreak = parsed.bestStreak || 0;
-                    gameState.level = parsed.level || 1;
-                    if (parsed.spaceship) gameState.spaceship = parsed.spaceship;
-                    if (parsed.badges) gameState.badges = parsed.badges;
+
+                    // 处理 score 数据迁移（旧版本是数字，新版本是对象）
+                    if (typeof parsed.score === 'number') {
+                        // 旧版本：把总分平均分配或全归到乘法
+                        gameState.score = {
+                            multiplication: parsed.score,
+                            division: 0,
+                            wordProblem: 0
+                        };
+                    } else {
+                        gameState.score = parsed.score || gameState.score;
+                    }
+
+                    // 处理 bestStreak 数据迁移（旧版本是数字，新版本是对象）
+                    if (typeof parsed.bestStreak === 'number') {
+                        gameState.bestStreak = {
+                            multiplication: parsed.bestStreak,
+                            division: 0,
+                            wordProblem: 0
+                        };
+                    } else {
+                        gameState.bestStreak = parsed.bestStreak || gameState.bestStreak;
+                    }
+
+                    // 处理等级数据迁移（从旧版本的数字格式迁移到新版本的对象格式）
+                    if (parsed.level !== undefined) {
+                        if (typeof parsed.level === 'number') {
+                            // 旧版本：level 是数字，需要迁移到新格式
+                            // 将所有模式的等级设为相同的值
+                            gameState.level = {
+                                multiplication: parsed.level,
+                                division: parsed.level,
+                                wordProblem: parsed.level
+                            };
+                        } else if (typeof parsed.level === 'object') {
+                            // 新版本：level 是对象
+                            gameState.level = parsed.level;
+                        }
+                    } else {
+                        // 如果没有 level 数据，初始化为默认值
+                        gameState.level = {
+                            multiplication: 1,
+                            division: 1,
+                            wordProblem: 1
+                        };
+                    }
+
+                    // 加载水晶进度（首次加载则初始化为 0）
+                    gameState.crystalsEarned = parsed.crystalsEarned || {
+                        multiplication: 0,
+                        division: 0,
+                        wordProblem: 0
+                    };
+
                     console.log('[存档] 统计数据已加载');
                 }
             } catch (error) {
@@ -2205,8 +2139,16 @@
                 : 0;
             document.getElementById('stat-accuracy').textContent = accuracy + '%';
 
-            document.getElementById('stat-best-streak').textContent = gameState.bestStreak;
-            document.getElementById('stat-total-score').textContent = gameState.score;
+            // 最高连击 = 三个模式中的最大值
+            var bestStreak = Math.max(
+                gameState.bestStreak.multiplication,
+                gameState.bestStreak.division,
+                gameState.bestStreak.wordProblem
+            );
+            document.getElementById('stat-best-streak').textContent = bestStreak;
+            // 总得分 = 三个模式之和
+            var totalScore = gameState.score.multiplication + gameState.score.division + gameState.score.wordProblem;
+            document.getElementById('stat-total-score').textContent = totalScore;
 
             var mult = stats.multiplication;
             var multAccuracy = mult.answered > 0 ? Math.round((mult.correct / mult.answered) * 100) : 0;
@@ -2226,279 +2168,152 @@
                 wp.correct + '/' + wp.answered + ' (' + wpAccuracy + '%)';
             document.getElementById('stat-word-problem-bar').style.width = wpAccuracy + '%';
 
-            // 更新徽章显示（新增）
-            updateBadgesDisplay();
+            // 更新三个模式的等级显示
+            updateAllModeLevels();
 
-            updateLevel();
+            // 同步刷新每个模式的目标行星距离（即使没在练习页也保持最新）
+            updateTargetPlanet('multiplication');
+            updateTargetPlanet('division');
+            updateTargetPlanet('wordProblem');
         }
 
-        function updateLevel() {
-            var totalCorrect = gameState.stats.totalCorrect;
-            var level = 1;
-            var title = '新手宇航员';
-
-            if (totalCorrect >= 100) {
-                level = 5;
-                title = '宇宙指挥官';
-            } else if (totalCorrect >= 50) {
-                level = 4;
-                title = '银河守护者';
-            } else if (totalCorrect >= 30) {
-                level = 3;
-                title = '星际导航员';
-            } else if (totalCorrect >= 10) {
-                level = 2;
-                title = '见习飞行员';
+        function updateAllModeLevels() {
+            // 更新乘法等级
+            var multLevel = gameState.level.multiplication;
+            var multTitle = gameState.levelTitles[multLevel - 1] || gameState.levelTitles[0];
+            var multLevelElem = document.getElementById('multiplication-level');
+            if (multLevelElem) {
+                multLevelElem.textContent = 'Lv.' + multLevel;
             }
 
-            gameState.level = level;
-            document.getElementById('level-number').textContent = 'Lv.' + level;
-            document.getElementById('level-title').textContent = title;
+            // 更新除法等级
+            var divLevel = gameState.level.division;
+            var divTitle = gameState.levelTitles[divLevel - 1] || gameState.levelTitles[0];
+            var divLevelElem = document.getElementById('division-level');
+            if (divLevelElem) {
+                divLevelElem.textContent = 'Lv.' + divLevel;
+            }
+
+            // 更新应用题等级
+            var wpLevel = gameState.level.wordProblem;
+            var wpTitle = gameState.levelTitles[wpLevel - 1] || gameState.levelTitles[0];
+            var wpLevelElem = document.getElementById('wordProblem-level');
+            if (wpLevelElem) {
+                wpLevelElem.textContent = 'Lv.' + wpLevel;
+            }
+
+            // 更新当前模式的等级显示（在页面顶部）
+            var currentMode = gameState.currentMode;
+            if (currentMode !== 'menu' && currentMode !== 'stats') {
+                var currentLevel = gameState.level[currentMode];
+                var currentTitle = gameState.levelTitles[currentLevel - 1] || gameState.levelTitles[0];
+                var levelNumberElem = document.getElementById('level-number');
+                var levelTitleElem = document.getElementById('level-title');
+                if (levelNumberElem && levelTitleElem) {
+                    levelNumberElem.textContent = 'Lv.' + currentLevel;
+                    levelTitleElem.textContent = currentTitle;
+                }
+            }
+        }
+
+        function updateLevel(mode) {
+            // 根据模式获取该模式的正确答题数
+            var correctCount = gameState.stats[mode].correct;
+            var level = 1;
+            var title = gameState.levelTitles[0];
+
+            if (correctCount >= 100) {
+                level = 5;
+                title = gameState.levelTitles[4];
+            } else if (correctCount >= 50) {
+                level = 4;
+                title = gameState.levelTitles[3];
+            } else if (correctCount >= 30) {
+                level = 3;
+                title = gameState.levelTitles[2];
+            } else if (correctCount >= 10) {
+                level = 2;
+                title = gameState.levelTitles[1];
+            }
+
+            // 更新该模式的等级
+            gameState.level[mode] = level;
+
+            // 更新显示（如果在统计页面，显示所有模式的等级）
+            updateLevelDisplay(mode, level, title);
+        }
+
+        function updateLevelDisplay(mode, level, title) {
+            // 更新当前模式的等级显示
+            var levelNumberElem = document.getElementById('level-number');
+            var levelTitleElem = document.getElementById('level-title');
+
+            if (levelNumberElem && levelTitleElem) {
+                levelNumberElem.textContent = 'Lv.' + level;
+                levelTitleElem.textContent = title;
+            }
+
+            // 同时更新该模式的独立显示（如果存在）
+            var modeLevelElem = document.getElementById(mode + '-level-number');
+            var modeTitleElem = document.getElementById(mode + '-level-title');
+            if (modeLevelElem && modeTitleElem) {
+                modeLevelElem.textContent = 'Lv.' + level;
+                modeTitleElem.textContent = title;
+            }
         }
 
         function resetStats() {
-            if (!confirm('确定要重置所有数据吗？这个操作不可恢复！')) {
-                return;
-            }
+            if (confirm('确定要重置所有数据吗？这个操作不可恢复！')) {
+                // 用 Object.assign 逐个重置，避免替换对象导致引用问题
+                gameState.stats.totalAnswered = 0;
+                gameState.stats.totalCorrect = 0;
+                gameState.stats.multiplication.answered = 0;
+                gameState.stats.multiplication.correct = 0;
+                gameState.stats.division.answered = 0;
+                gameState.stats.division.correct = 0;
+                gameState.stats.wordProblem.answered = 0;
+                gameState.stats.wordProblem.correct = 0;
 
-            // 1. 清零 gameState
-            gameState.stats = {
-                totalAnswered: 0,
-                totalCorrect: 0,
-                multiplication: { answered: 0, correct: 0 },
-                division: { answered: 0, correct: 0 },
-                wordProblem: { answered: 0, correct: 0 }
-            };
-            gameState.score = 0;
-            gameState.bestStreak = 0;
-            gameState.streak = 0;
-            gameState.sessionQuestions = 0;
-            gameState.level = 1;
-            gameState.spaceship = {
-                multiplication: { stage: 0, fuel: 0, maxFuel: 10 },
-                division: { stage: 0, fuel: 0, maxFuel: 10 },
-                wordProblem: { stage: 0, fuel: 0, maxFuel: 10 }
-            };
-            gameState.badges = {
-                first: false, streak5: false, streak10: false, perfect: false,
-                'multiplication-master': false, 'division-master': false,
-                'word-problem-master': false, galaxy: false
-            };
+                // 重置三套独立的得分/连击/最高连击
+                gameState.score.multiplication = 0;
+                gameState.score.division = 0;
+                gameState.score.wordProblem = 0;
+                gameState.streak.multiplication = 0;
+                gameState.streak.division = 0;
+                gameState.streak.wordProblem = 0;
+                gameState.bestStreak.multiplication = 0;
+                gameState.bestStreak.division = 0;
+                gameState.bestStreak.wordProblem = 0;
 
-            // 2. 彻底清空 localStorage（键名完全匹配 saveStats 写的）
-            localStorage.removeItem('math-camp-stats');
+                // 重置三个模式的等级
+                gameState.level.multiplication = 1;
+                gameState.level.division = 1;
+                gameState.level.wordProblem = 1;
 
-            // 3. 显式更新"我的成绩"页面所有 DOM 元素（不依赖 updateStatsDisplay）
-            var safeSet = function(id, val) {
-                var el = document.getElementById(id);
-                if (el) el.textContent = val;
-            };
+                // 重置水晶进度
+                gameState.crystalsEarned.multiplication = 0;
+                gameState.crystalsEarned.division = 0;
+                gameState.crystalsEarned.wordProblem = 0;
 
-            safeSet('stat-total', 0);
-            safeSet('stat-accuracy', '0%');
-            safeSet('stat-best-streak', 0);
-            safeSet('stat-total-score', 0);
-            safeSet('stat-multiplication', '0/0 (0%)');
-            safeSet('stat-division', '0/0 (0%)');
-            safeSet('stat-word-problem', '0/0 (0%)');
-            safeSet('level-number', 'Lv.1');
-            safeSet('level-title', '新手宇航员');
+                // 彻底清空 localStorage（移除所有相关 key）
+                localStorage.removeItem('math-camp-stats');
+                localStorage.removeItem('math-camp-stats-backup');
 
-            // 进度条归零
-            var barIds = ['stat-multiplication-bar', 'stat-division-bar', 'stat-word-problem-bar'];
-            barIds.forEach(function(id) {
-                var el = document.getElementById(id);
-                if (el) el.style.width = '0%';
-            });
+                // 强制刷新统计页 DOM，每个元素独立更新并包在 try 里
+                try { updateStatsDisplay(); } catch(e) { console.error('updateStatsDisplay 错误:', e); }
 
-            // 4. 清除所有徽章的 earned 样式
-            document.querySelectorAll('.badge.earned').forEach(function(badge) {
-                badge.classList.remove('earned');
-            });
+                // 在统计页显示重置成功的提示
+                showFeedback('stats-feedback', '✅ 数据已重置！', 'correct');
 
-            // 5. 刷新三套飞船显示和星球旅程进度
-            ['multiplication', 'division', 'wordProblem'].forEach(function(mode) {
-                updateSpaceshipDisplay(mode);
-                updateJourneyDisplay(mode);
-            });
-
-            // 6. 更新等级显示（含等级进度条）
-            updateLevel();
-
-            // 7. 重新保存清零后的状态到 localStorage
-            saveStats();
-
-            // 8. 提示（用菜单页的 feedback，或当前活动视图的 feedback）
-            showFeedback('feedback', '数据已重置！', 'hint');
-        }
-
-        // ========== 飞船系统函数（按模式分离）==========
-        function addFuel(mode) {
-            // mode: 'multiplication' | 'division' | 'word-problem'
-            var ship = gameState.spaceship[mode];
-            ship.fuel++;
-
-            if (ship.fuel >= ship.maxFuel) {
-                if (ship.stage < 4) {
-                    ship.fuel = 0;
-                    ship.stage++;
-                    showLevelUp(mode, ship.stage);
-                } else {
-                    ship.fuel = ship.maxFuel;
-                }
-            }
-            updateSpaceshipDisplay(mode);
-            updateJourneyDisplay(mode);
-            checkBadges();
-        }
-
-        function updateSpaceshipDisplay(mode) {
-            var prefix = mode === 'multiplication' ? '' : (mode === 'division' ? 'division-' : 'wp-');
-            var iconEl = document.getElementById(prefix + 'spaceship-icon');
-            var nameEl = document.getElementById(prefix + 'spaceship-name');
-            var fuelEl = document.getElementById(prefix + 'spaceship-fuel');
-            var fillEl = document.getElementById(prefix + 'fuel-fill');
-
-            if (!iconEl) return;
-
-            var ship = gameState.spaceship[mode];
-            var config = spaceshipLevels[mode][ship.stage];
-            iconEl.textContent = config.icon;
-            nameEl.textContent = config.name;
-            fuelEl.textContent = '燃料：' + ship.fuel + ' / ' + ship.maxFuel;
-            var percent = (ship.fuel / ship.maxFuel) * 100;
-            fillEl.style.width = percent + '%';
-        }
-
-        function updateJourneyDisplay(mode) {
-            var view = document.getElementById(mode + '-view');
-            if (!view) return;
-            var planets = view.querySelectorAll('.journey-planet');
-            var stage = gameState.spaceship[mode].stage;
-            planets.forEach(function(planet) {
-                var planetStage = parseInt(planet.getAttribute('data-stage'));
-                planet.classList.remove('visited', 'current');
-                if (planetStage < stage) {
-                    planet.classList.add('visited');
-                } else if (planetStage === stage) {
-                    planet.classList.add('current');
-                }
-            });
-        }
-
-        function showLevelUp(mode, newStage) {
-            var config = spaceshipLevels[mode][newStage];
-            var modeName = mode === 'multiplication' ? '乘法' : (mode === 'division' ? '除法' : '应用题');
-            var overlay = document.createElement('div');
-            overlay.className = 'level-up-overlay';
-            overlay.onclick = function() { overlay.remove(); };
-            overlay.innerHTML = '<div class="level-up-content" onclick="event.stopPropagation()">' +
-                '<div class="level-up-icon">' + config.icon + '</div>' +
-                '<div class="level-up-title">🎉 升级啦！</div>' +
-                '<div class="level-up-subtitle">' + modeName + '飞船：' + config.name + '</div>' +
-                '<button class="level-up-close" onclick="this.parentNode.parentNode.remove()">继续飞行</button>' +
-                '</div>';
-            document.body.appendChild(overlay);
-        }
-
-        // 飞船飞过屏幕特效
-        function flySpaceship(mode) {
-            var ship = gameState.spaceship[mode];
-            var flyingShip = document.createElement('div');
-            flyingShip.className = 'flying-spaceship';
-            flyingShip.textContent = spaceshipLevels[mode][ship.stage].icon;
-            flyingShip.style.top = (Math.random() * 30 + 20) + '%';
-            document.body.appendChild(flyingShip);
-
-            var trail = document.createElement('div');
-            trail.className = 'rocket-trail';
-            trail.style.left = '0';
-            trail.style.top = flyingShip.style.top;
-            trail.style.transform = 'translateY(-50%)';
-            document.body.appendChild(trail);
-
-            setTimeout(function() {
-                flyingShip.remove();
-                trail.remove();
-            }, 1500);
-        }
-
-        // 检查并解锁徽章
-        function checkBadges() {
-            var stats = gameState.stats;
-            var badges = gameState.badges;
-
-            // 初次飞行：答对第一题
-            if (stats.totalCorrect >= 1 && !badges.first) {
-                badges.first = true;
-                showBadgeEarned('first', '初次飞行');
-            }
-            // 5连击
-            if (gameState.bestStreak >= 5 && !badges.streak5) {
-                badges.streak5 = true;
-                showBadgeEarned('streak5', '5连击');
-            }
-            // 10连击
-            if (gameState.bestStreak >= 10 && !badges.streak10) {
-                badges.streak10 = true;
-                showBadgeEarned('streak10', '10连击');
-            }
-            // 满分：单次会话正确率100%（至少答5题）
-            if (gameState.sessionQuestions >= 5 && stats.totalCorrect === stats.totalAnswered && !badges.perfect) {
-                badges.perfect = true;
-                showBadgeEarned('perfect', '满分');
-            }
-            // 乘法大师：答对20道乘法
-            if (stats.multiplication.correct >= 20 && !badges['multiplication-master']) {
-                badges['multiplication-master'] = true;
-                showBadgeEarned('multiplication-master', '乘法大师');
-            }
-            // 除法大师：答对20道除法
-            if (stats.division.correct >= 20 && !badges['division-master']) {
-                badges['division-master'] = true;
-                showBadgeEarned('division-master', '除法大师');
-            }
-            // 应用题王：答对15道应用题
-            if (stats.wordProblem.correct >= 15 && !badges['word-problem-master']) {
-                badges['word-problem-master'] = true;
-                showBadgeEarned('word-problem-master', '应用题王');
-            }
-            // 银河大师：至少一个模式到达最高等级
-            var maxStage = Math.max(
-                gameState.spaceship.multiplication.stage,
-                gameState.spaceship.division.stage,
-                gameState.spaceship.wordProblem.stage
-            );
-            if (maxStage >= 4 && !badges.galaxy) {
-                badges.galaxy = true;
-                showBadgeEarned('galaxy', '银河大师');
-            }
-        }
-
-        function showBadgeEarned(badgeId, badgeName) {
-            // 在统计页面显示已获得的徽章
-            var badge = document.querySelector('.badge[data-badge="' + badgeId + '"]');
-            if (badge) badge.classList.add('earned');
-
-            // 显示获得徽章的提示
-            if (gameState.soundEnabled) {
-                var msg = '🏆 获得徽章：' + badgeName + '！';
-                showFeedback('feedback', msg, 'correct');
-            }
-        }
-
-        function updateBadgesDisplay() {
-            var badges = gameState.badges;
-            Object.keys(badges).forEach(function(key) {
-                var badge = document.querySelector('.badge[data-badge="' + key + '"]');
-                if (badge) {
-                    if (badges[key]) {
-                        badge.classList.add('earned');
-                    } else {
-                        badge.classList.remove('earned');
+                // 1.5秒后自动切到菜单页再切回统计页，强制刷新整个视图
+                setTimeout(function() {
+                    var currentView = gameState.currentMode;
+                    if (currentView === 'stats') {
+                        // 当前就在统计页，直接再刷一次 DOM
+                        try { updateStatsDisplay(); } catch(e) {}
                     }
-                }
-            });
+                }, 1500);
+            }
         }
 
         window.addEventListener('error', function(event) {
