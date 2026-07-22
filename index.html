@@ -966,6 +966,14 @@
                 </div>
 
                 <div class="feedback" id="wp-feedback" style="display: none;"></div>
+
+                <!-- AI 错题讲解：答错时才出现 -->
+                <div id="wp-ai-explain" style="display: none; text-align: center; margin-top: 12px;">
+                    <button class="btn" id="wp-ai-btn" onclick="explainWrongAnswer()" style="background: linear-gradient(135deg, #8b5cf6, #6366f1);">
+                        <i class="fas fa-robot"></i> 为什么错了？点我讲解
+                    </button>
+                </div>
+                <div id="wp-ai-result" style="display: none; margin-top: 12px; padding: 14px 16px; border-radius: 12px; background: rgba(139,92,246,0.12); border: 1px solid rgba(139,92,246,0.35); line-height: 1.7; font-size: 15px; text-align: left; white-space: pre-wrap;"></div>
             </div>
         </div>
 
@@ -1084,7 +1092,7 @@
         </div>
 
         <div style="text-align: center; padding: 30px 0; color: #475569; font-size: 14px;">
-            <p>乘除法星际探险 v2.0 正式版 | 适合二年级学生</p>
+            <p>乘除法星际探险 v2.1 定版 | 适合二年级学生</p>
         </div>
     </div>
 
@@ -1167,7 +1175,7 @@
         };
 
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('[初始化] 乘除法星际探险 v2.0 正式版 启动');
+            console.log('[初始化] 乘除法星际探险 v2.1 定版 启动');
 
             initStarfield();
             initMultiplicationTable();
@@ -1886,6 +1894,267 @@
                     if (b >= a) b = a - 5;
                     return { answer: a - b, hint: a + ' - ' + b + ' = ' + (a - b) };
                 }
+            },
+
+            // ===== v2.2 新增题目（25道）=====
+
+            // --- 乘法：购物与生活（5道）---
+            {
+                scene: '🧃',
+                template: '每箱果汁有 {a} 瓶，买了 {b} 箱。一共有多少瓶？',
+                vars: { a: [6, 9], b: [3, 7] },
+                calc: function(a, b) { return { answer: a * b, hint: a + ' × ' + b + ' = ' + (a * b) }; }
+            },
+            {
+                scene: '🪑',
+                template: '教室里有 {a} 排课桌，每排 {b} 张。一共有多少张课桌？',
+                vars: { a: [4, 7], b: [5, 9] },
+                calc: function(a, b) { return { answer: a * b, hint: a + ' × ' + b + ' = ' + (a * b) }; }
+            },
+            {
+                scene: '🥟',
+                template: '每笼包子有 {a} 个，{b} 笼一共有多少个？',
+                vars: { a: [5, 9], b: [3, 6] },
+                calc: function(a, b) { return { answer: a * b, hint: a + ' × ' + b + ' = ' + (a * b) }; }
+            },
+            {
+                scene: '🏠',
+                template: '每层楼有 {a} 个窗户，{b} 层楼一共有多少个窗户？',
+                vars: { a: [3, 6], b: [3, 7] },
+                calc: function(a, b) { return { answer: a * b, hint: a + ' × ' + b + ' = ' + (a * b) }; }
+            },
+            {
+                scene: '🚗',
+                template: '一辆玩具车有 {a} 个轮子，{b} 辆一共有多少个轮子？',
+                vars: { a: [4, 8], b: [3, 8] },
+                calc: function(a, b) { return { answer: a * b, hint: a + ' × ' + b + ' = ' + (a * b) }; }
+            },
+
+            // --- 乘法：自然与学校（5道）---
+            {
+                scene: '🐟',
+                template: '每个鱼缸有 {a} 条鱼，有 {b} 个鱼缸。一共有多少条鱼？',
+                vars: { a: [3, 8], b: [2, 6] },
+                calc: function(a, b) { return { answer: a * b, hint: a + ' × ' + b + ' = ' + (a * b) }; }
+            },
+            {
+                scene: '🌸',
+                template: '每个花盆种 {a} 朵花，有 {b} 个花盆。一共种了多少朵花？',
+                vars: { a: [3, 6], b: [4, 9] },
+                calc: function(a, b) { return { answer: a * b, hint: a + ' × ' + b + ' = ' + (a * b) }; }
+            },
+            {
+                scene: '🎵',
+                template: '一首歌 {a} 分钟，连听 {b} 首。一共多少分钟？',
+                vars: { a: [3, 5], b: [4, 8] },
+                calc: function(a, b) { return { answer: a * b, hint: a + ' × ' + b + ' = ' + (a * b) }; }
+            },
+            {
+                scene: '🎈',
+                template: '每串有 {a} 个气球，{b} 串一共有多少个气球？',
+                vars: { a: [5, 9], b: [3, 7] },
+                calc: function(a, b) { return { answer: a * b, hint: a + ' × ' + b + ' = ' + (a * b) }; }
+            },
+            {
+                scene: '📮',
+                template: '每个信封贴 {a} 张邮票，{b} 个信封一共贴了多少张？',
+                vars: { a: [2, 5], b: [5, 9] },
+                calc: function(a, b) { return { answer: a * b, hint: a + ' × ' + b + ' = ' + (a * b) }; }
+            },
+
+            // --- 除法：分配与分组（8道）---
+            {
+                scene: '🧩',
+                template: '有 {a} 块拼图，平均分成 {b} 盒。每盒有几块？',
+                vars: { a: [24, 72], b: [3, 8] },
+                preProcess: function(p) {
+                    var b = randInt(p.vars.b[0], p.vars.b[1]);
+                    var q = randInt(Math.ceil(p.vars.a[0] / b), Math.floor(p.vars.a[1] / b));
+                    return { b: b, q: q };
+                },
+                calc2: function(ctx) {
+                    return { answer: ctx.q, hint: (ctx.q * ctx.b) + ' ÷ ' + ctx.b + ' = ' + ctx.q };
+                }
+            },
+            {
+                scene: '🍊',
+                template: '有 {a} 个橘子，每 {b} 个装一袋。可以装几袋？',
+                vars: { a: [18, 63], b: [3, 7] },
+                preProcess: function(p) {
+                    var b = randInt(p.vars.b[0], p.vars.b[1]);
+                    var q = randInt(Math.ceil(p.vars.a[0] / b), Math.floor(p.vars.a[1] / b));
+                    return { b: b, q: q };
+                },
+                calc2: function(ctx) {
+                    return { answer: ctx.q, hint: (ctx.q * ctx.b) + ' ÷ ' + ctx.b + ' = ' + ctx.q };
+                }
+            },
+            {
+                scene: '🎲',
+                template: '有 {a} 个色子，每 {b} 个装一盒。可以装几盒？',
+                vars: { a: [12, 56], b: [3, 7] },
+                preProcess: function(p) {
+                    var b = randInt(p.vars.b[0], p.vars.b[1]);
+                    var q = randInt(Math.ceil(p.vars.a[0] / b), Math.floor(p.vars.a[1] / b));
+                    return { b: b, q: q };
+                },
+                calc2: function(ctx) {
+                    return { answer: ctx.q, hint: (ctx.q * ctx.b) + ' ÷ ' + ctx.b + ' = ' + ctx.q };
+                }
+            },
+            {
+                scene: '🌻',
+                template: '有 {a} 颗种子，每 {b} 颗种一盆。可以种几盆？',
+                vars: { a: [15, 72], b: [3, 8] },
+                preProcess: function(p) {
+                    var b = randInt(p.vars.b[0], p.vars.b[1]);
+                    var q = randInt(Math.ceil(p.vars.a[0] / b), Math.floor(p.vars.a[1] / b));
+                    return { b: b, q: q };
+                },
+                calc2: function(ctx) {
+                    return { answer: ctx.q, hint: (ctx.q * ctx.b) + ' ÷ ' + ctx.b + ' = ' + ctx.q };
+                }
+            },
+            {
+                scene: '📝',
+                template: '有 {a} 张白纸，每 {b} 张订一本。可以订几本？',
+                vars: { a: [18, 60], b: [3, 6] },
+                preProcess: function(p) {
+                    var b = randInt(p.vars.b[0], p.vars.b[1]);
+                    var q = randInt(Math.ceil(p.vars.a[0] / b), Math.floor(p.vars.a[1] / b));
+                    return { b: b, q: q };
+                },
+                calc2: function(ctx) {
+                    return { answer: ctx.q, hint: (ctx.q * ctx.b) + ' ÷ ' + ctx.b + ' = ' + ctx.q };
+                }
+            },
+            {
+                scene: '🏀',
+                template: '有 {a} 个乒乓球，每 {b} 个装一筒。可以装几筒？',
+                vars: { a: [12, 56], b: [3, 7] },
+                preProcess: function(p) {
+                    var b = randInt(p.vars.b[0], p.vars.b[1]);
+                    var q = randInt(Math.ceil(p.vars.a[0] / b), Math.floor(p.vars.a[1] / b));
+                    return { b: b, q: q };
+                },
+                calc2: function(ctx) {
+                    return { answer: ctx.q, hint: (ctx.q * ctx.b) + ' ÷ ' + ctx.b + ' = ' + ctx.q };
+                }
+            },
+            {
+                scene: '💐',
+                template: '有 {a} 朵花，每 {b} 朵扎一束。可以扎几束？',
+                vars: { a: [18, 72], b: [3, 8] },
+                preProcess: function(p) {
+                    var b = randInt(p.vars.b[0], p.vars.b[1]);
+                    var q = randInt(Math.ceil(p.vars.a[0] / b), Math.floor(p.vars.a[1] / b));
+                    return { b: b, q: q };
+                },
+                calc2: function(ctx) {
+                    return { answer: ctx.q, hint: (ctx.q * ctx.b) + ' ÷ ' + ctx.b + ' = ' + ctx.q };
+                }
+            },
+            {
+                scene: '📚',
+                template: '图书馆有 {a} 本新书，平均放到 {b} 个书架。每架放几本？',
+                vars: { a: [36, 81], b: [4, 9] },
+                preProcess: function(p) {
+                    var b = randInt(p.vars.b[0], p.vars.b[1]);
+                    var q = randInt(Math.ceil(p.vars.a[0] / b), Math.floor(p.vars.a[1] / b));
+                    return { b: b, q: q };
+                },
+                calc2: function(ctx) {
+                    return { answer: ctx.q, hint: (ctx.q * ctx.b) + ' ÷ ' + ctx.b + ' = ' + ctx.q };
+                }
+            },
+
+            // --- 减法与多步运算（7道）---
+            {
+                scene: '🏪',
+                template: '商店有 {a} 个本子，卖了 {b} 个，又进货 {c} 个。现在有多少个？',
+                vars: { a: [50, 80], b: [15, 30], c: [10, 25] },
+                preProcess: function(p) {
+                    var a = randInt(p.vars.a[0], p.vars.a[1]);
+                    var b = randInt(p.vars.b[0], p.vars.b[1]);
+                    if (b > a - 10) b = a - 15;
+                    var maxC = Math.min(p.vars.c[1], 99 - (a - b));
+                    var c = randInt(p.vars.c[0], Math.max(p.vars.c[0], maxC));
+                    return { a: a, b: b, c: c };
+                },
+                calc2: function(ctx) {
+                    var ans = ctx.a - ctx.b + ctx.c;
+                    return { answer: ans, hint: ctx.a + ' - ' + ctx.b + ' + ' + ctx.c + ' = ' + ans };
+                }
+            },
+            {
+                scene: '🚲',
+                template: '停车场有 {a} 辆车，开走了 {b} 辆，又开来了 {c} 辆。现在有多少辆？',
+                vars: { a: [60, 90], b: [15, 35], c: [10, 30] },
+                preProcess: function(p) {
+                    var a = randInt(p.vars.a[0], p.vars.a[1]);
+                    var b = randInt(p.vars.b[0], p.vars.b[1]);
+                    if (b > a - 10) b = a - 15;
+                    var maxC = Math.min(p.vars.c[1], 99 - (a - b));
+                    var c = randInt(p.vars.c[0], Math.max(p.vars.c[0], maxC));
+                    return { a: a, b: b, c: c };
+                },
+                calc2: function(ctx) {
+                    var ans = ctx.a - ctx.b + ctx.c;
+                    return { answer: ans, hint: ctx.a + ' - ' + ctx.b + ' + ' + ctx.c + ' = ' + ans };
+                }
+            },
+            {
+                scene: '📺',
+                template: '一集动画片 {a} 分钟，看了 {b} 分钟。还剩多少分钟？',
+                vars: { a: [20, 40], b: [5, 15] },
+                calc: function(a, b) {
+                    if (b >= a) b = a - 5;
+                    return { answer: a - b, hint: a + ' - ' + b + ' = ' + (a - b) };
+                }
+            },
+            {
+                scene: '🧮',
+                template: '还要做 {a} 道数学题，已经做了 {b} 道。还剩几道？',
+                vars: { a: [30, 60], b: [10, 25] },
+                calc: function(a, b) {
+                    if (b >= a) b = a - 5;
+                    return { answer: a - b, hint: a + ' - ' + b + ' = ' + (a - b) };
+                }
+            },
+            {
+                scene: '🍉',
+                template: '妈妈切了 {a} 块西瓜，吃了 {b} 块。还剩几块？',
+                vars: { a: [30, 60], b: [8, 22] },
+                calc: function(a, b) {
+                    if (b >= a) b = a - 5;
+                    return { answer: a - b, hint: a + ' - ' + b + ' = ' + (a - b) };
+                }
+            },
+            {
+                scene: '🍪',
+                template: '烤箱里有 {a} 块饼干，烤好了 {b} 块，没烤好的有几块？',
+                vars: { a: [30, 60], b: [10, 25] },
+                calc: function(a, b) {
+                    if (b >= a) b = a - 5;
+                    return { answer: a - b, hint: a + ' - ' + b + ' = ' + (a - b) };
+                }
+            },
+            {
+                scene: '🎒',
+                template: '书包里有 {a} 本书，拿出了 {b} 本，又放进去 {c} 本。现在有几本？',
+                vars: { a: [30, 50], b: [5, 15], c: [5, 15] },
+                preProcess: function(p) {
+                    var a = randInt(p.vars.a[0], p.vars.a[1]);
+                    var b = randInt(p.vars.b[0], p.vars.b[1]);
+                    if (b > a - 10) b = a - 10;
+                    var maxC = Math.min(p.vars.c[1], 60 - (a - b));
+                    var c = randInt(p.vars.c[0], Math.max(p.vars.c[0], maxC));
+                    return { a: a, b: b, c: c };
+                },
+                calc2: function(ctx) {
+                    var ans = ctx.a - ctx.b + ctx.c;
+                    return { answer: ans, hint: ctx.a + ' - ' + ctx.b + ' + ' + ctx.c + ' = ' + ans };
+                }
             }
         ];
 
@@ -1950,6 +2219,7 @@
         }
 
         function generateWordProblem() {
+            hideAiExplain();
             var problem = wordProblems[Math.floor(Math.random() * wordProblems.length)];
             var instance = instantiateProblem(problem);
 
@@ -2045,20 +2315,84 @@
 
                 document.getElementById('wp-streak').textContent = 0;
                 document.getElementById('wp-streak-fire').style.display = 'none';
+
+                // 记录这道错题，供 AI 讲解使用
+                gameState.lastWrongProblem = {
+                    question: gameState.currentQuestion.text,
+                    correctAnswer: gameState.currentQuestion.answer,
+                    kidAnswer: userAnswer,
+                    hint: gameState.currentQuestion.hint
+                };
+                // 如果配置了 AI 讲解地址，显示"讲解"按钮
+                showAiExplainButton();
             }
 
             document.getElementById('wp-action-btn').innerHTML = '<i class="fas fa-arrow-right"></i> 下一题';
             document.getElementById('wp-answer').style.display = 'none';
 
-            setTimeout(function() {
-                // 如果用户已切换到别的模式，不再自动生成旧模式的新题
-                if (gameState.currentMode !== 'word-problem') return;
-                var currentBtn = document.getElementById('wp-action-btn');
-                if (currentBtn.textContent.indexOf('下一题') !== -1) {
-                    generateWordProblem();
-                    currentBtn.innerHTML = '<i class="fas fa-check"></i> 确认';
+            // 只有答对才自动跳下一题；答错时停留，让孩子看讲解，自己点"下一题"
+            if (correct) {
+                setTimeout(function() {
+                    // 如果用户已切换到别的模式，不再自动生成旧模式的新题
+                    if (gameState.currentMode !== 'word-problem') return;
+                    var currentBtn = document.getElementById('wp-action-btn');
+                    if (currentBtn.textContent.indexOf('下一题') !== -1) {
+                        generateWordProblem();
+                        currentBtn.innerHTML = '<i class="fas fa-check"></i> 确认';
+                    }
+                }, 2500);
+            }
+        }
+
+        // ===== AI 错题讲解功能 =====
+        // 把下面这行的地址换成你部署好的 Cloudflare Worker 网址即可开启；留空则不显示讲解按钮
+        var AI_EXPLAIN_ENDPOINT = 'https://math2026.27805432.workers.dev/';
+
+        function showAiExplainButton() {
+            var wrap = document.getElementById('wp-ai-explain');
+            var result = document.getElementById('wp-ai-result');
+            var btn = document.getElementById('wp-ai-btn');
+            if (result) { result.style.display = 'none'; result.textContent = ''; }
+            if (!AI_EXPLAIN_ENDPOINT) { if (wrap) wrap.style.display = 'none'; return; }
+            if (wrap) wrap.style.display = 'block';
+            if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-robot"></i> 为什么错了？点我讲解'; }
+        }
+
+        function hideAiExplain() {
+            var wrap = document.getElementById('wp-ai-explain');
+            var result = document.getElementById('wp-ai-result');
+            if (wrap) wrap.style.display = 'none';
+            if (result) { result.style.display = 'none'; result.textContent = ''; }
+        }
+
+        function explainWrongAnswer() {
+            var btn = document.getElementById('wp-ai-btn');
+            var result = document.getElementById('wp-ai-result');
+            var wrong = gameState.lastWrongProblem;
+            if (!wrong || !AI_EXPLAIN_ENDPOINT) return;
+
+            // loading 状态
+            if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 老师正在思考…'; }
+            if (result) { result.style.display = 'block'; result.textContent = '🤖 正在给你讲解，请稍等…'; }
+
+            fetch(AI_EXPLAIN_ENDPOINT, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(wrong)
+            })
+            .then(function(resp) { return resp.json(); })
+            .then(function(data) {
+                if (data && data.explanation) {
+                    if (result) result.textContent = '🤖 老师讲解：\n' + data.explanation;
+                } else {
+                    if (result) result.textContent = '😅 讲解暂时拿不到，先看看提示：' + (wrong.hint || '');
                 }
-            }, 2500);
+                if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-robot"></i> 再讲一遍'; }
+            })
+            .catch(function() {
+                if (result) result.textContent = '😅 网络不太好，讲解没成功。先看看提示：' + (wrong.hint || '');
+                if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-robot"></i> 再试一次'; }
+            });
         }
 
         function showFeedback(elementId, message, type) {
