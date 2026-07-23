@@ -974,6 +974,11 @@
                     </button>
                 </div>
                 <div id="wp-ai-result" style="display: none; margin-top: 12px; padding: 14px 16px; border-radius: 12px; background: rgba(139,92,246,0.12); border: 1px solid rgba(139,92,246,0.35); line-height: 1.7; font-size: 15px; text-align: left; white-space: pre-wrap;"></div>
+                <div style="text-align: center; margin-top: 10px;">
+                    <button class="btn" id="wp-ai-speak-btn" onclick="speakAiExplanation()" style="display: none; background: linear-gradient(135deg, #6366f1, #8b5cf6);">
+                        <i class="fas fa-volume-up"></i> 🔊 朗读讲解
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -1092,7 +1097,7 @@
         </div>
 
         <div style="text-align: center; padding: 30px 0; color: #475569; font-size: 14px;">
-            <p>乘除法星际探险 v2.1 定版 | 适合二年级学生</p>
+            <p>乘除法星际探险 v2.4 定版 | 适合二年级学生</p>
         </div>
     </div>
 
@@ -1175,7 +1180,7 @@
         };
 
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('[初始化] 乘除法星际探险 v2.1 定版 启动');
+            console.log('[初始化] 乘除法星际探险 v2.4 定版 启动');
 
             initStarfield();
             initMultiplicationTable();
@@ -1410,6 +1415,10 @@
         }
 
         function generateMultiplicationQuestion() {
+            // 清空上题反馈
+            var fb = document.getElementById('feedback');
+            if (fb) { fb.style.display = 'none'; fb.textContent = ''; }
+
             var num1 = Math.floor(Math.random() * 9) + 1;
             var num2 = Math.floor(Math.random() * 9) + 1;
             var answer = num1 * num2;
@@ -1546,6 +1555,10 @@
         }
 
         function generateDivisionQuestion() {
+            // 清空上题反馈
+            var fb = document.getElementById('division-feedback');
+            if (fb) { fb.style.display = 'none'; fb.textContent = ''; }
+
             var divisor = Math.floor(Math.random() * 9) + 1;
             var quotient = Math.floor(Math.random() * 9) + 1;
             var dividend = divisor * quotient;
@@ -2220,6 +2233,10 @@
 
         function generateWordProblem() {
             hideAiExplain();
+            // 清空上题反馈
+            var fb = document.getElementById('wp-feedback');
+            if (fb) { fb.style.display = 'none'; fb.textContent = ''; }
+
             var problem = wordProblems[Math.floor(Math.random() * wordProblems.length)];
             var instance = instantiateProblem(problem);
 
@@ -2352,7 +2369,10 @@
             var wrap = document.getElementById('wp-ai-explain');
             var result = document.getElementById('wp-ai-result');
             var btn = document.getElementById('wp-ai-btn');
+            var speakBtn = document.getElementById('wp-ai-speak-btn');
             if (result) { result.style.display = 'none'; result.textContent = ''; }
+            if (speakBtn) speakBtn.style.display = 'none';
+            window._lastAiExplanation = '';
             if (!AI_EXPLAIN_ENDPOINT) { if (wrap) wrap.style.display = 'none'; return; }
             if (wrap) wrap.style.display = 'block';
             if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-robot"></i> 为什么错了？点我讲解'; }
@@ -2361,8 +2381,11 @@
         function hideAiExplain() {
             var wrap = document.getElementById('wp-ai-explain');
             var result = document.getElementById('wp-ai-result');
+            var speakBtn = document.getElementById('wp-ai-speak-btn');
             if (wrap) wrap.style.display = 'none';
             if (result) { result.style.display = 'none'; result.textContent = ''; }
+            if (speakBtn) speakBtn.style.display = 'none';
+            window._lastAiExplanation = '';
         }
 
         function explainWrongAnswer() {
@@ -2390,7 +2413,14 @@
             })
             .then(function(data) {
                 if (data && data.explanation) {
+                    window._lastAiExplanation = data.explanation;
                     if (result) result.textContent = '🤖 老师讲解：\n' + data.explanation;
+                    var speakBtn = document.getElementById('wp-ai-speak-btn');
+                    if (speakBtn) speakBtn.style.display = 'inline-block';
+                    // 自动朗读（受声音开关控制；iOS 异步回调可能受限，按钮可兜底）
+                    if (gameState.soundEnabled) {
+                        setTimeout(function() { speakChinese(data.explanation); }, 250);
+                    }
                 } else {
                     if (result) result.textContent = '😅 讲解暂时拿不到，先看看提示：' + (wrong.hint || '');
                 }
@@ -2610,6 +2640,35 @@
                 window._lastUtterance = u;
                 speechSynthesis.speak(u);
             } catch(e) {}
+        }
+
+        // 通用中文语音朗读（题目、讲解共用）
+        function speakChinese(text) {
+            if (!window.speechSynthesis) return;
+            if (!text) return;
+            try {
+                speechSynthesis.cancel();
+                var u = new SpeechSynthesisUtterance(text);
+                u.lang = 'zh-CN';
+                u.rate = 0.9;
+                u.pitch = 1.05;
+                // 保持全局引用防止被垃圾回收
+                window._lastUtterance = u;
+                speechSynthesis.speak(u);
+            } catch (e) {}
+        }
+
+        // 朗读当前 AI 讲解（点击按钮触发，绕过声音开关，确保落在用户手势内）
+        function speakAiExplanation() {
+            if (window._lastAiExplanation) {
+                speakChinese(window._lastAiExplanation);
+                return;
+            }
+            var result = document.getElementById('wp-ai-result');
+            if (result) {
+                var t = result.textContent.replace('🤖 老师讲解：', '').trim();
+                if (t) speakChinese(t);
+            }
         }
 
         // 检查能量水晶里程碑
