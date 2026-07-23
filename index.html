@@ -2380,7 +2380,14 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(wrong)
             })
-            .then(function(resp) { return resp.json(); })
+            .then(function(resp) {
+                if (!resp.ok) {
+                    return resp.text().then(function(text) {
+                        throw new Error('服务器返回 ' + resp.status + '：' + text.slice(0, 200));
+                    });
+                }
+                return resp.json();
+            })
             .then(function(data) {
                 if (data && data.explanation) {
                     if (result) result.textContent = '🤖 老师讲解：\n' + data.explanation;
@@ -2389,8 +2396,10 @@
                 }
                 if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-robot"></i> 再讲一遍'; }
             })
-            .catch(function() {
-                if (result) result.textContent = '😅 网络不太好，讲解没成功。先看看提示：' + (wrong.hint || '');
+            .catch(function(err) {
+                console.error('AI讲解请求失败', err);
+                var msg = (err && err.message) ? err.message : '网络请求失败';
+                if (result) result.textContent = '😅 网络不太好，讲解没成功（' + msg + '）。先看看提示：' + (wrong.hint || '');
                 if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-robot"></i> 再试一次'; }
             });
         }
